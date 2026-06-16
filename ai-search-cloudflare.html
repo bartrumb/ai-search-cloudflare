@@ -2915,6 +2915,22 @@ html, body, .reveal {
 .trace-card .tc-body .fn { color: var(--orange); }
 .trace-card .tc-body .blue { color: #6BB6FF; }
 
+/* Slide 20 — GraphRAG retrieval walkthrough (replaces terse trace card) */
+.graphrag-flow { background: var(--navy); color: #fff; border-radius: 8px; padding: 11px 16px 12px; display: flex; flex-direction: column; gap: 7px; }
+.graphrag-flow .gf-label { font-size: 0.55em; font-weight: 700; letter-spacing: 1.5px; color: var(--orange); }
+.graphrag-flow .gf-label em { color: #C5D0E0; font-style: italic; font-weight: 600; letter-spacing: 0.5px; }
+.graphrag-flow .gf-steps { display: flex; flex-direction: column; gap: 6px; }
+.graphrag-flow .gf-step { display: grid; grid-template-columns: 14px 66px 1fr; gap: 9px; align-items: baseline; }
+.graphrag-flow .gf-n { font-family: 'Inter', sans-serif; font-weight: 800; color: var(--orange); font-size: 0.8em; }
+.graphrag-flow .gf-k { font-family: 'JetBrains Mono', monospace; font-size: 0.56em; font-weight: 800; letter-spacing: 1px; color: #6BB6FF; align-self: center; }
+.graphrag-flow .gf-d { font-size: 0.65em; line-height: 1.42; color: #C5D0E0; }
+.graphrag-flow .gf-d .fn { color: var(--orange); font-family: 'JetBrains Mono', monospace; }
+.graphrag-flow .gf-d .blue { color: #6BB6FF; font-family: 'JetBrains Mono', monospace; }
+.graphrag-flow .gf-d strong { color: #fff; font-weight: 700; }
+.graphrag-flow .gf-punch { border-top: 1px solid rgba(255,255,255,0.16); padding-top: 7px; font-size: 0.72em; color: #fff; }
+.graphrag-flow .gf-punch strong { color: var(--orange); }
+.graphrag-flow .gf-punch em { color: #C5D0E0; font-style: italic; }
+
 /* Slide E — Live demo (chat console + mermaid) — with sequential playback */
 @keyframes msgFadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -6814,7 +6830,7 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
 <div class="slide-pad">
   <div class="case-eyebrow">
     <span class="ce-num">PART III OF III</span>
-    <span class="ce-label">Graph Anatomy &amp; Pipeline</span>
+    <span class="ce-label">Anatomy &amp; GraphRAG Retrieval</span>
     <span class="case-progress">
       <span class="cp-dot done"></span>
       <span class="cp-line"></span>
@@ -6880,13 +6896,6 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
     </div>
 
     <div class="pipeline-stack">
-      <div class="pipeline-mini">
-        <div class="pipe-step"><span class="ps-num">1</span><div class="ps-tag">SEED</div><div class="ps-name">TS source of truth</div><div class="ps-detail">Nodes · edges · profiles<br>Expert-authored ordering</div></div>
-        <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
-        <div class="pipe-step"><span class="ps-num">2</span><div class="ps-tag">STORE</div><div class="ps-name">D1 + KV cache</div><div class="ps-detail">diagnostic_nodes<br>diagnostic_edges<br>KV · 7-day TTL</div></div>
-        <span class="pipe-arrow" aria-hidden="true">&rarr;</span>
-        <div class="pipe-step"><span class="ps-num">3</span><div class="ps-tag">RETRIEVE</div><div class="ps-name">Three query paths</div><div class="ps-detail">query_ebike_graph<br>find_symptom · 768D<br>lookup_error_code</div></div>
-      </div>
       <div class="ordering-card">
         <div class="oc-label">E-BIKE-SPECIFIC ORDERING</div>
         <div class="oc-quote">"Brake lever pulls to bar" — reordered for e-bikes:</div>
@@ -6896,9 +6905,15 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
           <li><strong>3.</strong> Pad knock-back <em>(LAST — sealed e-bike bearings)</em></li>
         </ol>
       </div>
-      <div class="trace-card">
-        <div class="tc-label">EXAMPLE TRACE</div>
-        <div class="tc-body">"motor cuts out climbing" → <span class="fn">find_symptom</span> → sym_motor_cutout_under_load → suspects: <span class="blue">thermal_cutoff · battery_cell_sag · controller_overcurrent</span></div>
+      <div class="graphrag-flow">
+        <div class="gf-label">HOW GRAPHRAG ANSWERS &mdash; <em>"motor cuts out climbing"</em></div>
+        <div class="gf-steps">
+          <div class="gf-step"><span class="gf-n">1</span><span class="gf-k">MATCH</span><span class="gf-d"><span class="fn">find_symptom</span> maps the phrase to a graph <strong>node</strong> &mdash; not a text chunk &rarr; <span class="blue">sym_motor_cutout_under_load</span></span></div>
+          <div class="gf-step"><span class="gf-n">2</span><span class="gf-k">TRAVERSE</span><span class="gf-d"><span class="fn">query_ebike_graph</span> walks causal edges (SYMPTOM_OF &middot; INTERRUPTS &middot; CUTS_POWER_TO) to pull the connected subsystem</span></div>
+          <div class="gf-step"><span class="gf-n">3</span><span class="gf-k">RANK</span><span class="gf-d">suspects scored by base probability &times; live conditions (sustained climb = load + heat) &rarr; <span class="blue">thermal_cutoff &middot; battery_cell_sag &middot; controller_overcurrent</span></span></div>
+          <div class="gf-step"><span class="gf-n">4</span><span class="gf-k">ANSWER</span><span class="gf-d">Sonnet receives a <strong>causal subgraph</strong> as context &mdash; it reasons over the chain and names the cause + the fix</span></div>
+        </div>
+        <div class="gf-punch">Vector RAG retrieves <em>passages</em>. GraphRAG retrieves the <strong>causal chain</strong>.</div>
       </div>
     </div>
   </div>
