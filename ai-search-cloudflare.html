@@ -2539,6 +2539,18 @@ html, body, .reveal {
 .graph-mini svg .edge { stroke: var(--muted); stroke-width: 1.2; fill: none; }
 .graph-mini svg .edge-label { font-family: 'JetBrains Mono', monospace; font-size: 4px; fill: var(--muted); }
 
+/* Slide 20 — real labeled diagnostic subgraph (explains the graph concretely) */
+.graph-example { background: #FBFCFE; border: 1px solid var(--muted-soft); border-radius: 8px; padding: 8px 12px 6px; margin: 2px 0 8px; }
+.graph-example svg { width: 100%; height: auto; max-height: 232px; display: block; margin: 0 auto; }
+.graph-caption { font-size: 0.66em; color: var(--body); line-height: 1.45; margin-bottom: 9px; }
+.graph-caption strong { color: var(--navy); }
+.graph-legend { display: flex; flex-wrap: wrap; gap: 7px 14px; font-size: 0.62em; color: var(--body); font-weight: 600; margin-bottom: 9px; align-items: center; }
+.graph-legend .lg { display: inline-flex; align-items: center; gap: 5px; }
+.graph-legend .dot { width: 11px; height: 11px; border-radius: 3px; border: 1.5px solid; flex-shrink: 0; }
+.graph-legend .dot.sym { background: #FFF1E2; border-color: var(--orange); }
+.graph-legend .dot.cse { background: #FDECEC; border-color: var(--red); }
+.graph-legend .dot.cmp { background: #E8F3E9; border-color: var(--green); }
+
 /* Case-card bullet list (slide 18 meat addition) */
 .case-card .cc-bullets {
   list-style: none;
@@ -2884,7 +2896,8 @@ html, body, .reveal {
 }
 .ordering-card ol {
   margin: 0;
-  padding-left: 18px;
+  padding-left: 2px;
+  list-style: none;
   font-size: 0.68em;
   color: var(--body);
   line-height: 1.55;
@@ -6843,54 +6856,85 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
 
   <div class="anatomy-row">
     <div class="anatomy-card">
-      <div class="ac-eyebrow">ANATOMY · D1 + KV</div>
-      <div class="ac-numbers">
-        <div><div class="big" data-count-to="757">0</div><div class="lbl">NODES</div></div>
-        <div><div class="big" data-count-to="1739" data-comma="1">0</div><div class="lbl">EDGES</div></div>
-        <div><div class="big" data-count-to="69">0</div><div class="lbl">ERROR CODES</div></div>
-      </div>
+      <div class="ac-eyebrow">ONE DIAGNOSTIC SLICE · D1 + KV</div>
 
-      <div class="graph-mini" aria-hidden="true">
-        <svg viewBox="0 0 200 90">
-          <!-- Edges first so they sit beneath nodes -->
-          <g class="edge"><line x1="40" y1="20" x2="100" y2="45"/></g>
-          <g class="edge"><line x1="100" y1="45" x2="160" y2="20"/></g>
-          <g class="edge"><line x1="40" y1="20" x2="40" y2="70"/></g>
-          <g class="edge"><line x1="160" y1="20" x2="160" y2="70"/></g>
-          <g class="edge"><line x1="100" y1="45" x2="60" y2="72"/></g>
-          <g class="edge"><line x1="100" y1="45" x2="140" y2="72"/></g>
-          <text class="edge-label" x="68" y="32">SYMPTOM_OF</text>
-          <text class="edge-label" x="132" y="32">SYMPTOM_OF</text>
-          <text class="edge-label" x="70" y="60" transform="rotate(-15 70 60)">INTERRUPTS</text>
-          <text class="edge-label" x="130" y="60" transform="rotate(15 130 60)">INTERRUPTS</text>
-          <!-- Symptom (center top) -->
-          <g><circle class="node symptom" cx="100" cy="45" r="9"/><text class="node-label" text-anchor="middle" x="100" y="47">SYM</text></g>
-          <!-- Causes -->
-          <g><circle class="node cause" cx="40" cy="20" r="8"/><text class="node-label" text-anchor="middle" x="40" y="22">cause</text></g>
-          <g><circle class="node cause" cx="160" cy="20" r="8"/><text class="node-label" text-anchor="middle" x="160" y="22">cause</text></g>
-          <!-- Components -->
-          <g><circle class="node component" cx="40" cy="72" r="8"/><text class="node-label" text-anchor="middle" x="40" y="74">comp</text></g>
-          <g><circle class="node component" cx="60" cy="80" r="6"/><text class="node-label" text-anchor="middle" x="60" y="82">.</text></g>
-          <g><circle class="node component" cx="140" cy="80" r="6"/><text class="node-label" text-anchor="middle" x="140" y="82">.</text></g>
-          <g><circle class="node component" cx="160" cy="72" r="8"/><text class="node-label" text-anchor="middle" x="160" y="74">comp</text></g>
+      <div class="graph-example">
+        <svg viewBox="0 0 480 220" font-family="'JetBrains Mono', monospace" aria-hidden="true">
+          <defs>
+            <marker id="ge_a" markerWidth="7" markerHeight="7" refX="5.5" refY="2.5" orient="auto"><polygon points="0 0, 6 2.5, 0 5" fill="#93A1C1"/></marker>
+            <marker id="ge_o" markerWidth="7" markerHeight="7" refX="5.5" refY="2.5" orient="auto"><polygon points="0 0, 6 2.5, 0 5" fill="#F6821F"/></marker>
+            <marker id="ge_b" markerWidth="7" markerHeight="7" refX="5.5" refY="2.5" orient="auto"><polygon points="0 0, 6 2.5, 0 5" fill="#2563EB"/></marker>
+          </defs>
+
+          <!-- edges: symptom -> 3 causes -->
+          <line x1="220" y1="48" x2="92" y2="116" stroke="#F6821F" stroke-width="2" marker-end="url(#ge_o)"/>
+          <line x1="240" y1="48" x2="240" y2="116" stroke="#C9D2E0" stroke-width="1.5" marker-end="url(#ge_a)"/>
+          <line x1="260" y1="48" x2="388" y2="116" stroke="#C9D2E0" stroke-width="1.5" marker-end="url(#ge_a)"/>
+          <text x="240" y="68" text-anchor="middle" font-size="7.5" letter-spacing="0.5" fill="#93A1C1">SYMPTOM_OF</text>
+          <text x="118" y="100" font-size="9" font-weight="700" fill="#F6821F">p .31</text>
+          <text x="240" y="100" text-anchor="middle" font-size="9" font-weight="700" fill="#93A1C1">p .22</text>
+          <text x="360" y="100" font-size="9" font-weight="700" fill="#93A1C1">p .15</text>
+
+          <!-- edge: thermal cutoff -> motor -->
+          <line x1="90" y1="164" x2="90" y2="182" stroke="#C9D2E0" stroke-width="1.5" marker-end="url(#ge_a)"/>
+          <text x="98" y="178" font-size="7" fill="#93A1C1">CUTS_POWER_TO</text>
+
+          <!-- condition multiplier -->
+          <rect x="348" y="2" width="130" height="19" rx="9.5" fill="#EAF1FF" stroke="#2563EB" stroke-width="1" stroke-dasharray="3 2"/>
+          <text x="413" y="15" text-anchor="middle" font-size="8" font-weight="700" fill="#2563EB">CONDITION: climb</text>
+          <path d="M 352 19 Q 250 36 176 80" fill="none" stroke="#2563EB" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#ge_b)"/>
+          <text x="270" y="40" font-size="7" font-style="italic" fill="#2563EB">×load + heat → boosts p</text>
+
+          <!-- symptom node -->
+          <rect x="156" y="8" width="168" height="40" rx="7" fill="#FFF1E2" stroke="#F6821F" stroke-width="1.5"/>
+          <text x="240" y="22" text-anchor="middle" font-size="7" font-weight="700" letter-spacing="1.5" fill="#F6821F">SYMPTOM</text>
+          <text x="240" y="39" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1B2A4A">motor cutout under load</text>
+
+          <!-- cause nodes -->
+          <g>
+            <rect x="20" y="116" width="140" height="46" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/>
+            <text x="90" y="130" text-anchor="middle" font-size="6.5" font-weight="700" letter-spacing="1.5" fill="#C62828">CAUSE</text>
+            <text x="90" y="146" text-anchor="middle" font-size="10" font-weight="700" fill="#1B2A4A">thermal</text>
+            <text x="90" y="157" text-anchor="middle" font-size="10" font-weight="700" fill="#1B2A4A">cutoff</text>
+          </g>
+          <g>
+            <rect x="170" y="116" width="140" height="46" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/>
+            <text x="240" y="130" text-anchor="middle" font-size="6.5" font-weight="700" letter-spacing="1.5" fill="#C62828">CAUSE</text>
+            <text x="240" y="146" text-anchor="middle" font-size="10" font-weight="700" fill="#1B2A4A">battery</text>
+            <text x="240" y="157" text-anchor="middle" font-size="10" font-weight="700" fill="#1B2A4A">cell sag</text>
+          </g>
+          <g>
+            <rect x="320" y="116" width="140" height="46" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/>
+            <text x="390" y="130" text-anchor="middle" font-size="6.5" font-weight="700" letter-spacing="1.5" fill="#C62828">CAUSE</text>
+            <text x="390" y="146" text-anchor="middle" font-size="10" font-weight="700" fill="#1B2A4A">controller</text>
+            <text x="390" y="157" text-anchor="middle" font-size="10" font-weight="700" fill="#1B2A4A">overcurrent</text>
+          </g>
+
+          <!-- component node -->
+          <rect x="42" y="182" width="96" height="32" rx="7" fill="#E8F3E9" stroke="#2E7D32" stroke-width="1.5"/>
+          <text x="90" y="194" text-anchor="middle" font-size="6.5" font-weight="700" letter-spacing="1.2" fill="#2E7D32">COMPONENT</text>
+          <text x="90" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#1B2A4A">motor</text>
         </svg>
       </div>
-      <div class="ac-section">
-        <div class="ac-section-label">COMPONENT CATEGORIES</div>
-        <div class="ac-section-body">Electrical · Mechanical · Sensor · Safety · Braking · Wheels · Cockpit · Lighting</div>
+
+      <div class="graph-caption">A real slice of the 757-node graph. <strong>Typed nodes</strong> (symptom · cause · component) linked by <strong>typed, weighted edges</strong> — and live <strong>conditions</strong> (a sustained climb) re-weight the probabilities before ranking.</div>
+
+      <div class="graph-legend">
+        <span class="lg"><span class="dot sym"></span>symptom</span>
+        <span class="lg"><span class="dot cse"></span>cause / failure</span>
+        <span class="lg"><span class="dot cmp"></span>component</span>
+        <span class="lg" style="color:var(--muted);">edge = relation · <strong style="color:var(--orange);">p</strong> = probability</span>
       </div>
+
       <div class="ac-section">
-        <div class="ac-section-label">RELATIONS</div>
-        <div class="ac-relations">SUPPLIES_POWER_TO · SENDS_SIGNAL_TO · CUTS_POWER_TO · SYMPTOM_OF · TESTED_BY · RESOLVES</div>
-      </div>
-      <div class="ac-section">
-        <div class="ac-section-label">ERROR CODES · 69</div>
+        <div class="ac-section-label">ALSO IN THE GRAPH</div>
+        <div class="ac-section-body" style="margin-bottom:5px;">12 component categories &middot; 6 causal relation types &middot; environmental multipliers (rain · cold · cargo)</div>
         <div class="ac-codes">
           <span class="code-pill">BAFANG</span>
           <span class="code-pill">BOSCH</span>
           <span class="code-pill">SHIMANO STEPS</span>
           <span class="code-pill">KT / KUNTENG</span>
-          <span class="code-pill">GENERIC</span>
+          <span class="code-pill">+ 69 ERROR CODES</span>
         </div>
       </div>
     </div>
