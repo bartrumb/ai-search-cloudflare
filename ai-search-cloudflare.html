@@ -1097,7 +1097,7 @@ html, body, .reveal {
 /* Reveal aspect ratio holder — slide is 1280x720 (16:9) */
 
 /* ============================================================
-   SLIDE 1b — "Why we built this" (bench-tech reality hook)
+   SLIDE 1b — "Why I built this" (bench-tech reality hook)
    ============================================================ */
 .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 30px 0 26px; }
 .why-card { background: #fff; border-radius: 10px; box-shadow: var(--shadow); border-top: 4px solid var(--orange); padding: 26px 20px 28px; display: flex; flex-direction: column; }
@@ -3420,7 +3420,7 @@ html, body, .reveal {
   box-shadow: var(--shadow-lg);
 }
 .gen-card.highlight::before {
-  content: "WHAT WE USE";
+  content: "WHAT I USE";
   position: absolute;
   top: -12px; right: 14px;
   background: var(--orange);
@@ -4742,25 +4742,25 @@ kbd.key {
 </div>
 <aside class="notes">
 <strong>Opening — 1 min.</strong><br><br>
-Hi, I'm Brett — I run shopdawg.app. For the next hour I'll walk through how we built an AI-powered repair knowledge base on Cloudflare for about $80/mo. This is a knowledge-share, not a pitch. If anything resonates and you want to back the work, happy to talk after.<br><br>
+Hi, I'm Brett — I run shopdawg.app. For the next hour I'll walk through how I built an AI-powered repair knowledge base on Cloudflare for about $80/mo. This is a knowledge-share, not a pitch. If anything resonates and you want to back the work, happy to talk after.<br><br>
 <strong>Three things to leave with:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
   <li>Why the search stack matters more than the model</li>
   <li>What an agent loop actually does in production</li>
-  <li>The lessons we'd hand to anyone shipping this today</li>
+  <li>The lessons I'd hand to anyone shipping this today</li>
 </ul>
 <strong>Pace:</strong> ~2 min per slide on average. Slow down on slides 7, 17, and the case-study trilogy (19–22). Speed through the dividers.
 </aside>
 </section>
 
 <!-- ============================================================
-     SLIDE 1b — WHY WE BUILT THIS (bench-tech reality hook)
+     SLIDE 1b — WHY I BUILT THIS (bench-tech reality hook)
      ============================================================ -->
 <section data-slide-id="why-us">
 <div class="slide-pad">
   <div class="slide-header">
     <div class="icon">⚙</div>
-    <h2>Why We Built This — It Starts at the Workbench</h2>
+    <h2>Why I Built This — It Starts at the Workbench</h2>
   </div>
   <p class="lead">Before the architecture, the problem. At <strong>Juiced Wheels</strong> a bench tech has a customer's e-bike on the stand and the clock running — and the answer is buried in a parts catalog and a stack of manuals no keyword box can navigate.</p>
 
@@ -4787,12 +4787,12 @@ Hi, I'm Brett — I run shopdawg.app. For the next hour I'll walk through how we
     </div>
   </div>
 
-  <div class="why-punch">A bench tech doesn't want ten documents — they want <strong>the answer, cited, before the customer walks out.</strong> That's the bar generic search couldn't clear, so we built a stack that could — for ~$80/mo.</div>
+  <div class="why-punch">A bench tech doesn't want ten documents — they want <strong>the answer, cited, before the customer walks out.</strong> That's the bar generic search couldn't clear, so I built a stack that could — for ~$80/mo.</div>
 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
-<strong>Why We Built This — 1.5 min. The hook.</strong><br><br>
+<strong>Why I Built This — 1.5 min. The hook.</strong><br><br>
 Ground the whole talk in the physical reality before any architecture. "I run Juiced Wheels and ShopDAWG. Picture the bench: a customer's e-bike on the stand, the clock running, and the tech needs an answer — now."<br><br>
 <strong>Walk the four cards:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
@@ -5077,7 +5077,7 @@ A: Workers Paid is $5/mo flat. The bill doesn't grow when nobody shows up.
 <aside class="notes">
 <strong>Why Cloudflare — 3 min.</strong><br><br>
 <strong>Hook:</strong> The relief hero mirrors the burn ticker. Where slide 2 was money going out, this is queries going through. Let it run silently.<br><br>
-<strong>Then:</strong> "Now look at the same load profile on Cloudflare. We're serving queries instead of burning capacity."<br><br>
+<strong>Then:</strong> "Now look at the same load profile on Cloudflare. I'm serving queries instead of burning capacity."<br><br>
 <strong>Four advantages — ~30s each:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
   <li><strong>Truly idle = $0.</strong> Workers cold-start in &lt;5ms, so scale-to-zero doesn't punish users.</li>
@@ -5189,9 +5189,9 @@ A: V8 isolates. Sub-5ms. Three Generations slide is up next — that's the proof
 <strong>The density delta is the punchline:</strong> 10s → 100s → 10,000s of tenants per box is three orders of magnitude. That's what makes "scale-to-zero at edge density" economically possible.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Aren't isolates limited compared to containers?"</em><br>
-A: Yes — no arbitrary native code, no long-running processes, CPU-time caps. We hit zero of those limits for this workload.<br>
+A: Yes — no arbitrary native code, no long-running processes, CPU-time caps. I hit zero of those limits for this workload.<br>
 <em>Q: "What about Deno Deploy / Fastly?"</em><br>
-A: Same V8 model, same advantages. We picked Cloudflare for the bindings ecosystem.
+A: Same V8 model, same advantages. I picked Cloudflare for the bindings ecosystem.
 </aside>
 </section>
 
@@ -5206,7 +5206,7 @@ A: Same V8 model, same advantages. We picked Cloudflare for the bindings ecosyst
 </div>
 <aside class="notes">
 <strong>Architecture section divider — 15 seconds.</strong><br><br>
-Beat: "Now let me show you how we actually built the search layer. Three engines, one router."<br><br>
+Beat: "Now let me show you how I actually built the search layer. Three engines, one router."<br><br>
 Don't dwell. Click through.
 </aside>
 </section>
@@ -5642,7 +5642,7 @@ Don't dwell. Click through.
 <strong>Open with the metaphor:</strong> "Imagine walking into a hardware store. You arrive with one of three questions in your head…"<br><br>
 <strong>Three stations, ~75s each:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li><strong>Register (keyword) — point at the scanner + barcode:</strong> "The customer walks up knowing exactly what they want — a part number, BR-M6100. That's a Shimano brake rotor. The cashier doesn't browse; they scan the barcode. The register matches it to one specific SKU and rings it up. That's keyword search. <strong>D1 + FTS5</strong> — SQLite's built-in full-text engine. We index every part number, every SKU, every error code. When the query has a strong identifier, we go straight to BM25 and return the exact match in <strong>3 to 11 milliseconds</strong>. There's no AI in this path — the AI is overkill when the user already typed the answer. <em>This is the layer most teams skip because it's unglamorous; it's also where the most-precise queries land.</em>"</li>
+  <li><strong>Register (keyword) — point at the scanner + barcode:</strong> "The customer walks up knowing exactly what they want — a part number, BR-M6100. That's a Shimano brake rotor. The cashier doesn't browse; they scan the barcode. The register matches it to one specific SKU and rings it up. That's keyword search. <strong>D1 + FTS5</strong> — SQLite's built-in full-text engine. I index every part number, every SKU, every error code. When the query has a strong identifier, I go straight to BM25 and return the exact match in <strong>3 to 11 milliseconds</strong>. There's no AI in this path — the AI is overkill when the user already typed the answer. <em>This is the layer most teams skip because it's unglamorous; it's also where the most-precise queries land.</em>"</li>
   <li><strong>Aisle directory (semantic):</strong> "My bike clicks when I pedal." Vague description → meaning map. 768-dim vectors. ~15ms warm.</li>
   <li><strong>Shelf (faceted):</strong> "Innertube — 26" × 4", Schrader valve." Structured filters. Meilisearch + facets. ~28ms engine.</li>
 </ul>
@@ -5655,12 +5655,12 @@ Don't dwell. Click through.
   <li><strong>The receipt:</strong> done. One transaction, no follow-up needed. Most customer queries to a parts catalog actually look like this.</li>
 </ul>
 <strong>The take-home:</strong> these aren't redundant — they're different mechanisms for different question shapes. The router decides which to call (or all three) per query.<br><br>
-<strong>Footnote honesty:</strong> point at the bottom caveat. "These are engine times. Cold semantic adds ~200ms for embedding. Meili adds ~500ms because we host it in NYC, not on Cloudflare."<br><br>
+<strong>Footnote honesty:</strong> point at the bottom caveat. "These are engine times. Cold semantic adds ~200ms for embedding. Meili adds ~500ms because I host it in NYC, not on Cloudflare."<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why three engines instead of one good one?"</em><br>
 A: There's no one good one for all three query shapes. Keyword search on a vector index is bad. Facet aggregation on FTS5 is brutal. Each tool earns its place.<br>
 <em>Q: "Who routes? An LLM?"</em><br>
-A: Mostly the agent (Sonnet 4.6) using tools. We also have a pre-agent classifier (next half of deck) that primes the routing.
+A: Mostly the agent (Sonnet 4.6) using tools. I also have a pre-agent classifier (next half of deck) that primes the routing.
 </aside>
 </section>
 
@@ -5734,7 +5734,7 @@ A: Mostly the agent (Sonnet 4.6) using tools. We also have a pre-agent classifie
 <strong>Layer 1 — D1 + FTS5 — 2 min.</strong><br><br>
 <strong>Lead:</strong> "The register. You walk up with an exact part number. The cashier scans it. Done."<br><br>
 <strong>What FTS5 is:</strong> SQLite's full-text search extension. BM25 ranking — think of it as modern TF-IDF. Free with D1.<br><br>
-<strong>The two halves of the left column:</strong> "Finding" is HOW we match — progressive relaxation, exact → prefix → fuzzy in one round trip. "Ranking" is HOW we order the hits — BM25, which is just three intuitions:<br>
+<strong>The two halves of the left column:</strong> "Finding" is HOW I match — progressive relaxation, exact → prefix → fuzzy in one round trip. "Ranking" is HOW I order the hits — BM25, which is just three intuitions:<br>
 <ul style="margin:6px 0; padding-left:20px;">
   <li><strong>Rarity</strong> (IDF): a rare token like "BR-M6100" is worth far more than a common one like "brake."</li>
   <li><strong>Frequency</strong> (TF): more mentions score higher — but with diminishing returns, so keyword-stuffing doesn't win.</li>
@@ -5750,7 +5750,7 @@ Tie it to the card on the right: those three signals are what produce the "BM25 
 </ul>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Doesn't FTS5 fall over at scale?"</em><br>
-A: Our parts catalog is 84K rows and the broadest prefix scan returns in 11ms. We'll worry at 10M.<br>
+A: My parts catalog is 84K rows and the broadest prefix scan returns in 11ms. I'll worry at 10M.<br>
 <em>Q: "What about typos?"</em><br>
 A: FTS5 doesn't do typo tolerance — that's why Meilisearch is on the team for the parts catalog.
 </aside>
@@ -5836,13 +5836,13 @@ A: FTS5 doesn't do typo tolerance — that's why Meilisearch is on the team for 
   <li>Co-located with the worker — same network as D1, same edge PoP</li>
   <li>768-dim native — matches Workers AI's EmbeddingGemma output exactly</li>
   <li>Vector lookup itself is ~15ms warm</li>
-  <li>Embed cost is the tax: ~3ms cached, ~200ms cold. We cache aggressively.</li>
+  <li>Embed cost is the tax: ~3ms cached, ~200ms cold. I cache aggressively.</li>
 </ul>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why 768 dimensions?"</em><br>
-A: The embedding model's output dimension. EmbeddingGemma is 768. Larger models go to 1024, 1536, 3072 — diminishing returns past 768 for our domain.<br>
+A: The embedding model's output dimension. EmbeddingGemma is 768. Larger models go to 1024, 1536, 3072 — diminishing returns past 768 for my domain.<br>
 <em>Q: "How does this beat OpenAI embeddings?"</em><br>
-A: It doesn't, on raw quality. It beats them on latency (co-located) and cost ($0–10/mo vs $5–25). For our domain, the quality delta is invisible.
+A: It doesn't, on raw quality. It beats them on latency (co-located) and cost ($0–10/mo vs $5–25). For my domain, the quality delta is invisible.
 </aside>
 </section>
 
@@ -5924,11 +5924,11 @@ A: It doesn't, on raw quality. It beats them on latency (co-located) and cost ($
   <li><strong>Facet aggregation:</strong> sub-30ms count-by-category over 84K products. D1 GROUP BY can't keep up at this shape.</li>
   <li><strong>Faceted UI is what users want:</strong> "valve type ▾" "wheel size ▾" — every checkbox needs a fast count.</li>
 </ul>
-<strong>Honest disclosure:</strong> this is the ONE paid third-party. $30/mo. We could drop it and the parts catalog would degrade — slower facets, no typo tolerance — but it would still work via D1 FTS5 fallback.<br><br>
+<strong>Honest disclosure:</strong> this is the ONE paid third-party. $30/mo. I could drop it and the parts catalog would degrade — slower facets, no typo tolerance — but it would still work via D1 FTS5 fallback.<br><br>
 <strong>Note on latency:</strong> Meili lives in NYC, not on Cloudflare. The 28ms is engine time. Round-trip from edge is ~500ms. That's the tradeoff for the only third-party in the stack.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why not host Meili on Workers?"</em><br>
-A: Meili's a Rust binary, not edge-deployable. The Workers-native equivalent (D1 FTS5) covers two of the three things Meili gives us; the third (typo tolerance) is the part we pay for.
+A: Meili's a Rust binary, not edge-deployable. The Workers-native equivalent (D1 FTS5) covers two of the three things Meili gives me; the third (typo tolerance) is the part I pay for.
 </aside>
 </section>
 
@@ -6058,9 +6058,9 @@ A: Meili's a Rust binary, not edge-deployable. The Workers-native equivalent (D1
 <strong>Why this matters:</strong> a pure keyword search misses "clicks when I pedal." A pure semantic search misses "BR-M6100." Hybrid catches both query shapes in one round trip.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "How do you tune the weights?"</em><br>
-A: We have a 30-case eval suite (mentioned on slide 13). When we change weights, we re-run the eval and check Top-1/Top-3 accuracy.<br>
+A: I have a 30-case eval suite (mentioned on slide 13). When I change weights, I re-run the eval and check Top-1/Top-3 accuracy.<br>
 <em>Q: "Why not let the LLM combine?"</em><br>
-A: We do — Sonnet re-ranks the top 30. The weighted merge is the prefilter.
+A: I do — Sonnet re-ranks the top 30. The weighted merge is the prefilter.
 </aside>
 </section>
 
@@ -6076,7 +6076,7 @@ A: We do — Sonnet re-ranks the top 30. The weighted merge is the prefilter.
   <div class="pdf-stage">
     <div>
       <h3>Why OCR Every PDF?</h3>
-      <p>Most OEM service manuals are scanned images or flattened exports — there's no selectable text layer. <strong>OCR (Optical Character Recognition)</strong> turns those page images into searchable text. We then inject that text <strong>back into the PDF as a hidden layer</strong>, so the manual is fully searchable in any viewer while looking identical to the original. <strong>You can't chunk what you can't read.</strong></p>
+      <p>Most OEM service manuals are scanned images or flattened exports — there's no selectable text layer. <strong>OCR (Optical Character Recognition)</strong> turns those page images into searchable text. I then inject that text <strong>back into the PDF as a hidden layer</strong>, so the manual is fully searchable in any viewer while looking identical to the original. <strong>You can't chunk what you can't read.</strong></p>
 
       <div class="size-compare">
         <div class="sc-headline">Raw OEM PDF → Mobile-ready</div>
@@ -6092,7 +6092,7 @@ A: We do — Sonnet re-ranks the top 30. The weighted merge is the prefilter.
         </div>
         <div class="sc-tag">40× smaller · same content · ready for a 4G phone at the bench</div>
         <div class="opt-recipe">
-          <div class="opt-recipe-title">How we get there</div>
+          <div class="opt-recipe-title">How I get there</div>
           <ul class="opt-recipe-list">
             <li><span class="opt-check">✓</span> Subset embedded fonts <span class="opt-note">(strip unused glyphs)</span></li>
             <li><span class="opt-check">✓</span> Recompress images <span class="opt-note">(JPEG2000 / lossy DCT)</span></li>
@@ -6147,16 +6147,16 @@ A: We do — Sonnet re-ranks the top 30. The weighted merge is the prefilter.
 </div>
 <aside class="notes">
 <strong>PDF Pipeline — 4 min.</strong><br><br>
-<strong>Lead:</strong> "We have 2,845 PDF manuals — 593,000 chunks. But the input is brutal: OEM service manuals arrive as 80MB scanned-image PDFs, no selectable text. The phone mockup on this slide shows what we ship: a 2MB mobile-ready PDF that a tech can scroll through on 4G at the bench, AND a fully indexed retrieval layer for the AI."<br><br>
+<strong>Lead:</strong> "I have 2,845 PDF manuals — 593,000 chunks. But the input is brutal: OEM service manuals arrive as 80MB scanned-image PDFs, no selectable text. The phone mockup on this slide shows what I ship: a 2MB mobile-ready PDF that a tech can scroll through on 4G at the bench, AND a fully indexed retrieval layer for the AI."<br><br>
 <strong>This is actually two parallel pipelines from one OCR pass:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
   <li><strong>Retrieval pipeline (for the AI):</strong> OCR → chunk → embed → D1 + Vectorize</li>
   <li><strong>Distribution pipeline (for the human):</strong> OCR text → re-inject into PDF → font/image optimize → R2</li>
 </ul>
-<strong>The OCR detour worth calling out:</strong> "OCR doesn't just feed our search index — we also <em>put the extracted text back into the PDF as a hidden layer</em>. Visually the page looks identical to the original scan. But now if a tech opens the manual in any PDF viewer, search works. Copy-paste works. Accessibility tools work. That's a separate win from the AI side."<br><br>
-<strong>How we get 80MB → 2MB (point at the recipe list):</strong>
+<strong>The OCR detour worth calling out:</strong> "OCR doesn't just feed my search index — I also <em>put the extracted text back into the PDF as a hidden layer</em>. Visually the page looks identical to the original scan. But now if a tech opens the manual in any PDF viewer, search works. Copy-paste works. Accessibility tools work. That's a separate win from the AI side."<br><br>
+<strong>How I get 80MB → 2MB (point at the recipe list):</strong>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li><strong>Subset embedded fonts:</strong> OEM manuals ship with the entire font family. We strip everything except the glyphs actually used in this document.</li>
+  <li><strong>Subset embedded fonts:</strong> OEM manuals ship with the entire font family. I strip everything except the glyphs actually used in this document.</li>
   <li><strong>Recompress images:</strong> scanned pages are usually 600dpi PNG or uncompressed TIFF. JPEG2000 / lossy DCT at 150dpi keeps screen-readable quality at a fraction of the size.</li>
   <li><strong>Inject OCR text layer:</strong> the searchable layer adds ~50KB per manual — negligible compared to the image savings.</li>
   <li><strong>Adobe optimize to PDF/A-2u:</strong> the latest archival standard. Validates structure, strips redundant objects, normalizes color profiles.</li>
@@ -6165,7 +6165,7 @@ A: We do — Sonnet re-ranks the top 30. The weighted merge is the prefilter.
 <strong>The mobile-ready brag:</strong> a 2MB linearized PDF means a tech in a shop on bad cellular can open it in under 2 seconds. The competitor experience (download an 80MB OEM PDF on 4G) is 90+ seconds and frequently times out.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why not just use ChatGPT and let it read the PDF?"</em><br>
-A: Two reasons. (1) Cost and latency — re-uploading 5MB on every query is wasteful. (2) The text-layer reinsertion is a separate product win — the human-readable optimized PDF only happens if we OCR ourselves.<br>
+A: Two reasons. (1) Cost and latency — re-uploading 5MB on every query is wasteful. (2) The text-layer reinsertion is a separate product win — the human-readable optimized PDF only happens if I OCR myself.<br>
 <em>Q: "Why Adobe and not Ghostscript / qpdf?"</em><br>
 A: Adobe's pipeline is closer to producing PDF/A-2u in one pass; open-source tooling needs more orchestration to hit the same standard reliably.<br>
 <em>Q: "What's PDF/A-2u?"</em><br>
@@ -6293,7 +6293,7 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
   </div>
 
   <p class="lead">Metadata gives chunks a structural home. Adding a 1–2 sentence <strong>LLM-generated summary on top</strong> — Anthropic's Contextual Retrieval pattern — is what made even OCR garbage findable in production.</p>
-  <p style="font-size:0.72em; color:var(--muted); margin:-4px 0 8px 0; font-style:italic; line-height:1.5;"><strong style="color:var(--navy); font-style:normal;">A note on labor division:</strong> chunks get LLM-authored <em>context</em>; the structural graph (slides 18&ndash;20) stays human-authored. We trust LLMs to enrich existing text — not to invent ontology.</p>
+  <p style="font-size:0.72em; color:var(--muted); margin:-4px 0 8px 0; font-style:italic; line-height:1.5;"><strong style="color:var(--navy); font-style:normal;">A note on labor division:</strong> chunks get LLM-authored <em>context</em>; the structural graph (slides 18&ndash;20) stays human-authored. I trust LLMs to enrich existing text — not to invent ontology.</p>
 
   <div class="cr-stage">
     <div class="cr-card">
@@ -6332,8 +6332,8 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
 </div>
 <aside class="notes">
   <strong>Eval coverage caveat — say this out loud if asked.</strong><br><br>
-  The 66.7% → 93.3% / 83.3% → 100% numbers are from a <strong>30-case curated regression suite</strong>, not a generalization claim across all possible queries. It's a representative sample we hand-picked to cover known failure modes (OCR garbage, vocab mismatch, multi-tenant manuals, error codes). When we ship new retrieval behavior, we add cases.<br><br>
-  If someone asks "is 30 enough?" — honest answer: it's enough to catch regressions on our actual failure surface, not enough to claim universal recall. We trade coverage breadth for tight feedback loops.<br><br>
+  The 66.7% → 93.3% / 83.3% → 100% numbers are from a <strong>30-case curated regression suite</strong>, not a generalization claim across all possible queries. It's a representative sample I hand-picked to cover known failure modes (OCR garbage, vocab mismatch, multi-tenant manuals, error codes). When I ship new retrieval behavior, I add cases.<br><br>
+  If someone asks "is 30 enough?" — honest answer: it's enough to catch regressions on my actual failure surface, not enough to claim universal recall. I trade coverage breadth for tight feedback loops.<br><br>
   <em>Don't volunteer the n=30 unprompted — the slide already says it. But have this answer ready.</em>
 </aside>
 </section>
@@ -6345,11 +6345,11 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
 <div class="section-slide">
   <div class="eyebrow">Part Two</div>
   <h1>From RAG to Agentic AI</h1>
-  <div class="sub">Everything so far was <em>stateless</em> — every request started cold. Now we add what search can't have: <em>durable per-user memory</em>, crash recovery, and query-aware context compression. Watch one number the whole way down: a tool turn drops from ~36¢ to ~3¢.</div>
+  <div class="sub">Everything so far was <em>stateless</em> — every request started cold. Now I add what search can't have: <em>durable per-user memory</em>, crash recovery, and query-aware context compression. Watch one number the whole way down: a tool turn drops from ~36¢ to ~3¢.</div>
 </div>
 <aside class="notes">
 <strong>RAG/Agentic AI section divider — 20 seconds. The hinge of the talk.</strong><br><br>
-Beat: "Everything we just saw — keyword, vector, faceted — was <em>stateless</em>. Every request started from zero. Now we add the one thing search can't have: memory that survives the request."<br><br>
+Beat: "Everything I just saw — keyword, vector, faceted — was <em>stateless</em>. Every request started from zero. Now I add the one thing search can't have: memory that survives the request."<br><br>
 Say the stateless→stateful line, then move. This is the transition the whole back half hangs on.
 </aside>
 </section>
@@ -6610,7 +6610,7 @@ A: State is persisted to durable storage. Restart picks up exactly where it left
     </div>
 
     <div class="ss-footnote">
-      <strong>20&ndash;50&times; faster</strong> than frontier APIs.<br>The pre-agent adds <em>~250ms</em>, not <em>~3 seconds</em> &mdash; that's what makes the offload pattern viable.<br><br><strong>Why Cerebras for the mini-agent:</strong> we trialed Claude Haiku and Cloudflare Workers AI models too &mdash; both viable, but Cerebras's speed at low cost was the best fit for work that runs on every turn.
+      <strong>20&ndash;50&times; faster</strong> than frontier APIs.<br>The pre-agent adds <em>~250ms</em>, not <em>~3 seconds</em> &mdash; that's what makes the offload pattern viable.<br><br><strong>Why Cerebras for the mini-agent:</strong> I trialed Claude Haiku and Cloudflare Workers AI models too &mdash; both viable, but Cerebras's speed at low cost was the best fit for work that runs on every turn.
     </div>
   </div>
   </div><!-- /.sa-row -->
@@ -6620,7 +6620,7 @@ A: State is persisted to durable storage. Restart picks up exactly where it left
 <aside class="notes">
 <strong>Sub-Agent Offloading + Cerebras Speed — 4 min.</strong><br><br>
 <strong>This is the cost-cutting trick. Hammer it.</strong><br><br>
-<strong>Lead:</strong> "We use Sonnet 4.6 — premium frontier model — for synthesis and tool calling. But we don't use it to format tool output. Formatting 30 raw parts results into a nice markdown table is a $0.005 problem; we don't pay $0.05 for it."<br><br>
+<strong>Lead:</strong> "I use Sonnet 4.6 — premium frontier model — for synthesis and tool calling. But I don't use it to format tool output. Formatting 30 raw parts results into a nice markdown table is a $0.005 problem; I don't pay $0.05 for it."<br><br>
 <strong>The lane diagram:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
   <li><strong>User</strong> — sends query</li>
@@ -6630,12 +6630,12 @@ A: State is persisted to durable storage. Restart picks up exactly where it left
 </ul>
 <strong>The throughput strip on the right is the kill shot.</strong> Cerebras runs gpt-oss-120b at ~3000 tokens/sec. Frontier APIs run at 50–150 t/s. That's a 20–50× speed delta. For tool-output formatting (a high-token, low-judgment task), Cerebras eats Sonnet's lunch.<br><br>
 <strong>The economics:</strong> Sonnet stays where quality matters (synthesis). gpt-oss-120b takes the volume work (formatting). Token cost drops ~10×; user-perceived quality stays the same.<br><br>
-<strong>What we evaluated:</strong> Claude Haiku and Cloudflare Workers AI models both work for the mini-agent; we landed on Cerebras because its speed at low cost is what makes a per-turn sub-agent viable.<br><br>
+<strong>What I evaluated:</strong> Claude Haiku and Cloudflare Workers AI models both work for the mini-agent; I landed on Cerebras because its speed at low cost is what makes a per-turn sub-agent viable.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Won't users notice the smaller model?"</em><br>
-A: Not on formatting tasks. We benchmarked it — 100% marker preservation on parts output, 100% on diagnostic steps. The bench is in the codebase.<br>
+A: Not on formatting tasks. I benchmarked it — 100% marker preservation on parts output, 100% on diagnostic steps. The bench is in the codebase.<br>
 <em>Q: "What about quality regression?"</em><br>
-A: Mini-agent bench runs against fixed fixtures. If we swap models, we re-bench before shipping.
+A: Mini-agent bench runs against fixed fixtures. If I swap models, I re-bench before shipping.
 </aside>
 </section>
 
@@ -6757,7 +6757,7 @@ A: Bigger windows cost more and degrade quality at the edges. Targeted retrieval
   <div class="case-grid">
     <div class="case-card stage-had">
       <div class="cc-icon-stage">✓</div>
-      <div class="cc-tag"><span class="num">01</span>WHAT WE HAD</div>
+      <div class="cc-tag"><span class="num">01</span>WHAT I HAD</div>
       <h3 class="cc-headline">Hybrid search over 2,845 manuals, 2,334 articles, 84K parts.</h3>
       <ul class="cc-bullets">
         <li>FTS5 + Vectorize + Meilisearch fused via <code>/api/search/unified</code></li>
@@ -6777,7 +6777,7 @@ A: Bigger windows cost more and degrade quality at the edges. Targeted retrieval
     </div>
     <div class="case-card stage-built">
       <div class="cc-icon-stage">⌬</div>
-      <div class="cc-tag"><span class="num">03</span>WHAT WE BUILT</div>
+      <div class="cc-tag"><span class="num">03</span>WHAT I BUILT</div>
       <h3 class="cc-headline">A causal graph built on physics, real-world conditions &amp; rider behavior.</h3>
       <ul class="cc-bullets">
         <li><strong>757 typed nodes</strong> &mdash; <em>component &middot; symptom &middot; cause &middot; verb</em></li>
@@ -6789,21 +6789,21 @@ A: Bigger windows cost more and degrade quality at the edges. Targeted retrieval
 
   <div class="case-next">
     <span class="cn-label">NEXT THREE SLIDES</span>
-    <p>We tried LLM extraction. It hallucinated. We shipped hand-crafted instead &mdash; and the agent still queries the graph every diagnostic turn. Here's the trade-off, the anatomy, and the live trace.</p>
+    <p>I tried LLM extraction. It hallucinated. I shipped hand-crafted instead &mdash; and the agent still queries the graph every diagnostic turn. Here's the trade-off, the anatomy, and the live trace.</p>
   </div>
 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
 <strong>Case Study Intro — 3 min. Trilogy starts here.</strong><br><br>
-<strong>Frame the trilogy:</strong> "Over the next three slides I'll walk you through one specific problem the standard RAG stack couldn't solve, and how we solved it."<br><br>
+<strong>Frame the trilogy:</strong> "Over the next three slides I'll walk you through one specific problem the standard RAG stack couldn't solve, and how I solved it."<br><br>
 <strong>The three cards:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li><strong>What we HAD (green):</strong> 2,845 manuals indexed, hybrid search, Contextual Retrieval. Strong on lookup.</li>
+  <li><strong>What I HAD (green):</strong> 2,845 manuals indexed, hybrid search, Contextual Retrieval. Strong on lookup.</li>
   <li><strong>What BROKE (red):</strong> "My motor cuts out on hills" — RAG returned 30 chunks about motors, batteries, electricals. None named the cause (controller overheating) or the subsystem (thermal cutoff disabling motor power).</li>
-  <li><strong>What we BUILT (orange):</strong> A hand-crafted causal graph that encodes the real <strong>physics</strong> (thermal, electrical, and hydraulic load paths), <strong>real-world operating conditions</strong> (sustained climbs, heat, battery sag), and <strong>rider behavior</strong> (how the bikes are actually ridden and how riders describe a fault) — not just text. 757 nodes, queryable per turn.</li>
+  <li><strong>What I BUILT (orange):</strong> A hand-crafted causal graph that encodes the real <strong>physics</strong> (thermal, electrical, and hydraulic load paths), <strong>real-world operating conditions</strong> (sustained climbs, heat, battery sag), and <strong>rider behavior</strong> (how the bikes are actually ridden and how riders describe a fault) — not just text. 757 nodes, queryable per turn.</li>
 </ul>
-<strong>The progress dots at the bottom:</strong> this is slide 1 of 4. We're at "the problem." Next slide is the trade-off. Then the anatomy. Then the live demo.<br><br>
+<strong>The progress dots at the bottom:</strong> this is slide 1 of 4. I'm at "the problem." Next slide is the trade-off. Then the anatomy. Then the live demo.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why couldn't RAG figure it out?"</em><br>
 A: RAG retrieves text by similarity. It can't reason about causality. Chunks that say "motor cutout" don't necessarily say WHY. The graph encodes the why.
@@ -6878,7 +6878,7 @@ A: RAG retrieves text by similarity. It can't reason about causality. Chunks tha
 </div>
 <aside class="notes">
 <strong>Trade-off: Dead-end vs. Shipped — 3 min.</strong><br><br>
-<strong>The story arc:</strong> we tried the LLM-extraction approach first. It failed. Then we hand-authored. It worked.<br><br>
+<strong>The story arc:</strong> I tried the LLM-extraction approach first. It failed. Then I hand-authored. It worked.<br><br>
 <strong>The DEAD END card (left):</strong>
 <ul style="margin:6px 0; padding-left:20px;">
   <li>Anthropic Batch API on 963 docs → spit out an entity graph</li>
@@ -6889,7 +6889,7 @@ A: RAG retrieves text by similarity. It can't reason about causality. Chunks tha
 <ul style="margin:6px 0; padding-left:20px;">
   <li>757 hand-crafted TypeScript nodes</li>
   <li>One file, one PR for any change, full diff audit trail</li>
-  <li>The agent still uses GraphRAG to TRAVERSE it — we just don't let LLMs AUTHOR it</li>
+  <li>The agent still uses GraphRAG to TRAVERSE it — I just don't let LLMs AUTHOR it</li>
 </ul>
 <strong>The lesson under the cards:</strong> "Truth is human work. Reasoning over it is LLM work."<br><br>
 <strong>Anticipated questions:</strong><br>
@@ -7172,7 +7172,7 @@ A: Hand-assigned base probabilities per edge, with environmental multipliers (ra
 <strong>If asked to do live:</strong> have shepherd.shopdawg.app pre-warmed and a similar query staged. Don't risk a cold-start in front of the audience.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "The Mermaid is generated by the LLM?"</em><br>
-A: Yes — Sonnet writes the diagram in its response, mermaid.js renders it client-side. Pattern detailed in our internal docs.<br>
+A: Yes — Sonnet writes the diagram in its response, mermaid.js renders it client-side. Pattern detailed in my internal docs.<br>
 <em>Q: "Why not just show the answer in prose?"</em><br>
 A: For diagnostics, the picture is worth the tokens. Mechanics scan a flowchart in seconds.
 </aside>
@@ -7240,11 +7240,11 @@ A: For diagnostics, the picture is worth the tokens. Mechanics scan a flowchart 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
-<strong>Real-World Scale — 2 min. The "we actually shipped this" slide.</strong><br><br>
+<strong>Real-World Scale — 2 min. The "I actually shipped this" slide.</strong><br><br>
 <strong>The four cards:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
   <li><strong>2,845 manuals</strong> — sourced from 1,200+ e-bike SKUs. ~593K chunks indexed.</li>
-  <li><strong>2,334 knowledge-base articles</strong> — our own repair documentation</li>
+  <li><strong>2,334 knowledge-base articles</strong> — my own repair documentation</li>
   <li><strong>84,000+ parts</strong> — QBP catalog with e-bike relevance scoring</li>
   <li><strong>$80/mo production stack cost</strong> — your actual bill. Not a marketing number.</li>
 </ul>
@@ -7253,7 +7253,7 @@ A: For diagnostics, the picture is worth the tokens. Mechanics scan a flowchart 
 <em>Q: "What about LLM API costs?"</em><br>
 A: Sonnet + Cerebras + embedding calls run another $50–200/mo depending on traffic. The $80 is the infrastructure floor — model costs scale with usage.<br>
 <em>Q: "How big is the user base?"</em><br>
-A: We're pre-launch. The system is sized for shop staff (10s) initially, scales to thousands without architecture changes.
+A: I'm pre-launch. The system is sized for shop staff (10s) initially, scales to thousands without architecture changes.
 </aside>
 </section>
 
@@ -7329,7 +7329,7 @@ A: We're pre-launch. The system is sized for shop staff (10s) initially, scales 
 <strong>The bar visualization at the bottom:</strong> $2,000 vs $80 = 25× cheaper. Same throughput. Scale-to-zero baseline.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Aren't those Elastic numbers low?"</em><br>
-A: They're the Standard tier hot-node range. Enterprise tier easily hits $5–10K/mo. We chose the conservative comparison.<br>
+A: They're the Standard tier hot-node range. Enterprise tier easily hits $5–10K/mo. I chose the conservative comparison.<br>
 <em>Q: "What about vendor lock-in cost?"</em><br>
 A: Real. The Long Road slide later addresses how to keep architecture portable.
 </aside>
@@ -7344,7 +7344,7 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
     <div class="icon">💡</div>
     <h2>Lessons from Production</h2>
   </div>
-  <p class="lessons-intro">Five hard-won lessons from running this in production &mdash; <strong>not the order we learned them, but what we'd hand our past selves on day one.</strong></p>
+  <p class="lessons-intro">Five hard-won lessons from running this in production &mdash; <strong>not the order I learned them, but what I'd hand my past self on day one.</strong></p>
   <div class="lessons-body">
   <div class="lessons-flow">
     <div class="lesson-step">
@@ -7429,7 +7429,7 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
   <li><strong>2. Offload heavy context to sub-agents.</strong> Cerebras gpt-oss-120b for tool formatting. Sonnet for synthesis. ~10× token cost drop, no quality regression.</li>
   <li><strong>3. Hand-author the graph; let the LLM traverse it.</strong> Anthropic Batch API on 963 docs hallucinated edges, 31 duplicate "Battery" variants. 757 hand-crafted TypeScript nodes works. <strong>Truth is human work. Reasoning over it is LLM work.</strong></li>
   <li><strong>4. Metadata-tagged chunks beat raw chunks.</strong> Layer 2 metadata + Layer 3 LLM context (Contextual Retrieval pattern). 66.7% → 93.3% Top-1.</li>
-  <li><strong>5. Test in CI like any other code.</strong> 30-case regression suite. Every PR runs it. Quality gates that ship at the speed of CI, not at the speed of "we'll eval later."</li>
+  <li><strong>5. Test in CI like any other code.</strong> 30-case regression suite. Every PR runs it. Quality gates that ship at the speed of CI, not at the speed of "I'll eval later."</li>
 </ul>
 <strong>On lesson 3 — be ready for pushback:</strong> "But Brett, you DO use LLMs to author the chunk context_llm summaries — isn't that a contradiction?" The answer is on slide 13's text: LLMs enrich existing text, humans invent ontology. Different jobs.
 </aside>
@@ -7528,7 +7528,7 @@ Don't dwell. Click through.
 <strong>What you give up:</strong> custom rerankers, intent classification, the diagnostic graph, the agent loop. If you don't need those, you save weeks.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why didn't you use this?"</em><br>
-A: We started before it launched. We'd also lose the graph and the agent. For our use case, the full primitive control was worth the build time.
+A: I started before it launched. I'd also lose the graph and the agent. For my use case, the full primitive control was worth the build time.
 </aside>
 </section>
 
@@ -7615,7 +7615,7 @@ A: We started before it launched. We'd also lose the graph and the agent. For ou
   <li><strong>Stage 4:</strong> Hybrid scoring + custom reranker — the win zone</li>
   <li><strong>Stage 5:</strong> Agent loop + tools — what makes it "AI" instead of "search"</li>
 </ul>
-<strong>The outcome callout at the bottom:</strong> "When you're done, you have what we have. Same primitives. Full ownership."<br><br>
+<strong>The outcome callout at the bottom:</strong> "When you're done, you have what I have. Same primitives. Full ownership."<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "How long is the build?"</em><br>
 A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitoring in 2–4 weeks.
@@ -7675,7 +7675,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
   <h3>Slides</h3>
   <ol>
     <li data-slide="0"><span class="num">01</span><span>Title — AI Search on Cloudflare</span></li>
-    <li data-slide="1"><span class="num">02</span><span>Why We Built This — The Workbench Reality</span></li>
+    <li data-slide="1"><span class="num">02</span><span>Why I Built This — The Workbench Reality</span></li>
     <li data-slide="2"><span class="num">03</span><span>The Problem with Traditional Search</span></li>
     <li data-slide="3"><span class="num">04</span><span>Why Cloudflare? The Edge Advantage</span></li>
     <li data-slide="4"><span class="num">05</span><span>Three Generations of Compute</span></li>
@@ -8139,7 +8139,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     // Stochastic traffic state
     let currentMode = 'normal';   // 'normal' | 'burst' | 'pause'
     let currentRate = 50;         // queries per second
-    let nextRollAt = 0;           // wall time when we re-pick a mode
+    let nextRollAt = 0;           // wall time when I re-pick a mode
     let queriesAcc = 0;           // float accumulator across frames
     let queries = 0;              // integer displayed count
     let lastFrame = 0;
@@ -8261,7 +8261,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
       }
     }, true);
 
-    // Make our panel the single source of truth for '?' (disable reveal's built-in help)
+    // Make my panel the single source of truth for '?' (disable reveal's built-in help)
     if (window.Reveal && Reveal.configure) { try { Reveal.configure({ keyboard: { 191: null } }); } catch (_) {} }
   })();
 </script>
