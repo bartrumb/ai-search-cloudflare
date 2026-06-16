@@ -4187,6 +4187,9 @@ html, body, .reveal {
 .closing-slide .closing-logo { width: 68px; height: 68px; border-radius: 15px; margin-bottom: 18px; box-shadow: 0 6px 24px rgba(0,0,0,0.38); transition: transform 0.2s ease; }
 .closing-slide a.closing-logo-link { display: inline-block; line-height: 0; }
 .closing-slide a.closing-logo-link:hover .closing-logo { transform: translateY(-3px) scale(1.03); }
+.closing-slide .closing-logos { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 18px; }
+.closing-slide .closing-logos img { width: 66px; height: 66px; border-radius: 50%; background: #fff; object-fit: cover; margin-bottom: 0; box-shadow: 0 6px 24px rgba(0,0,0,0.38); }
+.closing-slide .closing-logos .logo-amp { color: var(--muted); font-family: 'Playfair Display', serif; font-size: 1.3em; font-style: italic; }
 .closing-slide .cta-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 12px; max-width: 740px; margin: 0 auto; }
 .closing-slide .cta-link {
   background: rgba(255,255,255,0.05);
@@ -7657,7 +7660,11 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
 <section data-background-color="#0F1B33">
 <div class="closing-slide">
   <div class="grid-bg"></div>
-  <a class="closing-logo-link" href="https://shepherd.shopdawg.app" target="_blank" rel="noopener"><img class="closing-logo" src="https://shepherd.shopdawg.app/cdn-cgi/image/width=512,height=512,quality=85,format=auto/logo.png" alt="Shop Shepherd"></a>
+  <div class="closing-logos">
+    <img src="https://f7902cf2f426af234992.cdn6.editmysite.com/uploads/b/f7902cf2f426af2349927136d37baa90e0b8779e9b17f783b7c2aeb9cb3685a9/JuicedWheels-CircleLogo_1635988245.png?width=2400&amp;optimize=medium" alt="Juiced Wheels">
+    <span class="logo-amp">&amp;</span>
+    <a class="closing-logo-link" href="https://shepherd.shopdawg.app" target="_blank" rel="noopener"><img class="closing-logo" src="https://shepherd.shopdawg.app/cdn-cgi/image/width=512,height=512,quality=85,format=auto/logo.png" alt="Shop Shepherd"></a>
+  </div>
   <h1>Start Building Today</h1>
   <div class="sub">Everything shown here runs on Cloudflare's free or pay-as-you-go tiers</div>
   <p style="font-family:'JetBrains Mono',monospace; font-size:0.78em; color:#F6821F; margin:8px 0 16px; letter-spacing:0.5px;">Start on AI Search → graduate to the primitives as you grow. Same edge, same economics, no rip-and-replace.</p>
