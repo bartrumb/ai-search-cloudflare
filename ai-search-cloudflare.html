@@ -1946,6 +1946,15 @@ html, body, .reveal {
 .facet-mockup .fm-result .info .t { font-weight: 700; color: var(--navy); font-size: 0.95em; }
 .facet-mockup .fm-result .info .p { font-size: 0.85em; color: var(--muted); }
 
+/* Slide 9 — D1 + Meilisearch division of labor */
+.engine-split { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.engine-split .es-block { background: #F8F9FB; border-left: 3px solid var(--muted-soft); border-radius: 0 6px 6px 0; padding: 8px 13px; }
+.engine-split .es-block.accent { border-left-color: var(--orange); background: #FFF8F0; }
+.engine-split .es-name { font-family: 'JetBrains Mono', monospace; font-size: 0.82em; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+.engine-split .es-name span { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.78em; color: var(--muted); letter-spacing: 0; text-transform: none; margin-left: 7px; }
+.engine-split .es-desc { font-size: 0.78em; color: var(--body); line-height: 1.42; }
+.engine-split .es-desc code { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: rgba(27,42,74,0.07); padding: 0 4px; border-radius: 3px; }
+
 /* ============================================================
    SLIDE 10 — PDF Pipeline: phone mockup + size comparison
    ============================================================ */
@@ -5612,6 +5621,14 @@ A: Mostly the agent (Sonnet 4.6) using tools. We also have a pre-agent classifie
     </div>
   </div>
 
+  <div class="process-strip" id="fts5Process">
+    <span class="ps-label">FTS5 STAGES</span>
+    <div class="ps-step" data-step="0"><span class="num">1</span>tokenize</div>
+    <span class="ps-arrow">→</span>
+    <div class="ps-step" data-step="1"><span class="num">2</span>match (virtual table)</div>
+    <span class="ps-arrow">→</span>
+    <div class="ps-step" data-step="2"><span class="num">3</span>rank (BM25)</div>
+  </div>
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
@@ -5742,20 +5759,19 @@ A: It doesn't, on raw quality. It beats them on latency (co-located) and cost ($
   </div>
   <div class="two-col">
     <div>
-      <h3>Why a Dedicated Parts Engine?</h3>
-      <p>Parts search is different from docs and manuals. Technicians need Newegg-style faceted filtering — brand, category, price, e-bike compatibility — not semantic similarity (with BSD-aware wheel sizing: "26" matches 26", "29" matches 700c + 29er).</p>
+      <h3>What Faceting Is</h3>
+      <p>Filtering a big catalog by structured attributes — brand, wheel size, valve type, price, in-stock — with a <strong>live count on every option</strong>. It's how a tech narrows 84,000 parts down to the 8 that fit, without typing a perfect query.</p>
 
-      <h3 style="margin-top:14px;">Data Pipeline</h3>
-      <div class="flow-pipeline">
-        <div class="flow-row"><div class="node">Vendor APIs / feeds</div></div>
-        <div class="flow-arrow">↓<span class="flow-dot"></span></div>
-        <div class="flow-row"><div class="node">Workers</div><span class="note">ingest + transform</span></div>
-        <div class="flow-arrow">↓<span class="flow-dot" style="animation-delay:0.2s;"></span></div>
-        <div class="flow-row"><div class="node">D1</div><span class="note">shape · normalize · score</span></div>
-        <div class="flow-arrow">↓<span class="flow-dot" style="animation-delay:0.4s;"></span></div>
-        <div class="flow-row"><div class="node">Meilisearch</div><span class="note">sync index for speed</span></div>
-        <div class="flow-arrow">↓<span class="flow-dot" style="animation-delay:0.6s;"></span></div>
-        <div class="flow-row"><div class="node" style="background:#FFF8F0; border-color:var(--orange); color:var(--navy);">Parts UI + AI tools</div></div>
+      <h3 style="margin-top:14px;">Why D1 <em>and</em> Meilisearch?</h3>
+      <div class="engine-split">
+        <div class="es-block">
+          <div class="es-name">D1 <span>system of record</span></div>
+          <div class="es-desc">Normalizes 84K parts from 3 vendor feeds, scores e-bike relevance, and serves keyword search via FTS5 — the fallback if Meili is ever down.</div>
+        </div>
+        <div class="es-block accent">
+          <div class="es-name">Meilisearch <span>the speed layer</span></div>
+          <div class="es-desc">A sub-30ms count for every facet checkbox across all 84K rows — which a D1 <code>GROUP BY</code> can't keep up with — plus typo tolerance: "shrader" still finds "Schrader". Synced from D1.</div>
+        </div>
       </div>
     </div>
 
@@ -7790,8 +7806,8 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
      ========================================================= */
   (function(){
     const ORCHESTRA = [
-      // slide index 6 = Layer 1 (FTS5): drive .relax-list progressive relaxation
-      { idx: 6, lists: ['relaxList'], stepMs: 1200, steps: 3 },
+      // slide index 6 = Layer 1 (FTS5): drive .relax-list + #fts5Process
+      { idx: 6, lists: ['relaxList', 'fts5Process'], stepMs: 1200, steps: 3 },
       // slide index 7 = Layer 2 (Vectorize): drive .embed-pipeline (4 steps) + #vecProcess (3 steps)
       { idx: 7, lists: ['embedPipeline'], stepMs: 900, steps: 4, secondary: 'vecProcess', secondarySteps: 3 },
       // slide index 8 = Layer 3 (Meilisearch): drive #meiliProcess (3 steps)
