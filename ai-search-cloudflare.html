@@ -1097,6 +1097,18 @@ html, body, .reveal {
 /* Reveal aspect ratio holder — slide is 1280x720 (16:9) */
 
 /* ============================================================
+   SLIDE 1b — "Why we built this" (bench-tech reality hook)
+   ============================================================ */
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 30px 0 26px; }
+.why-card { background: #fff; border-radius: 10px; box-shadow: var(--shadow); border-top: 4px solid var(--orange); padding: 26px 20px 28px; display: flex; flex-direction: column; }
+.why-card .wc-stat { font-family: 'Inter', sans-serif; font-size: 2.3em; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -0.5px; }
+.why-card .wc-stat .u { font-size: 0.46em; color: var(--orange); font-weight: 800; letter-spacing: 0; }
+.why-card .wc-title { font-size: 0.84em; font-weight: 700; color: var(--navy); margin: 14px 0 6px; }
+.why-card .wc-desc { font-size: 0.75em; color: var(--body); line-height: 1.5; }
+.why-punch { background: linear-gradient(135deg, #1B2A4A 0%, #0F1B33 100%); color: #fff; border-radius: 10px; padding: 26px 30px; font-size: 1.02em; line-height: 1.55; }
+.why-punch strong { color: var(--orange); }
+
+/* ============================================================
    SLIDE 2 — "The Problem" dynamic components (full-bleed layout)
    ============================================================ */
 .burn-hero {
@@ -4737,7 +4749,59 @@ Hi, I'm Brett — I run shopdawg.app. For the next hour I'll walk through how we
   <li>What an agent loop actually does in production</li>
   <li>The lessons we'd hand to anyone shipping this today</li>
 </ul>
-<strong>Pace:</strong> ~2 min per slide on average. Slow down on slides 6, 16, and the case-study trilogy (18–21). Speed through the dividers.
+<strong>Pace:</strong> ~2 min per slide on average. Slow down on slides 7, 17, and the case-study trilogy (19–22). Speed through the dividers.
+</aside>
+</section>
+
+<!-- ============================================================
+     SLIDE 1b — WHY WE BUILT THIS (bench-tech reality hook)
+     ============================================================ -->
+<section data-slide-id="why-us">
+<div class="slide-pad">
+  <div class="slide-header">
+    <div class="icon">⚙</div>
+    <h2>Why We Built This — It Starts at the Workbench</h2>
+  </div>
+  <p class="lead">Before the architecture, the problem. At <strong>Juiced Wheels</strong> a bench tech has a customer's e-bike on the stand and the clock running — and the answer is buried in a parts catalog and a stack of manuals no keyword box can navigate.</p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="wc-stat">84K<span class="u">+</span></div>
+      <div class="wc-title">parts to search</div>
+      <div class="wc-desc">The right innertube is one SKU among tens of thousands across QBP · JBI · OSCO.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-stat">2,845</div>
+      <div class="wc-title">PDF manuals</div>
+      <div class="wc-desc">The fix is on page 47 of a Bafang PDF — not in a tidy, queryable database.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-stat">"30h?"</div>
+      <div class="wc-title">cryptic error codes</div>
+      <div class="wc-desc">Bafang, Bosch &amp; Shimano each speak a different dialect — the code is meaningless without the table.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-stat">≠</div>
+      <div class="wc-title">symptom vs. keyword</div>
+      <div class="wc-desc">"Motor cuts out climbing" isn't a phrase in any manual — it's a trace through the system.</div>
+    </div>
+  </div>
+
+  <div class="why-punch">A bench tech doesn't want ten documents — they want <strong>the answer, cited, before the customer walks out.</strong> That's the bar generic search couldn't clear, so we built a stack that could — for ~$80/mo.</div>
+
+  <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
+</div>
+<aside class="notes">
+<strong>Why We Built This — 1.5 min. The hook.</strong><br><br>
+Ground the whole talk in the physical reality before any architecture. "I run Juiced Wheels and ShopDAWG. Picture the bench: a customer's e-bike on the stand, the clock running, and the tech needs an answer — now."<br><br>
+<strong>Walk the four cards:</strong>
+<ul style="margin:6px 0; padding-left:20px;">
+  <li><strong>84K+ parts</strong> — the catalog is enormous; the right part is one SKU among tens of thousands.</li>
+  <li><strong>2,845 manuals</strong> — answers live deep inside PDFs, not in clean rows.</li>
+  <li><strong>Cryptic error codes</strong> — every brand's codes mean something different; useless without the table.</li>
+  <li><strong>Symptom ≠ keyword</strong> — how a rider describes a fault never matches the doc; this sets up the diagnostic graph later.</li>
+</ul>
+<strong>Land the punchline:</strong> the tech wants the answer, cited, fast — not a pile of documents. That bar is why the rest of this talk exists. THEN pivot to the infra problem (next slide): even if you build it, traditional infra bills you to serve nobody.
 </aside>
 </section>
 
@@ -7611,33 +7675,34 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
   <h3>Slides</h3>
   <ol>
     <li data-slide="0"><span class="num">01</span><span>Title — AI Search on Cloudflare</span></li>
-    <li data-slide="1"><span class="num">02</span><span>The Problem with Traditional Search</span></li>
-    <li data-slide="2"><span class="num">03</span><span>Why Cloudflare? The Edge Advantage</span></li>
-    <li data-slide="3"><span class="num">04</span><span>Three Generations of Compute</span></li>
-    <li class="section" data-slide="4"><span class="num">05</span><span>Part 1 · Architecture Deep Dive</span></li>
-    <li data-slide="5"><span class="num">06</span><span>Search Stack — Think of It Like Shopping</span></li>
-    <li data-slide="6"><span class="num">07</span><span>Layer 1 — Scan the Barcode (FTS5)</span></li>
-    <li data-slide="7"><span class="num">08</span><span>Layer 2 — Find the Aisle (Vectorize)</span></li>
-    <li data-slide="8"><span class="num">09</span><span>Layer 3 — Pick the Shelf (Meilisearch)</span></li>
-    <li data-slide="9"><span class="num">10</span><span>Hybrid Search — Merging Keyword + Vector</span></li>
-    <li data-slide="10"><span class="num">11</span><span>PDF Pipeline — OCR, Extract, Optimize</span></li>
-    <li data-slide="11"><span class="num">12</span><span>Why Chunking Context Matters</span></li>
-    <li data-slide="12"><span class="num">13</span><span>Contextual Retrieval — Quality Up, Cost Down</span></li>
-    <li class="section" data-slide="13"><span class="num">14</span><span>Part 2 · From RAG to Agentic AI</span></li>
-    <li data-slide="14"><span class="num">15</span><span>A Durable Object Per User (Project Think)</span></li>
-    <li data-slide="15"><span class="num">16</span><span>Sub-Agent Offloading</span></li>
-    <li data-slide="16"><span class="num">17</span><span>Context Engineering</span></li>
-    <li data-slide="17"><span class="num">18</span><span>Case Study — When Retrieval Isn't Enough</span></li>
-    <li data-slide="18"><span class="num">19</span><span>Why Hand-Crafted Beat LLM Extraction</span></li>
-    <li data-slide="19"><span class="num">20</span><span>757 Nodes × 1,739 Edges × 69 Codes</span></li>
-    <li data-slide="20"><span class="num">21</span><span>From Symptom to Diagram — Live</span></li>
-    <li data-slide="21"><span class="num">22</span><span>Real-World Scale</span></li>
-    <li data-slide="22"><span class="num">23</span><span>Cost Comparison</span></li>
-    <li data-slide="23"><span class="num">24</span><span>Lessons from Production</span></li>
-    <li class="section" data-slide="24"><span class="num">25</span><span>Part 3 · Build It Yourself</span></li>
-    <li data-slide="25"><span class="num">26</span><span>The Shortcut — Cloudflare AI Search</span></li>
-    <li data-slide="26"><span class="num">27</span><span>The Long Road — Same Primitives, DIY</span></li>
-    <li data-slide="27"><span class="num">28</span><span>Start Building Today</span></li>
+    <li data-slide="1"><span class="num">02</span><span>Why We Built This — The Workbench Reality</span></li>
+    <li data-slide="2"><span class="num">03</span><span>The Problem with Traditional Search</span></li>
+    <li data-slide="3"><span class="num">04</span><span>Why Cloudflare? The Edge Advantage</span></li>
+    <li data-slide="4"><span class="num">05</span><span>Three Generations of Compute</span></li>
+    <li class="section" data-slide="5"><span class="num">06</span><span>Part 1 · Architecture Deep Dive</span></li>
+    <li data-slide="6"><span class="num">07</span><span>Search Stack — Think of It Like Shopping</span></li>
+    <li data-slide="7"><span class="num">08</span><span>Layer 1 — Scan the Barcode (FTS5)</span></li>
+    <li data-slide="8"><span class="num">09</span><span>Layer 2 — Find the Aisle (Vectorize)</span></li>
+    <li data-slide="9"><span class="num">10</span><span>Layer 3 — Pick the Shelf (Meilisearch)</span></li>
+    <li data-slide="10"><span class="num">11</span><span>Hybrid Search — Merging Keyword + Vector</span></li>
+    <li data-slide="11"><span class="num">12</span><span>PDF Pipeline — OCR, Extract, Optimize</span></li>
+    <li data-slide="12"><span class="num">13</span><span>Why Chunking Context Matters</span></li>
+    <li data-slide="13"><span class="num">14</span><span>Contextual Retrieval — Quality Up, Cost Down</span></li>
+    <li class="section" data-slide="14"><span class="num">15</span><span>Part 2 · From RAG to Agentic AI</span></li>
+    <li data-slide="15"><span class="num">16</span><span>A Durable Object Per User (Project Think)</span></li>
+    <li data-slide="16"><span class="num">17</span><span>Sub-Agent Offloading</span></li>
+    <li data-slide="17"><span class="num">18</span><span>Context Engineering</span></li>
+    <li data-slide="18"><span class="num">19</span><span>Case Study — When Retrieval Isn't Enough</span></li>
+    <li data-slide="19"><span class="num">20</span><span>Why Hand-Crafted Beat LLM Extraction</span></li>
+    <li data-slide="20"><span class="num">21</span><span>757 Nodes × 1,739 Edges × 69 Codes</span></li>
+    <li data-slide="21"><span class="num">22</span><span>From Symptom to Diagram — Live</span></li>
+    <li data-slide="22"><span class="num">23</span><span>Real-World Scale</span></li>
+    <li data-slide="23"><span class="num">24</span><span>Cost Comparison</span></li>
+    <li data-slide="24"><span class="num">25</span><span>Lessons from Production</span></li>
+    <li class="section" data-slide="25"><span class="num">26</span><span>Part 3 · Build It Yourself</span></li>
+    <li data-slide="26"><span class="num">27</span><span>The Shortcut — Cloudflare AI Search</span></li>
+    <li data-slide="27"><span class="num">28</span><span>The Long Road — Same Primitives, DIY</span></li>
+    <li data-slide="28"><span class="num">29</span><span>Start Building Today</span></li>
   </ol>
   <div class="toc-actions">
     <button id="tocPrint" type="button" title="Open a print-ready view of every slide"><span class="ico">⎙</span> Print / Export PDF</button>
@@ -7869,8 +7934,8 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     }
 
     function check(idx) {
-      // slide index 1 = "The Problem"
-      if (idx === 1) start();
+      // slide index 2 = "The Problem"
+      if (idx === 2) start();
       else stop();
     }
 
@@ -7884,14 +7949,14 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
      ========================================================= */
   (function(){
     const ORCHESTRA = [
-      // slide index 6 = Layer 1 (FTS5): drive .relax-list + #fts5Process
-      { idx: 6, lists: ['relaxList', 'fts5Process'], stepMs: 1200, steps: 3 },
-      // slide index 7 = Layer 2 (Vectorize): drive .embed-pipeline (4 steps) + #vecProcess (3 steps)
-      { idx: 7, lists: ['embedPipeline'], stepMs: 900, steps: 4, secondary: 'vecProcess', secondarySteps: 3 },
-      // slide index 8 = Layer 3 (Meilisearch): drive #meiliProcess (3 steps)
-      { idx: 8, lists: ['meiliProcess'], stepMs: 1400, steps: 3 },
-      // slide index 10 = PDF Pipeline: drive #pdfProcess (4 steps)
-      { idx: 10, lists: ['pdfProcess'], stepMs: 1100, steps: 4 },
+      // slide index 7 = Layer 1 (FTS5): drive .relax-list + #fts5Process
+      { idx: 7, lists: ['relaxList', 'fts5Process'], stepMs: 1200, steps: 3 },
+      // slide index 8 = Layer 2 (Vectorize): drive .embed-pipeline (4 steps) + #vecProcess (3 steps)
+      { idx: 8, lists: ['embedPipeline'], stepMs: 900, steps: 4, secondary: 'vecProcess', secondarySteps: 3 },
+      // slide index 9 = Layer 3 (Meilisearch): drive #meiliProcess (3 steps)
+      { idx: 9, lists: ['meiliProcess'], stepMs: 1400, steps: 3 },
+      // slide index 11 = PDF Pipeline: drive #pdfProcess (4 steps)
+      { idx: 11, lists: ['pdfProcess'], stepMs: 1100, steps: 4 },
     ];
     let timer = null;
 
@@ -7960,7 +8025,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     function check(idx) {
       const chat = document.getElementById('liveChatConsole');
       const svg = document.getElementById('liveMermaidSvg');
-      if (idx === 20) {
+      if (idx === 21) {
         restart(chat);
         restart(svg);
       } else {
@@ -7987,7 +8052,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     }
     function check(idx) {
       if (timer) { clearInterval(timer); timer = null; engines.forEach(e => e.classList.remove('fire')); }
-      if (idx === 9) { tick(); timer = setInterval(tick, 1100); }
+      if (idx === 10) { tick(); timer = setInterval(tick, 1100); }
     }
     Reveal.on('ready', (e) => check(e.indexh));
     Reveal.on('slidechanged', (e) => check(e.indexh));
@@ -8029,8 +8094,8 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     function check(idx) {
       if (raf) { cancelAnimationFrame(raf); raf = null; }
       let targets = null;
-      if (idx === 21) targets = scaleTargets;       // Real-World Scale
-      else if (idx === 19) targets = graphTargets;  // Graph Anatomy
+      if (idx === 22) targets = scaleTargets;       // Real-World Scale
+      else if (idx === 20) targets = graphTargets;  // Graph Anatomy
       if (targets) {
         targets.forEach(t => { t.textContent = '0'; });
         setTimeout(() => animateSet(targets), 150);
@@ -8051,7 +8116,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     function reset() { bad.style.width = '0%'; good.style.width = '0%'; }
     function fill() { bad.style.width = '100%'; good.style.width = '4%'; }
     function check(idx) {
-      if (idx === 22) { reset(); setTimeout(fill, 200); }
+      if (idx === 23) { reset(); setTimeout(fill, 200); }
       else reset();
     }
     Reveal.on('ready', (e) => check(e.indexh));
@@ -8146,8 +8211,8 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     }
 
     function check(idx) {
-      // slide index 2 = "Why Cloudflare"
-      if (idx === 2) start();
+      // slide index 3 = "Why Cloudflare"
+      if (idx === 3) start();
       else stop();
     }
 
