@@ -4374,11 +4374,13 @@ html.print-pdf-active .gd-fill { animation: none !important; transform: none !im
 /* ---- Slide 17 · Context Engineering — 3-metric dashboard ---- */
 .ctx-dash {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 11px;
   flex-shrink: 0;
   margin-top: 2px;
 }
+.metric-card.cost .mc-before { font-size: 0.85em; }
+.metric-card.cost .mc-after { font-size: 1.35em; color: var(--green); }
 .metric-card {
   background: #fff;
   border-radius: 8px;
@@ -6583,6 +6585,12 @@ A: Mini-agent bench runs against fixed fixtures. If we swap models, we re-bench 
       <div class="mc-label">Tool calls / answer</div>
       <div class="mc-vals"><span class="mc-before">8</span><span class="mc-arrow">&rarr;</span><span class="mc-after">2</span></div>
       <div class="mc-sub">no follow-up narrowing</div>
+    </div>
+    <div class="metric-card cost">
+      <span class="mc-badge">&minus;90%</span>
+      <div class="mc-label">Cost / turn</div>
+      <div class="mc-vals"><span class="mc-before">$0.36</span><span class="mc-arrow">&rarr;</span><span class="mc-after">$0.03</span></div>
+      <div class="mc-sub">&asymp; $330 saved / 1K turns</div>
     </div>
     <div class="metric-card">
       <span class="mc-badge">+10&times;</span>
