@@ -1744,6 +1744,13 @@ html, body, .reveal {
 }
 .relax-line.live { opacity: 1; border-left-color: var(--orange); background: #FFF8F0; transform: translateX(2px); }
 .relax-line .stage { font-size: 0.78em; color: var(--orange); font-weight: 700; letter-spacing: 0.5px; }
+/* Slide 7 — paired sub-section labels (Finding / Ranking) */
+.rank-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62em; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); margin: 13px 0 4px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.rank-label .note { color: var(--muted); font-weight: 600; letter-spacing: 0.3px; text-transform: none; }
+/* BM25 ranking list — same row style as relaxation, always lit, navy signal badges */
+.bm25-list .relax-line { opacity: 1; justify-content: flex-start; gap: 10px; border-left-color: var(--navy); }
+.bm25-list .relax-line .stage { color: var(--navy); min-width: 92px; flex-shrink: 0; }
+.bm25-list .relax-line .sig { color: var(--body); }
 
 /* Slide 8 — animated embedding pipeline */
 .embed-pipeline { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
@@ -5562,12 +5569,20 @@ A: Mostly the agent (Sonnet 4.6) using tools. We also have a pre-agent classifie
   <div class="two-col">
     <div>
       <h3>How It Works</h3>
-      <p>D1 is Cloudflare's serverless SQLite. FTS5 is its built-in full-text search — BM25 ranking, no extra service, co-located with your Workers at the edge.</p>
-      <p style="margin-top:10px;"><strong>Progressive relaxation:</strong> one lookup, three passes — exact → prefix → fuzzy, all in a single round trip.</p>
+      <p>D1 is Cloudflare's serverless SQLite; FTS5 is its built-in full-text search — co-located with your Worker, no extra service, no extra bill.</p>
+
+      <div class="rank-label">Finding · progressive relaxation <span class="note">one round trip</span></div>
       <div class="relax-list" id="relaxList">
         <div class="relax-line" data-step="0"><span class="stage">EXACT</span><span>"BR-M6100" &rarr; 1 hit</span></div>
         <div class="relax-line" data-step="1"><span class="stage">PREFIX</span><span>"BR-M61…" &rarr; 6 hits</span></div>
         <div class="relax-line" data-step="2"><span class="stage">FUZZY</span><span>"BR~M6100" &rarr; 18 hits</span></div>
+      </div>
+
+      <div class="rank-label">Ranking · how BM25 scores a hit <span class="note">3 signals &rarr; one score</span></div>
+      <div class="relax-list bm25-list">
+        <div class="relax-line"><span class="stage">RARITY</span><span class="sig">"BR-M6100" outweighs a common "brake"</span></div>
+        <div class="relax-line"><span class="stage">FREQUENCY</span><span class="sig">more hits help — but less each time</span></div>
+        <div class="relax-line"><span class="stage">BREVITY</span><span class="sig">a title hit beats one deep in a manual</span></div>
       </div>
     </div>
     <div class="card top-accent">
@@ -5597,20 +5612,19 @@ A: Mostly the agent (Sonnet 4.6) using tools. We also have a pre-agent classifie
     </div>
   </div>
 
-  <div class="process-strip" id="fts5Process">
-    <span class="ps-label">FTS5 STAGES</span>
-    <div class="ps-step" data-step="0"><span class="num">1</span>tokenize</div>
-    <span class="ps-arrow">→</span>
-    <div class="ps-step" data-step="1"><span class="num">2</span>match (virtual table)</div>
-    <span class="ps-arrow">→</span>
-    <div class="ps-step" data-step="2"><span class="num">3</span>rank (BM25)</div>
-  </div>
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
 <strong>Layer 1 — D1 + FTS5 — 2 min.</strong><br><br>
 <strong>Lead:</strong> "The register. You walk up with an exact part number. The cashier scans it. Done."<br><br>
 <strong>What FTS5 is:</strong> SQLite's full-text search extension. BM25 ranking — think of it as modern TF-IDF. Free with D1.<br><br>
+<strong>The two halves of the left column:</strong> "Finding" is HOW we match — progressive relaxation, exact → prefix → fuzzy in one round trip. "Ranking" is HOW we order the hits — BM25, which is just three intuitions:<br>
+<ul style="margin:6px 0; padding-left:20px;">
+  <li><strong>Rarity</strong> (IDF): a rare token like "BR-M6100" is worth far more than a common one like "brake."</li>
+  <li><strong>Frequency</strong> (TF): more mentions score higher — but with diminishing returns, so keyword-stuffing doesn't win.</li>
+  <li><strong>Brevity</strong> (length norm): the same match in a short title beats one buried in a 900-word manual.</li>
+</ul>
+Tie it to the card on the right: those three signals are what produce the "BM25 score 8.4."<br><br>
 <strong>What's interesting:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
   <li>Lives inside D1, so no separate cluster, no separate bill</li>
@@ -7776,8 +7790,8 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
      ========================================================= */
   (function(){
     const ORCHESTRA = [
-      // slide index 6 = Layer 1 (FTS5): drive .relax-list + #fts5Process
-      { idx: 6, lists: ['relaxList', 'fts5Process'], stepMs: 1200, steps: 3 },
+      // slide index 6 = Layer 1 (FTS5): drive .relax-list progressive relaxation
+      { idx: 6, lists: ['relaxList'], stepMs: 1200, steps: 3 },
       // slide index 7 = Layer 2 (Vectorize): drive .embed-pipeline (4 steps) + #vecProcess (3 steps)
       { idx: 7, lists: ['embedPipeline'], stepMs: 900, steps: 4, secondary: 'vecProcess', secondarySteps: 3 },
       // slide index 8 = Layer 3 (Meilisearch): drive #meiliProcess (3 steps)
