@@ -1519,15 +1519,15 @@ html, body, .reveal {
   background: #fff;
   border-radius: 8px;
   box-shadow: var(--shadow);
-  padding: 12px 16px 8px;
-  margin-top: 4px;
+  padding: 8px 16px 6px;
+  margin-top: 2px;
 }
-.store-scene svg { width: 100%; height: auto; display: block; }
+.store-scene svg { width: 100%; height: auto; max-height: 278px; margin: 0 auto; display: block; }
 .store-mappings {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
-  margin-top: 10px;
+  margin-top: 6px;
 }
 .store-mappings .mapping-col {
   background: #fff;
@@ -5107,7 +5107,7 @@ Don't dwell. Click through.
   </div>
   <p class="lead">Three search engines, three shopping behaviors. The customer's voice picks the station: keyword for exact parts, semantic for symptoms, faceted for browsing with constraints.</p>
 
-  <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:10px; padding:9px 16px; background:#F5F6FA; border:1px solid #E2E6EF; border-left:4px solid #F6821F; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78em;">
+  <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:8px; padding:6px 16px; background:#F5F6FA; border:1px solid #E2E6EF; border-left:4px solid #F6821F; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78em;">
     <span style="font-family:'JetBrains Mono',monospace; font-size:0.72em; font-weight:700; letter-spacing:1.5px; color:#93A1C1; text-transform:uppercase;">If you don't work on bikes</span>
     <span style="color:#334155;"><b style="color:#1B2A4A;">motor</b> = web server</span>
     <span style="color:#C9D2E0;">·</span>
@@ -6372,9 +6372,8 @@ A: State is persisted to durable storage. Restart picks up exactly where it left
     <div class="icon">⇆</div>
     <h2>Sub-Agent Offloading: Cheap Bulk Work, Premium Synthesis</h2>
   </div>
-  <div style="font-family:'JetBrains Mono',monospace; font-size:0.7em; font-weight:700; color:#93A1C1; letter-spacing:2px; margin-bottom:6px;">UNIT ECONOMICS</div>
   <p class="lead">High-token tool work goes to a near-free model. The premium model only sees the compressed result and writes the user-facing answer. Cost drops an order of magnitude; quality holds.</p>
-  <div style="display:inline-block; padding:5px 16px; margin-bottom:10px; background:#FFF1E2; border:1px solid #F6821F; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:0.8em; font-weight:700; color:#F6821F; letter-spacing:0.5px;">~$0.36 → ~$0.030 per turn — a 90% cut, same answer quality.</div>
+  <div style="display:inline-block; padding:4px 16px; margin-bottom:6px; background:#FFF1E2; border:1px solid #F6821F; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:0.8em; font-weight:700; color:#F6821F; letter-spacing:0.5px;">~$0.36 → ~$0.030 per turn — a 90% cut, same answer quality.</div>
 
   <div class="sa-row">
   <div class="seq-stage">
@@ -7346,7 +7345,7 @@ Don't dwell. Click through.
 
   <div class="start-here-callout">
     <span class="sh-label">START HERE</span>
-    <p>If you don't need per-tenant Durable Object state, hand-tuned hybrid scoring, or a long tail of agent tools — <strong>AI Search ships you 80% of this deck without writing a Worker.</strong> — and every primitive is right here in Step 2 when you outgrow it.</p>
+    <p>If you don't need per-tenant Durable Object state, hand-tuned hybrid scoring, or a long tail of agent tools — <strong>AI Search ships you 80% of this deck without writing a Worker</strong> — and every primitive is right here in Step 2 when you outgrow it.</p>
   </div>
 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
