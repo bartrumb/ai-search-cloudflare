@@ -5107,6 +5107,15 @@ Don't dwell. Click through.
   </div>
   <p class="lead">Three search engines, three shopping behaviors. The customer's voice picks the station: keyword for exact parts, semantic for symptoms, faceted for browsing with constraints.</p>
 
+  <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:10px; padding:9px 16px; background:#F5F6FA; border:1px solid #E2E6EF; border-left:4px solid #F6821F; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78em;">
+    <span style="font-family:'JetBrains Mono',monospace; font-size:0.72em; font-weight:700; letter-spacing:1.5px; color:#93A1C1; text-transform:uppercase;">If you don't work on bikes</span>
+    <span style="color:#334155;"><b style="color:#1B2A4A;">motor</b> = web server</span>
+    <span style="color:#C9D2E0;">·</span>
+    <span style="color:#334155;"><b style="color:#1B2A4A;">thermal cutoff</b> = CPU throttling under load</span>
+    <span style="color:#C9D2E0;">·</span>
+    <span style="color:#334155;"><b style="color:#1B2A4A;">battery sag</b> = DB / resource latency</span>
+  </div>
+
   <div class="store-scene">
     <svg viewBox="0 0 900 260" preserveAspectRatio="xMidYMid meet">
       <!-- Wall background -->
@@ -6209,7 +6218,7 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
 <div class="section-slide">
   <div class="eyebrow">Part Two</div>
   <h1>From RAG to Agentic AI</h1>
-  <div class="sub">Everything so far was <em>stateless</em> — every request started cold. Now we add what search can't have: <em>durable per-user memory</em>, crash recovery, and query-aware context compression.</div>
+  <div class="sub">Everything so far was <em>stateless</em> — every request started cold. Now we add what search can't have: <em>durable per-user memory</em>, crash recovery, and query-aware context compression. Watch one number the whole way down: a tool turn drops from ~36¢ to ~3¢.</div>
 </div>
 <aside class="notes">
 <strong>RAG/Agentic AI section divider — 20 seconds. The hinge of the talk.</strong><br><br>
@@ -6363,7 +6372,9 @@ A: State is persisted to durable storage. Restart picks up exactly where it left
     <div class="icon">⇆</div>
     <h2>Sub-Agent Offloading: Cheap Bulk Work, Premium Synthesis</h2>
   </div>
+  <div style="font-family:'JetBrains Mono',monospace; font-size:0.7em; font-weight:700; color:#93A1C1; letter-spacing:2px; margin-bottom:6px;">UNIT ECONOMICS</div>
   <p class="lead">High-token tool work goes to a near-free model. The premium model only sees the compressed result and writes the user-facing answer. Cost drops an order of magnitude; quality holds.</p>
+  <div style="display:inline-block; padding:5px 16px; margin-bottom:10px; background:#FFF1E2; border:1px solid #F6821F; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:0.8em; font-weight:700; color:#F6821F; letter-spacing:0.5px;">~$0.36 → ~$0.030 per turn — a 90% cut, same answer quality.</div>
 
   <div class="sa-row">
   <div class="seq-stage">
@@ -6511,6 +6522,7 @@ A: Mini-agent bench runs against fixed fixtures. If we swap models, we re-bench 
     <div class="icon">⤒</div>
     <h2>Context Engineering: The Missing Layer</h2>
   </div>
+  <div style="font-family:'JetBrains Mono',monospace; font-size:0.7em; font-weight:700; color:#93A1C1; letter-spacing:2px; margin-bottom:6px;">UNIT ECONOMICS</div>
 
   <div class="ctx-cards">
     <div class="ctx-card before">
@@ -7092,6 +7104,7 @@ A: We're pre-launch. The system is sized for shop staff (10s) initially, scales 
     <div class="icon">$</div>
     <h2>Cost Comparison: Traditional vs. Cloudflare</h2>
   </div>
+  <div style="font-family:'JetBrains Mono',monospace; font-size:0.7em; font-weight:700; color:#93A1C1; letter-spacing:2px; margin-bottom:6px;">UNIT ECONOMICS</div>
   <div class="cost-compare">
     <div class="cc-head">Where the monthly spend goes &middot; representative production scale &middot; JUN 2026 rates</div>
     <div class="cc-row">
@@ -7267,11 +7280,11 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
 <div class="section-slide">
   <div class="eyebrow">Part Three</div>
   <h1>Build It Yourself</h1>
-  <div class="sub">Step-by-step from zero to hybrid search</div>
+  <div class="sub">Two steps, not two choices — ship on AI Search now, graduate to the primitives when you scale.</div>
 </div>
 <aside class="notes">
 <strong>Build It Yourself section divider — 15 seconds.</strong><br><br>
-Beat: "OK that's our build. If you want something similar, here are two paths."<br><br>
+Beat: "Here's the path — start managed, graduate to custom when you outgrow it."<br><br>
 Don't dwell. Click through.
 </aside>
 </section>
@@ -7282,8 +7295,13 @@ Don't dwell. Click through.
 <section>
 <div class="slide-pad">
   <div class="case-eyebrow">
-    <span class="ce-num">THE SHORTCUT</span>
+    <span class="ce-num">STEP 1 · THE SHORTCUT</span>
     <span class="ce-label">Start Here</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:10px; margin:8px 0 14px; font-family:'JetBrains Mono',monospace; font-size:0.72em; font-weight:700; letter-spacing:1px;">
+    <span style="padding:4px 12px; border-radius:14px; background:#FFF1E2; color:#F6821F; border:1px solid #F6821F;">1 · AI SEARCH — SHIP THIS WEEKEND</span>
+    <span style="color:#F6821F;">→</span>
+    <span style="padding:4px 12px; border-radius:14px; background:#F5F6FA; color:#93A1C1; border:1px solid #E2E6EF;">2 · CUSTOM STACK — WHEN YOU SCALE</span>
   </div>
   <h2 style="font-size: 1.7em; margin: 0 0 6px 0;">Cloudflare <em>AI Search</em>.</h2>
   <p class="lead">The same architecture you just saw — provisioned for you in a few clicks.</p>
@@ -7328,7 +7346,7 @@ Don't dwell. Click through.
 
   <div class="start-here-callout">
     <span class="sh-label">START HERE</span>
-    <p>If you don't need per-tenant Durable Object state, hand-tuned hybrid scoring, or a long tail of agent tools — <strong>AI Search ships you 80% of this deck without writing a Worker.</strong></p>
+    <p>If you don't need per-tenant Durable Object state, hand-tuned hybrid scoring, or a long tail of agent tools — <strong>AI Search ships you 80% of this deck without writing a Worker.</strong> — and every primitive is right here in Step 2 when you outgrow it.</p>
   </div>
 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
@@ -7358,8 +7376,13 @@ A: We started before it launched. We'd also lose the graph and the agent. For ou
 <section>
 <div class="slide-pad">
   <div class="case-eyebrow">
-    <span class="ce-num">THE LONG ROAD</span>
+    <span class="ce-num">STEP 2 · THE LONG ROAD</span>
     <span class="ce-label">When You Outgrow the Shortcut</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:10px; margin:8px 0 14px; font-family:'JetBrains Mono',monospace; font-size:0.72em; font-weight:700; letter-spacing:1px;">
+    <span style="padding:4px 12px; border-radius:14px; background:#F5F6FA; color:#93A1C1; border:1px solid #E2E6EF;">1 · AI SEARCH — SHIP THIS WEEKEND</span>
+    <span style="color:#F6821F;">→</span>
+    <span style="padding:4px 12px; border-radius:14px; background:#FFF1E2; color:#F6821F; border:1px solid #F6821F;">2 · CUSTOM STACK — WHEN YOU SCALE</span>
   </div>
   <h2 style="font-size: 1.7em; margin: 0 0 12px 0;">Same primitives, <em>full control</em>.</h2>
 
@@ -7446,6 +7469,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
   <a class="closing-logo-link" href="https://shepherd.shopdawg.app" target="_blank" rel="noopener"><img class="closing-logo" src="https://shepherd.shopdawg.app/cdn-cgi/image/width=512,height=512,quality=85,format=auto/logo.png" alt="Shop Shepherd"></a>
   <h1>Start Building Today</h1>
   <div class="sub">Everything shown here runs on Cloudflare's free or pay-as-you-go tiers</div>
+  <p style="font-family:'JetBrains Mono',monospace; font-size:0.78em; color:#F6821F; margin:8px 0 16px; letter-spacing:0.5px;">Start on AI Search → graduate to the primitives as you grow. Same edge, same economics, no rip-and-replace.</p>
 
   <div class="cta-stack">
     <a class="cta-link" href="https://developers.cloudflare.com/d1" target="_blank" rel="noopener">developers.cloudflare.com/d1</a>
