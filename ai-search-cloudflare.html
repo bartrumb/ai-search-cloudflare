@@ -7768,6 +7768,8 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     <li data-slide="28"><span class="num">29</span><span>Start Building Today</span></li>
   </ol>
   <div class="toc-actions">
+    <button id="tocFullscreen" type="button" title="Toggle fullscreen (F)"><span class="ico">⛶</span> Fullscreen</button>
+    <button id="tocPresenter" type="button" title="Open presenter view with speaker notes (S)"><span class="ico">🖥</span> Presenter mode</button>
     <button id="tocPrint" type="button" title="Open a print-ready view of every slide"><span class="ico">⎙</span> Print / Export PDF</button>
     <button id="tocHelp" type="button" title="Show keyboard shortcuts (H)"><span class="ico">⌨</span> Keyboard shortcuts</button>
   </div>
@@ -8308,6 +8310,22 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
       window.open(location.href.split('?')[0].split('#')[0] + '?print-pdf&autoprint=1', '_blank');
     });
     if (helpBtn) helpBtn.addEventListener('click', () => { closeMenu(); openHelp(); });
+
+    const fsBtn = document.getElementById('tocFullscreen');
+    if (fsBtn) fsBtn.addEventListener('click', () => {
+      closeMenu();
+      const el = document.documentElement;
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        (el.requestFullscreen || el.webkitRequestFullscreen || function(){}).call(el);
+      } else {
+        (document.exitFullscreen || document.webkitExitFullscreen || function(){}).call(document);
+      }
+    });
+    const presBtn = document.getElementById('tocPresenter');
+    if (presBtn) presBtn.addEventListener('click', () => {
+      closeMenu();
+      try { const n = Reveal.getPlugin('notes'); if (n && n.open) n.open(); } catch (e) {}
+    });
     if (helpClose) helpClose.addEventListener('click', closeHelp);
     if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) closeHelp(); });
 
