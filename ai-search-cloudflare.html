@@ -3776,7 +3776,7 @@ html, body, .reveal {
    SLIDE 11 — Contextual Retrieval (compact override to avoid clipping)
    ============================================================ */
 .slide-cr h2 { font-size: 1.45em; margin-bottom: 8px; }
-.slide-cr .lead { margin: 0 0 10px 0; font-size: 0.72em; line-height: 1.4; max-width: 100%; }
+.slide-cr .lead { margin: 0 0 2px 0; font-size: 0.72em; line-height: 1.4; max-width: 100%; }
 .slide-cr .cr-stage { margin-top: 2px; gap: 14px; }
 .slide-cr .cr-card { padding: 10px 14px 8px; }
 .slide-cr .cr-card .eyebrow { font-size: 0.55em; margin-bottom: 2px; letter-spacing: 1.5px; }
@@ -3787,9 +3787,9 @@ html, body, .reveal {
 .slide-cr .cr-result-row { padding: 3px 0; font-size: 0.66em; gap: 8px; }
 .slide-cr .cr-result-row .badge { width: 16px; height: 16px; font-size: 9px; }
 .slide-cr .cr-card > p:last-child { font-size: 0.62em !important; margin-top: 4px !important; }
-.slide-cr .two-col { margin-top: 10px !important; gap: 18px !important; }
+.slide-cr .two-col { margin-top: 2px !important; gap: 18px !important; }
 .slide-cr .card[class*="top-accent"] { padding: 10px 18px 12px !important; }
-.slide-cr .stat-row { margin: 3px 0 6px; }
+.slide-cr .stat-row { margin: 2px 0 3px; }
 .slide-cr .stat-row .label { font-size: 0.78em; }
 .slide-cr .stat-row .before { font-size: 1.05em; }
 .slide-cr .stat-row .after { font-size: 1.7em; }
@@ -5121,7 +5121,7 @@ A: Workers Paid is $5/mo flat. The bill doesn't grow when nobody shows up.
       </div>
       <div class="advantage-body">
         <h4>Zero Cold Starts</h4>
-        <p>V8 isolates start in sub-ms — no container spin-up.</p>
+        <p>V8 isolates start in sub-ms — the shop lights flick on, no warming a cold engine.</p>
         <div class="advantage-tag"><strong>200× faster</strong> than containerized FaaS</div>
       </div>
     </div>
@@ -6240,7 +6240,7 @@ A: ISO 19005-2 — long-term archival format. Embeds all fonts, normalizes struc
   <div class="two-col">
     <div>
       <h3>The Naive Chunking Problem</h3>
-      <p>Most tutorials split documents into fixed-size text blocks and embed them as-is. The vector index returns a match, but you have no idea where it came from.</p>
+      <p>Most tutorials split documents into fixed-size blocks and embed them as-is — like cutting a manual into unlabeled index cards. You get a match back, but no idea which card it's from.</p>
       <p>An orphaned chunk like <em>"torque the bolts to 40 Nm"</em> is useless without knowing it's a Bosch CX mid-drive install vs. a Shimano hub motor teardown.</p>
 
       <div class="chunk-visual">
@@ -6347,8 +6347,8 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
     </div>
   </div>
 
-  <p class="lead">Metadata gives chunks a structural home. Adding a 1–2 sentence <strong>LLM-generated summary on top</strong> — Anthropic's Contextual Retrieval pattern — is what made even OCR garbage findable in production.</p>
-  <p style="font-size:0.72em; color:var(--muted); margin:-4px 0 8px 0; font-style:italic; line-height:1.5;"><strong style="color:var(--navy); font-style:normal;">A note on labor division:</strong> chunks get LLM-authored <em>context</em>; the structural graph (slides 18&ndash;20) stays human-authored. I trust LLMs to enrich existing text — not to invent ontology.</p>
+  <p class="lead">Metadata gives chunks a structural home. A 1–2 sentence <strong>LLM summary</strong> — Anthropic's Contextual Retrieval pattern — adds a sticky note that stays findable even when the page is OCR garbage.</p>
+  <p style="font-size:0.72em; color:var(--muted); margin:-4px 0 8px 0; font-style:italic; line-height:1.5;"><strong style="color:var(--navy); font-style:normal;">Labor division:</strong> LLMs author chunk <em>context</em>; humans author the graph (slides 18&ndash;20) — enrich text, don't invent ontology.</p>
 
   <div class="cr-stage">
     <div class="cr-card">
@@ -6554,7 +6554,7 @@ A: State is persisted to durable storage. Restart picks up exactly where it left
     <div class="icon">⇆</div>
     <h2>Sub-Agent Offloading: Cheap Bulk Work, Premium Synthesis</h2>
   </div>
-  <p class="lead">High-token tool work goes to a near-free model. The premium model only sees the compressed result and writes the user-facing answer. Cost drops an order of magnitude; quality holds.</p>
+  <p class="lead">High-token tool work goes to a near-free model; the premium model only sees the compressed result and writes the answer. Like a shop, the apprentice does the bulk grunt work and the master tech makes the call.</p>
   <div style="display:inline-block; padding:4px 16px; margin-bottom:6px; background:#FFF1E2; border:1px solid #F6821F; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:0.8em; font-weight:700; color:#F6821F; letter-spacing:0.5px;">~$0.36 → ~$0.030 per turn — a 90% cut, same answer quality.</div>
 
   <div class="sa-row">
