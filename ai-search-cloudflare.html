@@ -4304,13 +4304,16 @@ html, body, .reveal {
   height: 100vh;
   background: #fff;
   box-shadow: -8px 0 32px rgba(15,27,51,0.18);
-  padding: 76px 0 24px;
+  padding: 70px 0 0;
   z-index: 199;
   transition: right 0.3s ease;
-  overflow-y: auto;
+  overflow: hidden;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 .toc.open { right: 0; }
+.toc-scroll { flex: 1; overflow-y: auto; padding-bottom: 24px; }
 
 .toc h3 {
   padding: 0 22px 8px;
@@ -4691,7 +4694,7 @@ html.print-pdf-active .relax-line { opacity: 1 !important; }
 .mermaid-panel .mp-svg { max-height: 372px; min-height: 0; }
 
 /* ---- Dropdown-menu action buttons (Print, Shortcuts) ---- */
-.toc-actions { display: flex; flex-direction: column; gap: 8px; padding: 14px 22px 4px; margin-top: 10px; border-top: 1px solid var(--muted-soft); }
+.toc-actions { display: flex; flex-direction: column; gap: 8px; padding: 0 22px 12px; margin: 0 0 4px; border-bottom: 1px solid var(--muted-soft); flex-shrink: 0; }
 .toc-actions button {
   display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
   background: #F8F9FB; border: 1px solid var(--muted-soft); border-radius: 8px;
@@ -7739,6 +7742,13 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
      ============================================================ -->
 <button class="toc-toggle" id="tocToggle" aria-label="Toggle slide index" title="Slide index (press M)">≡</button>
 <nav class="toc" id="toc" aria-label="Slide index">
+  <div class="toc-actions">
+    <button id="tocFullscreen" type="button" title="Toggle fullscreen (F)"><span class="ico">⛶</span> Fullscreen</button>
+    <button id="tocPresenter" type="button" title="Open presenter view with speaker notes (S)"><span class="ico">🖥</span> Presenter mode</button>
+    <button id="tocPrint" type="button" title="Open a print-ready view of every slide"><span class="ico">⎙</span> Print / Export PDF</button>
+    <button id="tocHelp" type="button" title="Show keyboard shortcuts (H)"><span class="ico">⌨</span> Keyboard shortcuts</button>
+  </div>
+  <div class="toc-scroll">
   <h3>Slides</h3>
   <ol>
     <li data-slide="0"><span class="num">01</span><span>Title — AI Search on Cloudflare</span></li>
@@ -7771,18 +7781,13 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     <li data-slide="27"><span class="num">28</span><span>The Long Road — Same Primitives, DIY</span></li>
     <li data-slide="28"><span class="num">29</span><span>Start Building Today</span></li>
   </ol>
-  <div class="toc-actions">
-    <button id="tocFullscreen" type="button" title="Toggle fullscreen (F)"><span class="ico">⛶</span> Fullscreen</button>
-    <button id="tocPresenter" type="button" title="Open presenter view with speaker notes (S)"><span class="ico">🖥</span> Presenter mode</button>
-    <button id="tocPrint" type="button" title="Open a print-ready view of every slide"><span class="ico">⎙</span> Print / Export PDF</button>
-    <button id="tocHelp" type="button" title="Show keyboard shortcuts (H)"><span class="ico">⌨</span> Keyboard shortcuts</button>
-  </div>
   <div class="toc-colophon">
     <div class="tc-label">Colophon · How this was built</div>
     <p>One self-contained HTML file — no build step. Slides run on <a href="https://revealjs.com" target="_blank" rel="noopener">reveal.js</a> <span class="tc-tech">(MIT)</span>; type is Inter, Playfair Display &amp; JetBrains Mono <span class="tc-tech">(SIL OFL)</span>. Every chart and diagram is hand-authored inline <span class="tc-tech">SVG + CSS</span> — no charting library.</p>
     <p>Designed &amp; built by <strong>Brett Bartrum</strong> · layout, diagrams &amp; copy iterated with <strong>Claude</strong> (Anthropic) in Claude Code.</p>
   </div>
   <div class="hint">Click any slide to jump · <strong>M</strong> menu · <strong>H</strong> shortcuts</div>
+  </div>
 </nav>
 
 <!-- ============================================================
@@ -7903,9 +7908,11 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     if (!toc || !toggle) return;
     const items = Array.from(toc.querySelectorAll('li[data-slide]'));
 
+    const tocScroll = toc.querySelector('.toc-scroll');
     function setOpen(open) {
       toc.classList.toggle('open', open);
       toggle.classList.toggle('open', open);
+      if (open && tocScroll) requestAnimationFrame(() => { tocScroll.scrollTop = 0; });
     }
 
     function highlight(idx) {
