@@ -1094,8 +1094,8 @@ html, body, .reveal {
 /* ============================================================
    PROJECT THINK LOOP
    ============================================================ */
-.loop-stage { background: #fff; border-radius: 8px; padding: 14px 20px; box-shadow: var(--shadow); margin-top: 6px; }
-.loop-stage svg { display: block; max-height: 260px; width: 100%; }
+.loop-stage { background: #fff; border-radius: 8px; padding: 7px 20px; box-shadow: var(--shadow); margin-top: 2px; }
+.loop-stage svg { display: block; max-height: 210px; width: 100%; }
 .loop-node {
   background: #fff;
   border: 2px solid var(--muted-soft);
@@ -1577,15 +1577,15 @@ html, body, .reveal {
   background: #fff;
   border-radius: 8px;
   box-shadow: var(--shadow);
-  padding: 12px 16px 8px;
-  margin-top: 4px;
+  padding: 8px 16px 6px;
+  margin-top: 2px;
 }
-.store-scene svg { width: 100%; height: auto; display: block; }
+.store-scene svg { width: 100%; height: auto; max-height: 322px; margin: 0 auto; display: block; }
 .store-mappings {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
-  margin-top: 10px;
+  margin-top: 6px;
 }
 .store-mappings .mapping-col {
   background: #fff;
@@ -2401,7 +2401,7 @@ html, body, .reveal {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 14px;
-  padding: 6px 0;
+  padding: 4px 0;
   border-bottom: 1px solid #F0F2F6;
   font-size: 0.78em;
   align-items: baseline;
@@ -2427,7 +2427,7 @@ html, body, .reveal {
   border-bottom: 1px solid var(--muted-soft);
 }
 .state-list .sl-block {
-  padding: 6px 0;
+  padding: 4px 0;
   border-bottom: 1px solid #F0F2F6;
 }
 .state-list .sl-block:last-child { border-bottom: none; }
@@ -3584,13 +3584,14 @@ html, body, .reveal {
 /* ============================================================
    SLIDE 9 — Hybrid Search (expanded layout to fill page)
    ============================================================ */
+.slide-hybrid .lead { margin: 0 0 6px 0; }
 .slide-hybrid .hybrid-stage {
-  padding: 14px 28px 16px;
-  margin-top: 4px;
+  padding: 6px 28px 6px;
+  margin-top: 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 .slide-hybrid .hybrid-stage .hybrid-row {
   width: 100%;
@@ -3599,16 +3600,16 @@ html, body, .reveal {
 .slide-hybrid .hybrid-arrows {
   display: block;
   flex-shrink: 0;
-  height: 40px;
+  height: 22px;
 }
 .slide-hybrid .hybrid-q {
-  padding: 12px 44px;
+  padding: 7px 44px;
   font-size: 1.05em;
   letter-spacing: 0.5px;
 }
 .slide-hybrid .hybrid-engine {
   width: 158px;
-  padding: 12px 10px;
+  padding: 7px 10px;
 }
 .slide-hybrid .hybrid-engine .he-name { font-size: 1.05em; }
 .slide-hybrid .hybrid-engine .he-tag { font-size: 0.78em; margin-top: 3px; }
@@ -3618,7 +3619,7 @@ html, body, .reveal {
   top: -10px; right: -10px;
 }
 .slide-hybrid .hybrid-merge {
-  padding: 12px 56px;
+  padding: 7px 56px;
   font-size: 1.05em;
 }
 .slide-hybrid .hybrid-result {
@@ -3627,9 +3628,9 @@ html, body, .reveal {
   gap: 14px;
   background: linear-gradient(90deg, #2E7D32 0%, #1F7A2E 100%);
   color: #fff;
-  padding: 10px 20px;
+  padding: 6px 20px;
   border-radius: 8px;
-  margin-top: 12px;
+  margin-top: 6px;
   box-shadow: 0 4px 14px rgba(46,125,50,0.22);
   flex-shrink: 0;
 }
@@ -3667,11 +3668,11 @@ html, body, .reveal {
   flex-shrink: 0;
 }
 .slide-hybrid .two-col {
-  margin-top: 12px !important;
+  margin-top: 6px !important;
   gap: 18px !important;
   flex-shrink: 0;
 }
-.slide-hybrid .card.top-accent { padding: 12px 18px 14px; }
+.slide-hybrid .card.top-accent { padding: 8px 18px 9px; }
 .slide-hybrid .card.top-accent h4 { font-size: 0.92em; margin: 0 0 5px 0; }
 .slide-hybrid .card.top-accent p { font-size: 0.75em; margin: 3px 0; }
 .slide-hybrid .card.top-accent ul { margin: 5px 0 0 0; padding-left: 18px; }
@@ -5827,7 +5828,7 @@ A: FTS5 doesn't do typo tolerance — that's why Meilisearch is on the team for 
       <p>Keywords fail when users describe problems instead of naming parts. "My bike makes a clicking sound when I pedal" should match "bottom bracket adjustment" — vector search makes this connection.</p>
       <p>Workers AI maps each sentence to <strong>768 numbers</strong> &mdash; coordinates on a "meaning map," where similar meanings land near each other even with zero shared words. <span style="font-family:monospace; color:var(--orange);">embeddinggemma-300m</span> generates them; Vectorize finds the nearest via cosine similarity.</p>
 
-      <h3 style="margin-top:14px;">Embedding Pipeline</h3>
+      <h3 style="margin-top:8px;">Embedding Pipeline</h3>
       <div class="embed-pipeline" id="embedPipeline">
         <div class="embed-step" data-step="0"><span class="num">1</span>Auto-chunk content &gt; 7,500 chars</div>
         <div class="embed-step" data-step="1"><span class="num">2</span>Workers AI → 768-dim vector</div>
@@ -6504,7 +6505,7 @@ Say the stateless→stateful line, then move. This is the transition the whole b
     </svg>
   </div>
 
-  <div class="two-col" style="gap: 14px; margin-top: 10px;">
+  <div class="two-col" style="gap: 14px; margin-top: 4px;">
     <div class="tool-table">
       <div class="tt-head"><div>TOOL</div><div>PURPOSE</div></div>
       <div class="tt-row"><div class="name">search_documentation</div><div class="purpose">unified hybrid search</div></div>
