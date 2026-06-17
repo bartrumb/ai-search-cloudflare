@@ -2599,7 +2599,7 @@ html, body, .reveal {
 
 /* Slide 20 — real labeled diagnostic subgraph (explains the graph concretely) */
 .graph-example { background: #FBFCFE; border: 1px solid var(--muted-soft); border-radius: 8px; padding: 8px 12px 6px; margin: 2px 0 8px; }
-.graph-example svg { width: 100%; height: auto; max-height: 232px; display: block; margin: 0 auto; }
+.graph-example svg { width: 100%; height: auto; max-height: 188px; display: block; margin: 0 auto; }
 .graph-caption { font-size: 0.66em; color: var(--body); line-height: 1.45; margin-bottom: 9px; }
 .graph-caption strong { color: var(--navy); }
 .graph-legend { display: flex; flex-wrap: wrap; gap: 7px 14px; font-size: 0.62em; color: var(--body); font-weight: 600; margin-bottom: 9px; align-items: center; }
@@ -2806,13 +2806,22 @@ html, body, .reveal {
 /* Slide D — Graph anatomy */
 .graph-hero {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6em;
+  font-size: 1.5em;
   color: var(--navy);
   font-weight: 700;
-  margin: 4px 0 12px;
+  margin: 2px 0 3px;
   letter-spacing: -1px;
 }
 .graph-hero .x { color: var(--orange); font-style: italic; padding: 0 4px; }
+.graph-hero .hot { color: var(--orange); }
+.graph-sub {
+  font-size: 0.82em;
+  color: var(--body);
+  line-height: 1.4;
+  margin: 0 0 10px;
+}
+.graph-sub strong { color: var(--navy); font-weight: 800; }
+.graph-sub em { color: var(--muted); font-style: italic; }
 .anatomy-row {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -2964,6 +2973,33 @@ html, body, .reveal {
 .ordering-card ol li strong { color: var(--orange); font-weight: 700; }
 .ordering-card ol li em { color: var(--muted); font-style: italic; font-size: 0.95em; }
 
+/* Slide 20 — per-node diagnostic playbook (the hero panel) */
+.playbook-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 16px 8px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--orange);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.playbook-card .pb-label { font-size: 0.55em; font-weight: 700; letter-spacing: 2px; color: var(--orange); }
+.playbook-card .pb-label .pb-node { font-family: 'JetBrains Mono', monospace; color: var(--navy); letter-spacing: 0; font-size: 0.95em; }
+.playbook-card .pb-grid { display: flex; flex-direction: column; gap: 1px; }
+.playbook-card .pb-row { display: grid; grid-template-columns: 116px 1fr; gap: 8px; align-items: baseline; font-size: 0.63em; line-height: 1.25; }
+.playbook-card .pb-k { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; font-weight: 800; letter-spacing: 0.5px; color: var(--muted); white-space: nowrap; }
+.playbook-card .pb-v { color: var(--body); }
+.playbook-card .pb-tiers { display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--muted-soft); padding-top: 5px; }
+.playbook-card .pb-tier { display: grid; grid-template-columns: 116px 1fr; gap: 8px; align-items: baseline; font-size: 0.62em; line-height: 1.22; }
+.playbook-card .pb-t { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 0.92em; letter-spacing: 0.2px; white-space: nowrap; }
+.playbook-card .pb-t.t0 { color: var(--green); }
+.playbook-card .pb-t.t1 { color: var(--orange); }
+.playbook-card .pb-t.t2 { color: var(--red); }
+.playbook-card .pb-d { color: var(--body); }
+.playbook-card .pb-foot { font-size: 0.6em; color: var(--muted); border-top: 1px solid var(--muted-soft); padding-top: 4px; line-height: 1.35; }
+.playbook-card .pb-foot strong { color: var(--navy); font-weight: 700; }
+
 .trace-card {
   background: var(--navy);
   color: #fff;
@@ -2987,14 +3023,14 @@ html, body, .reveal {
 .trace-card .tc-body .blue { color: #6BB6FF; }
 
 /* Slide 20 — GraphRAG retrieval walkthrough (replaces terse trace card) */
-.graphrag-flow { background: var(--navy); color: #fff; border-radius: 8px; padding: 11px 16px 12px; display: flex; flex-direction: column; gap: 7px; }
+.graphrag-flow { background: var(--navy); color: #fff; border-radius: 8px; padding: 9px 14px 9px; display: flex; flex-direction: column; gap: 5px; }
 .graphrag-flow .gf-label { font-size: 0.55em; font-weight: 700; letter-spacing: 1.5px; color: var(--orange); }
 .graphrag-flow .gf-label em { color: #C5D0E0; font-style: italic; font-weight: 600; letter-spacing: 0.5px; }
-.graphrag-flow .gf-steps { display: flex; flex-direction: column; gap: 6px; }
+.graphrag-flow .gf-steps { display: flex; flex-direction: column; gap: 4px; }
 .graphrag-flow .gf-step { display: grid; grid-template-columns: 14px 66px 1fr; gap: 9px; align-items: baseline; }
 .graphrag-flow .gf-n { font-family: 'Inter', sans-serif; font-weight: 800; color: var(--orange); font-size: 0.8em; }
 .graphrag-flow .gf-k { font-family: 'JetBrains Mono', monospace; font-size: 0.56em; font-weight: 800; letter-spacing: 1px; color: #6BB6FF; }
-.graphrag-flow .gf-d { font-size: 0.65em; line-height: 1.42; color: #C5D0E0; }
+.graphrag-flow .gf-d { font-size: 0.65em; line-height: 1.34; color: #C5D0E0; }
 .graphrag-flow .gf-d .fn { color: var(--orange); font-family: 'JetBrains Mono', monospace; }
 .graphrag-flow .gf-d .blue { color: #6BB6FF; font-family: 'JetBrains Mono', monospace; }
 .graphrag-flow .gf-d strong { color: #fff; font-weight: 700; }
@@ -6842,8 +6878,8 @@ A: Bigger windows cost more and degrade quality at the edges. Targeted retrieval
       <div class="cc-tag"><span class="num">03</span>WHAT I BUILT</div>
       <h3 class="cc-headline">A diagnostic graph built on physics, real-world conditions &amp; rider behavior.</h3>
       <ul class="cc-bullets">
-        <li><strong>757 typed nodes</strong> &mdash; <em>component &middot; symptom &middot; cause &middot; verb</em></li>
-        <li><strong>1,739 typed edges</strong> &mdash; causal verbs the agent calls per turn via <code>query_ebike_graph</code></li>
+        <li><strong>825 profiled nodes</strong> &mdash; <em>each carries tools · symptoms · tiered $0-first steps</em></li>
+        <li><strong>2,523 typed edges</strong> &mdash; causal verbs the agent calls per turn via <code>query_ebike_graph</code></li>
       </ul>
       <div class="cc-relations">SUPPLIES_POWER_TO · CUTS_POWER_TO · SYMPTOM_OF · SENDS_SIGNAL_TO · TESTED_BY</div>
     </div>
@@ -6863,7 +6899,7 @@ A: Bigger windows cost more and degrade quality at the edges. Targeted retrieval
 <ul style="margin:6px 0; padding-left:20px;">
   <li><strong>What I HAD (green):</strong> 2,845 manuals indexed, hybrid search, Contextual Retrieval. Strong on lookup.</li>
   <li><strong>What BROKE (red):</strong> "My motor cuts out on hills" — RAG returned 30 chunks about motors, batteries, electricals. None named the cause (controller overheating) or the subsystem (thermal cutoff disabling motor power).</li>
-  <li><strong>What I BUILT (orange):</strong> A hand-crafted diagnostic graph that encodes the real <strong>physics</strong> (thermal, electrical, and hydraulic load paths), <strong>real-world operating conditions</strong> (sustained climbs, heat, battery sag), and <strong>rider behavior</strong> (how the bikes are actually ridden and how riders describe a fault) — not just text. 757 nodes, queryable per turn.</li>
+  <li><strong>What I BUILT (orange):</strong> A hand-crafted diagnostic graph that encodes the real <strong>physics</strong> (thermal, electrical, and hydraulic load paths), <strong>real-world operating conditions</strong> (sustained climbs, heat, battery sag), and <strong>rider behavior</strong> (how the bikes are actually ridden and how riders describe a fault) — not just text. 825 nodes, each with its own diagnostic profile, queryable per turn.</li>
 </ul>
 <strong>The progress dots at the bottom:</strong> this is slide 1 of 4. I'm at "the problem." Next slide is the trade-off. Then the anatomy. Then the live demo.<br><br>
 <strong>Anticipated questions:</strong><br>
@@ -6912,7 +6948,7 @@ A: RAG retrieves text by similarity. It can't reason about causality. Chunks tha
       <div class="cmp-tag">HAND-CRAFTED · SHIPPED IT</div>
       <h3 class="cmp-headline">$0 cost. 100% deterministic.</h3>
       <ul>
-        <li>757 nodes in TypeScript &mdash; one file, one source of truth</li>
+        <li>825 nodes in TypeScript &mdash; one file, one source of truth</li>
         <li>Expert-authored with e-bike diagnostic ordering</li>
         <li>Regenerate SQL + seed in seconds &mdash; zero LLM cost</li>
         <li>Zero hallucinated edges &rarr; no fabricated repair advice</li>
@@ -6955,7 +6991,7 @@ A: RAG retrieves text by similarity. It can't reason about causality. Chunks tha
 </ul>
 <strong>The lesson under the cards:</strong> "Truth is human work. Reasoning over it is LLM work."<br><br>
 <strong>Anticipated questions:</strong><br>
-<em>Q: "Doesn't 757 nodes feel like a lot of manual work?"</em><br>
+<em>Q: "Doesn't 825 nodes feel like a lot of manual work?"</em><br>
 A: It's about a week's work for someone who knows e-bikes. The agent uses it for every diagnostic turn — ROI was clear by week two.<br>
 <em>Q: "How do you maintain it?"</em><br>
 A: New parts → new nodes via PR. Pre-commit hook catches structural inconsistencies. Same workflow as any TypeScript file.
@@ -6963,7 +6999,7 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
 </section>
 
 <!-- ============================================================
-     SLIDE 21 — 757 NODES × 1,739 EDGES × 69 CODES (graph anatomy)
+     SLIDE 21 — A DIAGNOSTIC BRAIN · 825 PROFILES (graph anatomy + GraphRAG)
      ============================================================ -->
 <section>
 <div class="slide-pad">
@@ -6978,7 +7014,8 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
       <span class="cp-dot active"></span>
     </span>
   </div>
-  <div class="graph-hero">757 nodes <span class="x">×</span> 1,739 edges <span class="x">×</span> 69 codes.</div>
+  <div class="graph-hero">Not a search index &mdash; a <span class="hot">diagnostic brain</span>.</div>
+  <div class="graph-sub"><strong>825</strong> expert-authored diagnostic profiles <span class="x" style="color:var(--orange);">·</span> <strong>2,523</strong> weighted causal edges &mdash; <em>error codes are just one way in</em>.</div>
 
   <div class="anatomy-row">
     <div class="anatomy-card">
@@ -7043,7 +7080,7 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
         </svg>
       </div>
 
-      <div class="graph-caption">A real slice of the 757-node graph. <strong>Typed nodes</strong> (symptom · cause · component) linked by <strong>typed, weighted edges</strong> — and live <strong>conditions</strong> (a sustained climb) re-weight the probabilities before ranking.</div>
+      <div class="graph-caption">A real slice of the 825-node graph. <strong>Typed nodes</strong> (symptom · cause · component) linked by <strong>typed, weighted edges</strong> — and live <strong>conditions</strong> (a sustained climb) re-weight the probabilities before ranking. <strong>Expert-authored, not LLM-scraped.</strong></div>
 
       <div class="graph-legend">
         <span class="lg"><span class="dot sym"></span>symptom</span>
@@ -7054,34 +7091,33 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
 
       <div class="ac-section">
         <div class="ac-section-label">ALSO IN THE GRAPH</div>
-        <div class="ac-section-body" style="margin-bottom:5px;">12 component categories &middot; 6 causal relation types &middot; environmental multipliers (rain · cold · cargo)</div>
-        <div class="ac-codes">
-          <span class="code-pill">BAFANG</span>
-          <span class="code-pill">BOSCH</span>
-          <span class="code-pill">SHIMANO STEPS</span>
-          <span class="code-pill">KT / KUNTENG</span>
-          <span class="code-pill">+ 69 ERROR CODES</span>
-        </div>
+        <div class="ac-section-body" style="margin-bottom:4px;">18 node types &middot; 85 typed relations &middot; environmental multipliers (rain · cold · cargo)</div>
+        <div class="ac-relations">SYMPTOM_OF · CAUSES_FAULT_IN · FAILS_AS · TESTED_BY · INTERRUPTS · CUTS_POWER_TO</div>
       </div>
     </div>
 
     <div class="pipeline-stack">
-      <div class="ordering-card">
-        <div class="oc-label">E-BIKE-SPECIFIC ORDERING</div>
-        <div class="oc-quote">"Brake lever pulls to bar" — reordered for e-bikes:</div>
-        <ol>
-          <li><strong>1.</strong> Air in hydraulic line <em>(most common on e-bikes)</em></li>
-          <li><strong>2.</strong> Pad alignment</li>
-          <li><strong>3.</strong> Pad knock-back <em>(LAST — sealed e-bike bearings)</em></li>
-        </ol>
+      <div class="playbook-card">
+        <div class="pb-label">A PLAYBOOK PER NODE &mdash; <span class="pb-node">thermal_cutoff</span></div>
+        <div class="pb-grid">
+          <div class="pb-row"><span class="pb-k">TOOLS</span><span class="pb-v">multimeter &middot; IR thermometer &middot; torque wrench</span></div>
+          <div class="pb-row"><span class="pb-k">CONSUMABLES</span><span class="pb-v">dielectric grease &middot; thermal paste</span></div>
+          <div class="pb-row"><span class="pb-k">SYMPTOMS</span><span class="pb-v">cutout under load &middot; power returns after cooldown</span></div>
+        </div>
+        <div class="pb-tiers">
+          <div class="pb-tier"><span class="pb-t t0">TIER 0 · $0</span><span class="pb-d">temp check after a climb &middot; airflow + brake drag</span></div>
+          <div class="pb-tier"><span class="pb-t t1">TIER 1 · meter</span><span class="pb-d">temp-sensor resistance &middot; connector continuity</span></div>
+          <div class="pb-tier"><span class="pb-t t2">TIER 2 · swap</span><span class="pb-d">replace thermal sensor / controller</span></div>
+        </div>
+        <div class="pb-foot"><strong>Every node carries this</strong> — cost-tiered, e-bike-specific, cheapest-first.</div>
       </div>
       <div class="graphrag-flow">
         <div class="gf-label">HOW GRAPHRAG ANSWERS &mdash; <em>"motor cuts out climbing"</em></div>
         <div class="gf-steps">
-          <div class="gf-step"><span class="gf-n">1</span><span class="gf-k">MATCH</span><span class="gf-d"><span class="fn">find_symptom</span> maps the phrase to a graph <strong>node</strong> &mdash; not a text chunk &rarr; <span class="blue">sym_motor_cutout_under_load</span></span></div>
-          <div class="gf-step"><span class="gf-n">2</span><span class="gf-k">TRAVERSE</span><span class="gf-d"><span class="fn">query_ebike_graph</span> walks causal edges (SYMPTOM_OF &middot; INTERRUPTS &middot; CUTS_POWER_TO) to pull the connected subsystem</span></div>
-          <div class="gf-step"><span class="gf-n">3</span><span class="gf-k">RANK</span><span class="gf-d">suspects scored by base probability &times; live conditions (sustained climb = load + heat) &rarr; <span class="blue">thermal_cutoff &middot; battery_cell_sag &middot; controller_overcurrent</span></span></div>
-          <div class="gf-step"><span class="gf-n">4</span><span class="gf-k">ANSWER</span><span class="gf-d">Sonnet receives a <strong>causal subgraph</strong> as context &mdash; it reasons over the chain and names the cause + the fix</span></div>
+          <div class="gf-step"><span class="gf-n">1</span><span class="gf-k">MATCH</span><span class="gf-d"><span class="fn">find_symptom</span> maps the phrase to a <strong>node</strong> &mdash; codes &amp; the 768D vector are other ways in &rarr; <span class="blue">sym_motor_cutout_under_load</span></span></div>
+          <div class="gf-step"><span class="gf-n">2</span><span class="gf-k">TRAVERSE</span><span class="gf-d"><span class="fn">query_ebike_graph</span> walks causal edges to pull the connected subsystem</span></div>
+          <div class="gf-step"><span class="gf-n">3</span><span class="gf-k">RANK</span><span class="gf-d">scored by base&nbsp;p &times; live conditions (climb = load + heat) &rarr; <span class="blue">thermal_cutoff &middot; battery_cell_sag &middot; controller_overcurrent</span></span></div>
+          <div class="gf-step"><span class="gf-n">4</span><span class="gf-k">ANSWER</span><span class="gf-d">Sonnet reasons over the <strong>causal subgraph</strong> and names the cause + the fix</span></div>
         </div>
         <div class="gf-punch">Plain RAG retrieves <em>passages</em>.<br>GraphRAG retrieves the <strong>causal chain</strong>.</div>
       </div>
@@ -7092,17 +7128,17 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
 </div>
 <aside class="notes">
 <strong>Graph Anatomy — 3 min.</strong><br><br>
-<strong>The hero numbers (count-up):</strong> 757 nodes, 1,739 edges, 69 error codes, 12 component categories. Pause to let them land.<br><br>
-<strong>The three columns:</strong>
+<strong>Lead with the framing, not the stat dump.</strong> "Not a search index — a diagnostic brain." The differentiator isn't error codes (that's a lookup feature); it's that every one of the <strong>825 nodes carries a hand-authored diagnostic profile</strong>. Numbers in the sub-line: 825 profiles, 2,523 weighted edges, 18 node types, 85 typed relations. Don't dwell on the digits — make the point that this is curated, not scraped.<br><br>
+<strong>The three panels (left → right):</strong>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li><strong>Nodes:</strong> Components, sensors, symptoms, failure modes. Each has a profile (tools, consumables, diagnostic steps, common symptoms).</li>
-  <li><strong>Edges:</strong> Causal verbs the agent calls at query time. <code>upstream</code> ("what feeds this?"), <code>downstream</code> ("what does this affect?"), <code>interrupts</code> ("what cuts power?"), <code>symptoms</code> ("what does failure look like?").</li>
-  <li><strong>Error codes:</strong> 42 hand-curated Bafang/Bosch/Shimano codes. Looked up directly when a code appears in the query.</li>
+  <li><strong>Curated ontology (graph slice):</strong> typed nodes (symptom · cause · component) linked by typed, weighted edges. Live conditions (a sustained climb) re-weight probabilities before ranking. Expert-authored, not LLM-scraped.</li>
+  <li><strong>A playbook per node (the hero):</strong> every node knows how to diagnose itself — tools, consumables, symptoms, and <em>cost-tiered</em> steps: Tier 0 ($0 visual/physical) → Tier 1 (multimeter) → Tier 2 (replacement). Cheapest-first. This is what no generic RAG bot or PDF search has.</li>
+  <li><strong>Probability-ranked fault isolation:</strong> for "motor cuts out climbing" — find_symptom maps to a node, query_ebike_graph walks the causal edges, suspects ranked by base_p × environmental multipliers, Sonnet reasons over the causal subgraph. Error codes (69) and the 768D symptom vector are just two entry points.</li>
 </ul>
-<strong>The e-bike-ordering example:</strong> the three-step pipeline shows how a query like "motor cuts out climbing" walks the graph — find_symptom → query_ebike_graph(controller, interrupts) → ranked suspects with probability scores.<br><br>
+<strong>The one-liner to land:</strong> a curated causal ontology where each node knows how to diagnose itself, cheapest-first.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why not Neo4j?"</em><br>
-A: Overkill. Adjacency list in D1 (two tables: nodes, edges) is fast at 757 nodes, free, and joins with everything else.<br>
+A: Overkill. Adjacency list in D1 (two tables: nodes, edges) is fast at 825 nodes, free, and joins with everything else.<br>
 <em>Q: "Probability scores — where do they come from?"</em><br>
 A: Hand-assigned base probabilities per edge, with environmental multipliers (rain, cold, cargo load). Calibrated by domain expert.
 </aside>
@@ -7447,7 +7483,7 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
       </div>
       <span class="ls-tag">Judgment</span>
       <h4>Hand-author the graph</h4>
-      <p class="ls-line">Truth is human work; let the LLM traverse it. 757 nodes beat batch-API extraction.</p>
+      <p class="ls-line">Truth is human work; let the LLM traverse it. 825 profiled nodes beat batch-API extraction.</p>
     </div>
     <div class="flow-arrow" aria-hidden="true">&rarr;</div>
     <div class="lesson-step">
@@ -7772,7 +7808,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     <li data-slide="17"><span class="num">18</span><span>Context Engineering</span></li>
     <li data-slide="18"><span class="num">19</span><span>Case Study — When Retrieval Isn't Enough</span></li>
     <li data-slide="19"><span class="num">20</span><span>Why Hand-Crafted Beat LLM Extraction</span></li>
-    <li data-slide="20"><span class="num">21</span><span>757 Nodes × 1,739 Edges × 69 Codes</span></li>
+    <li data-slide="20"><span class="num">21</span><span>A Diagnostic Brain — 825 Profiles</span></li>
     <li data-slide="21"><span class="num">22</span><span>From Symptom to Diagram — Live</span></li>
     <li data-slide="22"><span class="num">23</span><span>Real-World Scale</span></li>
     <li data-slide="23"><span class="num">24</span><span>Cost Comparison</span></li>

@@ -12,7 +12,7 @@ Topics covered:
 - **Search architecture** — FTS5 hybrid search, vector embeddings, progressive relaxation, MiniSearch
 - **RAG pipeline** — Contextual Retrieval (Kimi K2.6 context summaries), Voyage rerank-2.5, structural reranking (Gemini)
 - **Pre-agent / intent classification** — Cerebras Qwen-3-235B query optimizer running before every turn
-- **Diagnostic knowledge graph** — 757 nodes, 1,739 edges, probability-ranked fault isolation
+- **Diagnostic knowledge graph** — 825 expert-authored node profiles, 2,523 weighted edges, probability-ranked fault isolation
 - **Mini-agents** — Cerebras GPT-OSS-120B and Kimi K2.6 for tool-output compression
 - **Cost comparison** — 25× cheaper than the traditional Elastic + Pinecone + EC2 stack
 - **Production lessons** — what bit us in order of impact
