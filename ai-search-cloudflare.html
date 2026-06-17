@@ -3341,7 +3341,7 @@ html, body, .reveal {
 .long-road-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
   flex: 1;
   min-height: 0;
 }
@@ -3353,7 +3353,7 @@ html, body, .reveal {
   background: linear-gradient(135deg, #fff 0%, #FFFAF4 100%);
   border-radius: 8px;
   border-left: 4px solid var(--orange);
-  padding: 9px 18px;
+  padding: 7px 18px;
   box-shadow: var(--shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
@@ -7593,17 +7593,16 @@ Plant the takeaway here too: the recipe is domain-agnostic — swap the e-bike c
   <div class="two-col" style="gap: 14px;">
     <div class="box-feature-list">
       <h4>WHERE AI SEARCH FITS IN YOUR STACK</h4>
-      <p style="margin:0 0 9px; font-size:0.72em; line-height:1.4; color:var(--body);"><strong style="color:var(--orange);">~80% of this deck without writing a Worker.</strong> It provisions one slice of the exact stack you just saw:</p>
+      <p style="margin:0 0 9px; font-size:0.72em; line-height:1.4; color:var(--body);"><strong style="color:var(--orange);">~80% of this deck without writing a Worker.</strong> It provisions the whole <strong>retrieval pipeline</strong> you just built:</p>
       <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:#FFF8F0; border:1.5px solid #F6821F; border-radius:6px;">
         <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; font-weight:700; color:#fff; background:#F6821F; padding:3px 9px; border-radius:10px; white-space:nowrap;">✓ AI SEARCH</span>
         <div style="min-width:0;">
-          <div style="color:var(--navy); font-weight:700; font-size:0.8em;">Semantic RAG</div>
-          <div style="color:#64748B; font-size:0.64em; line-height:1.35;">R2 ingest · Workers AI embeddings · Vectorize · AI Gateway · Search API</div>
+          <div style="color:var(--navy); font-weight:700; font-size:0.8em;">Hybrid RAG — vector + BM25 keyword, reranked</div>
+          <div style="color:#64748B; font-size:0.64em; line-height:1.35;">R2 · Workers AI · Vectorize · AI Gateway · query rewriting · cited answers</div>
         </div>
       </div>
       <div style="margin-top:7px; opacity:0.55;">
-        <div style="display:flex; gap:10px; align-items:baseline; padding:5px 12px; border:1px dashed #C9D2E0; border-radius:6px; margin-bottom:4px;"><span style="color:#64748B; font-weight:700; font-size:0.72em; min-width:118px;">Keyword</span><span style="color:#64748B; font-size:0.64em;">D1 + FTS5 · BM25 exact match</span></div>
-        <div style="display:flex; gap:10px; align-items:baseline; padding:5px 12px; border:1px dashed #C9D2E0; border-radius:6px; margin-bottom:4px;"><span style="color:#64748B; font-weight:700; font-size:0.72em; min-width:118px;">Faceted</span><span style="color:#64748B; font-size:0.64em;">Meilisearch · typo-tolerant filters</span></div>
+        <div style="display:flex; gap:10px; align-items:baseline; padding:5px 12px; border:1px dashed #C9D2E0; border-radius:6px; margin-bottom:4px;"><span style="color:#64748B; font-weight:700; font-size:0.72em; min-width:118px;">Faceted parts</span><span style="color:#64748B; font-size:0.64em;">Meilisearch · typo-tolerant filters</span></div>
         <div style="display:flex; gap:10px; align-items:baseline; padding:5px 12px; border:1px dashed #C9D2E0; border-radius:6px;"><span style="color:#64748B; font-weight:700; font-size:0.72em; min-width:118px;">Agent + Memory</span><span style="color:#64748B; font-size:0.64em;">Durable Objects · diagnostic graph</span></div>
       </div>
       <div style="font-family:'JetBrains Mono',monospace; font-size:0.6em; font-weight:700; color:var(--orange); margin-top:7px;">↑ bolt these on in Step 2, as you outgrow the shortcut</div>
@@ -7622,21 +7621,24 @@ Plant the takeaway here too: the recipe is domain-agnostic — swap the e-bike c
     </div>
   </div>
 
+  <p style="text-align:center; font-size:0.62em; color:#93A1C1; margin:14px 0 0; font-family:'Inter',sans-serif;">Cloudflare AI Search is in <strong style="color:#64748B;">open beta</strong> — free within limits, 4&nbsp;MB max per file.</p>
+
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
 <strong>The Shortcut: Cloudflare AI Search — 2 min.</strong><br><br>
 <strong>Lead:</strong> "If you want 80% of what I just showed you with 5% of the work, this is the answer."<br><br>
-<strong>What Cloudflare AI Search gives you out of the box:</strong>
+<strong>What Cloudflare AI Search gives you out of the box (verified against the docs, Apr 2026):</strong>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li>Hybrid search (keyword + vector) — done</li>
-  <li>Reranking — done</li>
-  <li>Managed embedding — done</li>
-  <li>R2-backed content storage — done</li>
-  <li>A single API endpoint</li>
+  <li>Hybrid search — vector + BM25 keyword with configurable RRF/max fusion (NOT vector-only)</li>
+  <li>Reranking, query rewriting, and similarity caching — all managed</li>
+  <li>Managed embedding (Workers AI) + R2-backed storage + Vectorize index, auto-synced</li>
+  <li>Metadata filtering, cited sources, a built-in MCP endpoint</li>
+  <li>One service: search() for ranked chunks, chatCompletions() for a generated answer</li>
 </ul>
 <strong>The navy "remember one thing" card:</strong> "Most teams should start here. You can always graduate to the primitives later."<br><br>
-<strong>What you give up:</strong> custom rerankers, intent classification, the diagnostic graph, the agent loop. If you don't need those, you save weeks.<br><br>
+<strong>What you actually give up</strong> (rerank + query rewriting are now managed, so it's not those): hand-tuned hybrid scoring and your own rerankers, the faceted parts catalog (Meilisearch), the diagnostic graph, and the agent loop + per-user Durable Object memory. If you don't need those, you save weeks.<br><br>
+<strong>Status:</strong> open beta — free within limits, 4 MB max per file. Fine to "ship this weekend," just flag the beta if asked.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why didn't you use this?"</em><br>
 A: I started before it launched. I'd also lose the graph and the agent. For my use case, the full primitive control was worth the build time.
@@ -7659,14 +7661,14 @@ A: I started before it launched. I'd also lose the graph and the agent. For my u
   </div>
   <h2 style="font-size: 1.7em; margin: 0 0 8px 0;">Same primitives, <em>full control</em>.</h2>
 
-  <p class="lr-lead">Started on <strong>AI Search</strong>? Steps 2 &amp; 3 (semantic + embeddings) are already provisioned — you pick up at the <strong style="color:var(--navy);">keyword layer</strong> and the <strong style="color:var(--navy);">agent</strong>.</p>
+  <p class="lr-lead">Started on <strong>AI Search</strong>? Steps 1&ndash;4 (the whole hybrid retrieval pipeline) come provisioned — your real build is the <strong style="color:var(--navy);">agent + memory + domain graph</strong>.</p>
 
   <div class="long-road-list">
     <div class="lr-row">
       <div class="lr-num">1</div>
       <div>
         <span class="lr-stage">Database · SQL</span>
-        <div class="lr-title">D1 + FTS5 for keyword</div>
+        <div class="lr-title">D1 + FTS5 for keyword <span class="lr-chip">✓ via AI Search</span></div>
       </div>
       <div class="lr-code">
         <code>wrangler d1 create my-search-db</code>
@@ -7696,7 +7698,7 @@ A: I started before it launched. I'd also lose the graph and the agent. For my u
       <div class="lr-num">4</div>
       <div>
         <span class="lr-stage">Search · API</span>
-        <div class="lr-title">Hybrid endpoint &mdash; merge &amp; score</div>
+        <div class="lr-title">Hybrid endpoint <span class="lr-chip">✓ via AI Search</span></div>
       </div>
       <div class="lr-desc">Parallel FTS5 + Vectorize, weighted merge by source, threshold + dedup.</div>
     </div>
