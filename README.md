@@ -4,7 +4,7 @@ Self-contained reveal.js presentation for **"AI Search on Cloudflare"** — a ta
 
 ## What this is
 
-A 28-slide technical conference deck covering the design, implementation, and lessons learned from building a production AI-powered search and repair assistant ([shepherd.shopdawg.app](https://shepherd.shopdawg.app)) entirely on Cloudflare's serverless stack.
+A 29-slide technical conference deck covering the design, implementation, and lessons learned from building a production AI-powered search and repair assistant ([shepherd.shopdawg.app](https://shepherd.shopdawg.app)) entirely on Cloudflare's serverless stack.
 
 Topics covered:
 

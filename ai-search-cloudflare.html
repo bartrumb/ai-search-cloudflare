@@ -210,7 +210,7 @@ html, body, .reveal {
    ============================================================ */
 
 .slide-pad {
-  padding: 32px 48px 52px 48px;
+  padding: 32px 48px 46px 48px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -4531,7 +4531,7 @@ html.print-pdf-active .gd-fill { animation: none !important; transform: none !im
 
 /* ---- Slide 08 · Vectorize — 2D meaning-map scatter ---- */
 .meaning-map { margin-top: 4px; }
-.meaning-map svg { width: 100%; height: auto; display: block; }
+.meaning-map svg { width: 100%; height: auto; max-height: 264px; margin: 0 auto; display: block; }
 .mm-q { animation: mmPulse 1.8s ease-in-out infinite; transform-origin: center; }
 @keyframes mmPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
 html.print-pdf-active .mm-q { animation: none !important; }
@@ -5136,7 +5136,7 @@ A: Workers Paid is $5/mo flat. The bill doesn't grow when nobody shows up.
 </div>
 <aside class="notes">
 <strong>Why Cloudflare — 3 min.</strong><br><br>
-<strong>Hook:</strong> The relief hero mirrors the burn ticker. Where slide 2 was money going out, this is queries going through. Let it run silently.<br><br>
+<strong>Hook:</strong> The relief hero mirrors the burn ticker. Where the burn-ticker slide was money going out, this is queries going through. Let it run silently.<br><br>
 <strong>Then:</strong> "Now look at the same load profile on Cloudflare. I'm serving queries instead of burning capacity."<br><br>
 <strong>Four advantages — ~30s each:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
@@ -5239,7 +5239,7 @@ A: V8 isolates. Sub-5ms. Three Generations slide is up next — that's the proof
 </div>
 <aside class="notes">
 <strong>Three Generations of Compute — 3 min.</strong><br><br>
-<strong>This is the conceptual foundation.</strong> Non-technical evaluators need this to understand why slide 23's cost numbers are real, not aspirational.<br><br>
+<strong>This is the conceptual foundation.</strong> Non-technical evaluators need this to understand why the Cost Comparison slide's numbers are real, not aspirational.<br><br>
 <strong>Walk left-to-right:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
   <li><strong>VMs (~2001):</strong> Full guest OS. GB footprint. 30–120s cold start. Tens per host. You pay 24/7.</li>
@@ -5832,7 +5832,7 @@ A: FTS5 doesn't do typo tolerance — that's why Meilisearch is on the team for 
       <p>Keywords fail when users describe problems instead of naming parts. "My bike makes a clicking sound when I pedal" should match "bottom bracket adjustment" — vector search makes this connection.</p>
       <p>Workers AI maps each sentence to <strong>768 numbers</strong> &mdash; coordinates on a "meaning map," where similar meanings land near each other even with zero shared words. <span style="font-family:monospace; color:var(--orange);">embeddinggemma-300m</span> generates them; Vectorize finds the nearest via cosine similarity.</p>
 
-      <h3 style="margin-top:8px;">Embedding Pipeline</h3>
+      <h3 style="margin-top:4px;">Embedding Pipeline</h3>
       <div class="embed-pipeline" id="embedPipeline">
         <div class="embed-step" data-step="0"><span class="num">1</span>Auto-chunk content &gt; 7,500 chars</div>
         <div class="embed-step" data-step="1"><span class="num">2</span>Workers AI → 768-dim vector</div>
@@ -6118,7 +6118,7 @@ A: Meili's a Rust binary, not edge-deployable. The Workers-native equivalent (D1
 <strong>Why this matters:</strong> a pure keyword search misses "clicks when I pedal." A pure semantic search misses "BR-M6100." Hybrid catches both query shapes in one round trip.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "How do you tune the weights?"</em><br>
-A: I have a 30-case eval suite (mentioned on slide 13). When I change weights, I re-run the eval and check Top-1/Top-3 accuracy.<br>
+A: I have a 30-case eval suite (mentioned on the Contextual Retrieval slide). When I change weights, I re-run the eval and check Top-1/Top-3 accuracy.<br>
 <em>Q: "Why not let the LLM combine?"</em><br>
 A: I do — Sonnet re-ranks the top 30. The weighted merge is the prefilter.
 </aside>
@@ -6353,7 +6353,7 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
   </div>
 
   <p class="lead">Metadata gives chunks a structural home. A 1–2 sentence <strong>LLM summary</strong> — Anthropic's Contextual Retrieval pattern — adds a sticky note that stays findable even when the page is OCR garbage.</p>
-  <p style="font-size:0.72em; color:var(--muted); margin:-4px 0 8px 0; font-style:italic; line-height:1.5;"><strong style="color:var(--navy); font-style:normal;">Labor division:</strong> LLMs author chunk <em>context</em>; humans author the graph (slides 18&ndash;20) — enrich text, don't invent ontology.</p>
+  <p style="font-size:0.72em; color:var(--muted); margin:-4px 0 8px 0; font-style:italic; line-height:1.5;"><strong style="color:var(--navy); font-style:normal;">Labor division:</strong> LLMs author chunk <em>context</em>; humans author the graph (slides 19&ndash;21) — enrich text, don't invent ontology.</p>
 
   <div class="cr-stage">
     <div class="cr-card">
@@ -7493,7 +7493,7 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
   <li><strong>4. Metadata-tagged chunks beat raw chunks.</strong> Layer 2 metadata + Layer 3 LLM context (Contextual Retrieval pattern). 66.7% → 93.3% Top-1.</li>
   <li><strong>5. Test in CI like any other code.</strong> 30-case regression suite. Every PR runs it. Quality gates that ship at the speed of CI, not at the speed of "I'll eval later."</li>
 </ul>
-<strong>On lesson 3 — be ready for pushback:</strong> "But Brett, you DO use LLMs to author the chunk context_llm summaries — isn't that a contradiction?" The answer is on slide 13's text: LLMs enrich existing text, humans invent ontology. Different jobs.
+<strong>On lesson 3 — be ready for pushback:</strong> "But Brett, you DO use LLMs to author the chunk context_llm summaries — isn't that a contradiction?" The answer is on the Contextual Retrieval slide: LLMs enrich existing text, humans invent ontology. Different jobs.
 </aside>
 </section>
 
@@ -7505,11 +7505,12 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
   <div class="eyebrow">Part Three</div>
   <h1>Build It Yourself</h1>
   <div class="sub">Two steps, not two choices — ship on AI Search now, graduate to the primitives when you scale.</div>
+  <div class="sub" style="font-size:0.9em; color:#93A1C1; margin-top:14px;">None of it is bike-specific — swap in your industry's manuals, parts &amp; diagnostics and the architecture holds.</div>
 </div>
 <aside class="notes">
 <strong>Build It Yourself section divider — 15 seconds.</strong><br><br>
 Beat: "Here's the path — start managed, graduate to custom when you outgrow it."<br><br>
-Don't dwell. Click through.
+Plant the takeaway here too: the recipe is domain-agnostic — swap the e-bike corpus for any industry's (healthcare is our next target). Don't dwell. Click through.
 </aside>
 </section>
 
@@ -7729,7 +7730,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
   <li>Cost numbers (verified June 2026 rates)</li>
   <li>Why hand-author vs LLM-extract for the graph</li>
   <li>Cold start tax on the live demo</li>
-  <li>Hand-author vs LLM-context contradiction (slide 13 covers it)</li>
+  <li>Hand-author vs LLM-context contradiction (Contextual Retrieval slide covers it)</li>
 </ul>
 </aside>
 </section>
@@ -7880,6 +7881,17 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
 
     // 4. Mark body so any CSS @media print rules can target both states
     document.body.classList.add('print-pdf-ready');
+
+    // 4b. Kill the trailing blank page. Every .pdf-page carries
+    //     page-break-after: always !important, so the LAST slide emits an
+    //     extra empty PDF page. Override just the last one with an !important
+    //     inline style (inline !important beats the stylesheet !important).
+    const pdfPages = document.querySelectorAll('.pdf-page');
+    const lastPdfPage = pdfPages[pdfPages.length - 1];
+    if (lastPdfPage) {
+      lastPdfPage.style.setProperty('page-break-after', 'avoid', 'important');
+      lastPdfPage.style.setProperty('break-after', 'avoid', 'important');
+    }
 
     // 5. Opened via the Print button (autoprint flag): open the browser print
     //    dialog once images (logos) finish loading so the PDF captures them.
