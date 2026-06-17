@@ -3836,6 +3836,7 @@ html, body, .reveal {
 }
 .slide-ctx .ctx-card.before h3 { color: var(--red); }
 .slide-ctx .ctx-card.after h3 { color: var(--green); }
+.slide-ctx .ctx-card .ctx-analogy { font-size: 0.76em; font-style: italic; color: var(--muted); margin: -4px 0 8px; line-height: 1.35; }
 .slide-ctx .ctx-card ul {
   font-size: 0.78em;
   color: var(--body);
@@ -6709,7 +6710,8 @@ A: Mini-agent bench runs against fixed fixtures. If I swap models, I re-bench be
   <div class="ctx-cards">
     <div class="ctx-card before">
       <div class="ctx-tag">✗ BEFORE · DUMB TRUNCATION</div>
-      <h3>Like clipping the manual at page 16.</h3>
+      <h3>The model gets noise.</h3>
+      <div class="ctx-analogy">Like clipping the manual at page 16.</div>
       <ul>
         <li>Tool returns <strong>15&nbsp;KB</strong> raw PDF text</li>
         <li>Char-count clip at 16K characters</li>
@@ -6721,7 +6723,8 @@ A: Mini-agent bench runs against fixed fixtures. If I swap models, I re-bench be
     </div>
     <div class="ctx-card after">
       <div class="ctx-tag">✓ AFTER · QUERY-AWARE COMPRESSION</div>
-      <h3>Like a service writer marks the right page.</h3>
+      <h3>The model gets answers.</h3>
+      <div class="ctx-analogy">Like a service writer marks the right page.</div>
       <ul>
         <li>Same 15&nbsp;KB result &mdash; pre-Sonnet hop adds <code>gpt-oss-120b</code></li>
         <li>Cerebras sub-agent extracts query-relevant sections</li>
