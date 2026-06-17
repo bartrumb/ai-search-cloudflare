@@ -3353,7 +3353,7 @@ html, body, .reveal {
   background: linear-gradient(135deg, #fff 0%, #FFFAF4 100%);
   border-radius: 8px;
   border-left: 4px solid var(--orange);
-  padding: 12px 18px;
+  padding: 9px 18px;
   box-shadow: var(--shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
@@ -3404,6 +3404,27 @@ html, body, .reveal {
   font-weight: 700;
   color: var(--navy);
   line-height: 1.3;
+}
+.lr-lead {
+  font-size: 0.7em;
+  color: var(--body);
+  margin: 0 0 9px;
+  line-height: 1.4;
+}
+.lr-lead strong { color: var(--green); }
+.lr-chip {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--green);
+  background: var(--green-soft);
+  border: 1px solid rgba(46,125,50,0.35);
+  border-radius: 10px;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.3px;
 }
 .lr-code {
   display: flex;
@@ -7571,27 +7592,21 @@ Plant the takeaway here too: the recipe is domain-agnostic — swap the e-bike c
 
   <div class="two-col" style="gap: 14px;">
     <div class="box-feature-list">
-      <h4>WHAT YOU GET OUT OF THE BOX</h4>
-      <div class="feat-row">
-        <div class="feat-name">R2</div>
-        <div class="feat-desc">Drop PDFs, HTML, Markdown into a bucket. That's the ingest.</div>
+      <h4>WHERE AI SEARCH FITS IN YOUR STACK</h4>
+      <p style="margin:0 0 9px; font-size:0.72em; line-height:1.4; color:var(--body);"><strong style="color:var(--orange);">~80% of this deck without writing a Worker.</strong> It provisions one slice of the exact stack you just saw:</p>
+      <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:#FFF8F0; border:1.5px solid #F6821F; border-radius:6px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; font-weight:700; color:#fff; background:#F6821F; padding:3px 9px; border-radius:10px; white-space:nowrap;">✓ AI SEARCH</span>
+        <div style="min-width:0;">
+          <div style="color:var(--navy); font-weight:700; font-size:0.8em;">Semantic RAG</div>
+          <div style="color:#64748B; font-size:0.64em; line-height:1.35;">R2 ingest · Workers AI embeddings · Vectorize · AI Gateway · Search API</div>
+        </div>
       </div>
-      <div class="feat-row">
-        <div class="feat-name">Workers AI</div>
-        <div class="feat-desc">Embeddings generated automatically — same models you'd wire up by hand.</div>
+      <div style="margin-top:7px; opacity:0.55;">
+        <div style="display:flex; gap:10px; align-items:baseline; padding:5px 12px; border:1px dashed #C9D2E0; border-radius:6px; margin-bottom:4px;"><span style="color:#64748B; font-weight:700; font-size:0.72em; min-width:118px;">Keyword</span><span style="color:#64748B; font-size:0.64em;">D1 + FTS5 · BM25 exact match</span></div>
+        <div style="display:flex; gap:10px; align-items:baseline; padding:5px 12px; border:1px dashed #C9D2E0; border-radius:6px; margin-bottom:4px;"><span style="color:#64748B; font-weight:700; font-size:0.72em; min-width:118px;">Faceted</span><span style="color:#64748B; font-size:0.64em;">Meilisearch · typo-tolerant filters</span></div>
+        <div style="display:flex; gap:10px; align-items:baseline; padding:5px 12px; border:1px dashed #C9D2E0; border-radius:6px;"><span style="color:#64748B; font-weight:700; font-size:0.72em; min-width:118px;">Agent + Memory</span><span style="color:#64748B; font-size:0.64em;">Durable Objects · diagnostic graph</span></div>
       </div>
-      <div class="feat-row">
-        <div class="feat-name">Vectorize</div>
-        <div class="feat-desc">Index provisioned and kept in sync with R2 changes.</div>
-      </div>
-      <div class="feat-row">
-        <div class="feat-name">AI Gateway</div>
-        <div class="feat-desc">Logging, caching, retries on every model call — included.</div>
-      </div>
-      <div class="feat-row">
-        <div class="feat-name">Search API</div>
-        <div class="feat-desc">One endpoint — ranked results or a streamed answer with citations.</div>
-      </div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:0.6em; font-weight:700; color:var(--orange); margin-top:7px;">↑ bolt these on in Step 2, as you outgrow the shortcut</div>
     </div>
 
     <div class="remember-card">
@@ -7605,11 +7620,6 @@ Plant the takeaway here too: the recipe is domain-agnostic — swap the e-bike c
       </ul>
       <a class="rmb-link" href="https://developers.cloudflare.com/ai-search">developers.cloudflare.com/ai-search</a>
     </div>
-  </div>
-
-  <div class="start-here-callout">
-    <span class="sh-label">START HERE</span>
-    <p>If you don't need per-tenant Durable Object state, hand-tuned hybrid scoring, or a long tail of agent tools — <strong>AI Search ships you 80% of this deck without writing a Worker</strong> — and every primitive is right here in Step 2 when you outgrow it.</p>
   </div>
 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
@@ -7647,7 +7657,9 @@ A: I started before it launched. I'd also lose the graph and the agent. For my u
     <span style="color:#F6821F;">→</span>
     <span style="padding:4px 12px; border-radius:14px; background:#FFF1E2; color:#F6821F; border:1px solid #F6821F;">2 · CUSTOM STACK — WHEN YOU SCALE</span>
   </div>
-  <h2 style="font-size: 1.7em; margin: 0 0 12px 0;">Same primitives, <em>full control</em>.</h2>
+  <h2 style="font-size: 1.7em; margin: 0 0 8px 0;">Same primitives, <em>full control</em>.</h2>
+
+  <p class="lr-lead">Started on <strong>AI Search</strong>? Steps 2 &amp; 3 (semantic + embeddings) are already provisioned — you pick up at the <strong style="color:var(--navy);">keyword layer</strong> and the <strong style="color:var(--navy);">agent</strong>.</p>
 
   <div class="long-road-list">
     <div class="lr-row">
@@ -7665,7 +7677,7 @@ A: I started before it launched. I'd also lose the graph and the agent. For my u
       <div class="lr-num">2</div>
       <div>
         <span class="lr-stage">Vectors</span>
-        <div class="lr-title">Vectorize for semantic</div>
+        <div class="lr-title">Vectorize for semantic <span class="lr-chip">✓ via AI Search</span></div>
       </div>
       <div class="lr-code">
         <code>wrangler vectorize create my-index \</code>
@@ -7676,7 +7688,7 @@ A: I started before it launched. I'd also lose the graph and the agent. For my u
       <div class="lr-num">3</div>
       <div>
         <span class="lr-stage">Ingest · Compute</span>
-        <div class="lr-title">Worker to ingest &amp; embed</div>
+        <div class="lr-title">Worker to ingest &amp; embed <span class="lr-chip">✓ via AI Search</span></div>
       </div>
       <div class="lr-desc">Chunk with metadata, embed via Workers AI, write to D1 + Vectorize in one transaction.</div>
     </div>
