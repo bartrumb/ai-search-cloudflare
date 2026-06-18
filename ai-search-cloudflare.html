@@ -4923,7 +4923,7 @@ Ground the whole talk in the physical reality before any architecture. "I run Ju
   <li><strong>Symptom ≠ keyword</strong> — how a rider describes a fault never matches the doc; this sets up the diagnostic graph later.</li>
 </ul>
 <strong>Land the punchline:</strong> the tech wants the answer, cited, fast — not a pile of documents, because bench time is the shop's biggest cost. That bar is why the rest of this talk exists.<br><br>
-<strong>The twist:</strong> I built it for my own bench at Juiced Wheels, but it works well enough that it's now <strong>Shop Shepherd — a subscription service other shops pay for.</strong> So this isn't just an internal tool; it's a product running on a ~$80/mo stack, which is the margin story. THEN pivot to the infra problem (next slide): even if you build it, traditional infra bills you to serve nobody.
+<strong>The pivot to land:</strong> I built this for my own bench at Juiced Wheels — and it works, on a ~$80/mo Cloudflare stack. But the takeaway isn't the bike shop: <strong>the stack underneath isn't bike-specific.</strong> Same primitives — manuals, parts, diagnostics — point at any industry (healthcare is our next target). This is a knowledge-share, not a sales pitch. THEN pivot to the infra problem (next slide): even if you build it, traditional infra bills you to serve nobody.
 </aside>
 </section>
 
@@ -6376,7 +6376,7 @@ A: ISO 19005-2 — long-term archival format. Embeds all fonts, normalizes struc
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
-<strong>Why Chunking Context Matters — 2 min. Set-up slide for #13.</strong><br><br>
+<strong>Why Chunking Context Matters — 2 min. Set-up for the Contextual Retrieval slide (next).</strong><br><br>
 <strong>Lead:</strong> "Here's the problem with naïve chunking. The chunk that contains the answer doesn't always contain the context that makes it findable."<br><br>
 <strong>The example:</strong> a chunk from the middle of a Bosch manual. The text says "the speed sensor must be torqued to 5Nm." It doesn't say "Bosch." It doesn't say "DriveUnit." It doesn't say "speed sensor installation procedure." Those words are on page 3; the chunk is from page 47.<br><br>
 <strong>The fix on this slide (metadata):</strong> tag every chunk with structural metadata — manual brand, model, section heading. Now FTS5 can find the chunk even when the body doesn't have the query terms.<br><br>
@@ -7733,16 +7733,17 @@ A: I started before it launched. I'd also lose the graph and the agent. For my u
 </div>
 <aside class="notes">
 <strong>The Long Road: Same primitives, full control — 2 min.</strong><br><br>
-<strong>Lead:</strong> "If you need control, here's the build path. Same primitives Cloudflare AI Search uses internally."<br><br>
-<strong>Walk through the stages:</strong>
+<strong>This is Step 2</strong> — the DIY build, for when you outgrow AI Search. Lead: "Same primitives Cloudflare AI Search uses internally — now you own them."<br><br>
+<strong>The continuity (the green chips):</strong> steps 1&ndash;4 — keyword, vector, ingest/embed, the hybrid endpoint — are exactly what AI Search already provisions. Your real build is <strong>step 5</strong>: the agent layer, per-user Durable Object memory, and the hand-authored diagnostic graph.<br><br>
+<strong>Walk the five steps:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li><strong>Stage 1:</strong> R2 + Workers — content storage and the fetch layer</li>
-  <li><strong>Stage 2:</strong> D1 + FTS5 — keyword search, free</li>
-  <li><strong>Stage 3:</strong> Vectorize + Workers AI — semantic layer</li>
-  <li><strong>Stage 4:</strong> Hybrid scoring + custom reranker — the win zone</li>
-  <li><strong>Stage 5:</strong> Agent loop + tools — what makes it "AI" instead of "search"</li>
+  <li><strong>1:</strong> D1 + FTS5 — keyword</li>
+  <li><strong>2:</strong> Vectorize — semantic</li>
+  <li><strong>3:</strong> Worker to ingest &amp; embed</li>
+  <li><strong>4:</strong> Hybrid endpoint — merge &amp; score</li>
+  <li><strong>5:</strong> Agent layer — tools &amp; memory (the differentiator)</li>
 </ul>
-<strong>The outcome callout at the bottom:</strong> "When you're done, you have what I have. Same primitives. Full ownership."<br><br>
+<strong>The trigger matrix at the bottom answers "WHEN do I graduate?"</strong> — point at it: big docs past the ~4&nbsp;MB beta ceiling, causal diagnosis needing typed-edge GraphRAG, per-user state, faceted parts (Meilisearch), custom scoring, or a long tail of agent tools. Any one = graduate.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "How long is the build?"</em><br>
 A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitoring in 2–4 weeks.
