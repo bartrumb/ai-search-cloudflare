@@ -3353,7 +3353,7 @@ html, body, .reveal {
   background: linear-gradient(135deg, #fff 0%, #FFFAF4 100%);
   border-radius: 8px;
   border-left: 4px solid var(--orange);
-  padding: 7px 18px;
+  padding: 5px 18px;
   box-shadow: var(--shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
@@ -7568,7 +7568,7 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
 </div>
 <aside class="notes">
 <strong>Build It Yourself section divider — 15 seconds.</strong><br><br>
-Beat: "Here's the path — start managed, graduate to custom when you outgrow it."<br><br>
+Beat: "Here's the path — start managed, graduate to custom when you hit a wall."<br><br>
 Plant the takeaway here too: the recipe is domain-agnostic — swap the e-bike corpus for any industry's (healthcare is our next target). Don't dwell. Click through.
 </aside>
 </section>
@@ -7712,9 +7712,16 @@ A: I started before it launched. I'd also lose the graph and the agent. For my u
     </div>
   </div>
 
-  <div class="long-road-outcome">
-    <span class="lro-label">WHEN YOU'RE<br>DONE</span>
-    <p>You ship <strong>hybrid search</strong>, a <strong>durable agent</strong>, <strong>per-user memory</strong>, and <strong>crash recovery</strong> &mdash; every primitive owned by you, none in a vendor's stack.</p>
+  <div style="margin:2px 0 0; padding:9px 16px 10px; background:#F5F6FA; border:1px solid #E2E6EF; border-left:4px solid #F6821F; border-radius:8px; font-family:'Inter',sans-serif;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:0.6em; font-weight:700; letter-spacing:1.5px; color:#F6821F; text-transform:uppercase; margin-bottom:6px;">Graduate to Step 2 when ANY of these is true</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4px 18px; font-size:0.66em; color:#334155; line-height:1.3;">
+      <div><strong style="color:#1B2A4A;">Big docs</strong> &mdash; PDFs past the beta's ~4&nbsp;MB file ceiling</div>
+      <div><strong style="color:#1B2A4A;">Causal diagnosis</strong> &mdash; typed-edge GraphRAG, not semantic proximity</div>
+      <div><strong style="color:#1B2A4A;">Per-user state</strong> &mdash; durable memory + crash recovery (Durable Objects)</div>
+      <div><strong style="color:#1B2A4A;">Faceted catalog</strong> &mdash; typo-tolerant facet filters over 84K parts (Meilisearch)</div>
+      <div><strong style="color:#1B2A4A;">Custom scoring</strong> &mdash; hand-tuned hybrid ranking / your own rerankers</div>
+      <div><strong style="color:#1B2A4A;">Tool breadth</strong> &mdash; a long tail of bespoke agent tools</div>
+    </div>
   </div>
 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
