@@ -1145,14 +1145,19 @@ html, body, .reveal {
 /* ============================================================
    SLIDE 1b — "Why I built this" (bench-tech reality hook)
    ============================================================ */
-.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 30px 0 26px; }
-.why-card { background: #fff; border-radius: 10px; box-shadow: var(--shadow); border-top: 4px solid var(--orange); padding: 26px 20px 28px; display: flex; flex-direction: column; }
-.why-card .wc-stat { font-family: 'Inter', sans-serif; font-size: 2.3em; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -0.5px; }
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0 22px; }
+.why-card { background: linear-gradient(150deg, #ffffff 0%, #FFF8F0 100%); border-radius: 12px; box-shadow: var(--shadow); border-top: 4px solid var(--orange); padding: 20px 20px 22px; display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.why-card::after { content: ''; position: absolute; bottom: -28px; right: -28px; width: 104px; height: 104px; background: radial-gradient(circle, rgba(246,130,31,0.09) 0%, transparent 70%); pointer-events: none; }
+.why-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.why-card .wc-stat { font-family: 'Inter', sans-serif; font-size: 2.5em; font-weight: 800; color: var(--navy); line-height: 1; letter-spacing: -0.5px; position: relative; z-index: 1; }
+.why-card .wc-stat::after { content: ''; display: block; width: 30px; height: 3px; background: var(--orange); border-radius: 2px; margin-top: 11px; }
+.why-card .wc-stat.wc-x { color: var(--orange); }
 .why-card .wc-stat .u { font-size: 0.46em; color: var(--orange); font-weight: 800; letter-spacing: 0; }
-.why-card .wc-title { font-size: 0.84em; font-weight: 700; color: var(--navy); margin: 14px 0 6px; }
-.why-card .wc-desc { font-size: 0.75em; color: var(--body); line-height: 1.5; }
-.why-punch { background: linear-gradient(135deg, #1B2A4A 0%, #0F1B33 100%); color: #fff; border-radius: 10px; padding: 26px 30px; font-size: 1.02em; line-height: 1.55; }
-.why-punch strong { color: var(--orange); }
+.why-card .wc-title { font-size: 0.84em; font-weight: 700; color: var(--navy); margin: 12px 0 6px; position: relative; z-index: 1; }
+.why-card .wc-desc { font-size: 0.75em; color: var(--body); line-height: 1.5; position: relative; z-index: 1; }
+.why-punch { background: linear-gradient(135deg, #1B2A4A 0%, #0F1B33 100%); color: #fff; border-radius: 12px; border-left: 4px solid var(--orange); padding: 24px 30px; font-size: 1.02em; line-height: 1.55; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(15,27,51,0.18); }
+.why-punch::after { content: ''; position: absolute; top: -50px; right: -30px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(246,130,31,0.13) 0%, transparent 70%); pointer-events: none; }
+.why-punch strong { color: var(--orange); position: relative; z-index: 1; }
 
 /* ============================================================
    SLIDE 2 — "The Problem" dynamic components (full-bleed layout)
@@ -4897,7 +4902,7 @@ Hi, I'm Brett — I run shopdawg.app. For the next hour I'll walk through how I 
       <div class="wc-desc">Bafang, Bosch &amp; Shimano each speak a different dialect — the code is meaningless without the table.</div>
     </div>
     <div class="why-card">
-      <div class="wc-stat">≠</div>
+      <div class="wc-stat wc-x">≠</div>
       <div class="wc-title">symptom vs. keyword</div>
       <div class="wc-desc">"Motor cuts out climbing" isn't a phrase in any manual — it's a trace through the system.</div>
     </div>
