@@ -2018,6 +2018,29 @@ html, body, .reveal {
 .engine-split .es-desc { font-size: 0.78em; color: var(--body); line-height: 1.42; }
 a.mlink { color: inherit; text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 2px; text-underline-offset: 2px; transition: color 0.15s ease; }
 a.mlink:hover { color: var(--orange); }
+
+/* Slide 23 — Observability: trace waterfall + card glow */
+.box-feature-list.obs-card, .remember-card.obs-card { position: relative; overflow: hidden; }
+.box-feature-list.obs-card { background: linear-gradient(150deg, #ffffff 0%, #FBFCFE 100%); }
+.box-feature-list.obs-card::after, .remember-card.obs-card::after { content: ''; position: absolute; bottom: -34px; right: -34px; width: 130px; height: 130px; background: radial-gradient(circle, rgba(246,130,31,0.10) 0%, transparent 70%); pointer-events: none; }
+.remember-card.obs-card::after { background: radial-gradient(circle, rgba(246,130,31,0.16) 0%, transparent 70%); top: -40px; right: -24px; bottom: auto; width: 170px; height: 170px; }
+.trace-wf { display: flex; flex-direction: column; gap: 6px; margin: 6px 0 0; position: relative; z-index: 1; }
+.trace-wf .twf-legend { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.55em; font-weight: 700; color: var(--muted); margin-bottom: 4px; flex-wrap: wrap; }
+.trace-wf .twf-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.trace-wf .twf-legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.trace-wf .lg-trace { background: #F6821F; } .trace-wf .lg-gen { background: #2563EB; } .trace-wf .lg-span { background: #6BB6FF; }
+.trace-wf .twf-row { display: grid; grid-template-columns: 110px 1fr 44px; gap: 9px; align-items: center; }
+.trace-wf .twf-name { font-family: 'Inter', sans-serif; font-size: 0.66em; font-weight: 600; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trace-wf .twf-name.i1 { padding-left: 11px; } .trace-wf .twf-name.i2 { padding-left: 22px; }
+.trace-wf .twf-track { position: relative; height: 16px; background: #EEF1F7; border-radius: 4px; }
+.trace-wf .twf-bar { position: absolute; top: 0; height: 16px; border-radius: 4px; box-shadow: 0 1px 3px rgba(15,27,51,0.14); }
+.trace-wf .twf-bar.b-trace { background: linear-gradient(90deg, #F6821F 0%, #FFB066 100%); }
+.trace-wf .twf-bar.b-gen { background: linear-gradient(90deg, #2563EB 0%, #5B8DEF 100%); }
+.trace-wf .twf-bar.b-span { background: linear-gradient(90deg, #6BB6FF 0%, #A5D2FF 100%); }
+.trace-wf .twf-dur { font-family: 'JetBrains Mono', monospace; font-size: 0.55em; font-weight: 700; color: var(--muted); text-align: right; white-space: nowrap; }
+.trace-wf .twf-cap { margin-top: 8px; padding-top: 9px; border-top: 1px solid var(--muted-soft); font-size: 0.64em; color: var(--muted); line-height: 1.5; }
+.trace-wf .twf-cap code { font-family: 'JetBrains Mono', monospace; color: #2563EB; font-size: 0.94em; }
+.trace-wf .twf-cap strong { color: var(--navy); }
 .engine-split .es-desc code { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: rgba(27,42,74,0.07); padding: 0 4px; border-radius: 3px; }
 /* Slide 9 — "lone third-party" honest-gap callout */
 .meili-note { margin-top: 12px; background: #FFF8F0; border: 1px solid var(--orange); border-radius: 8px; padding: 9px 14px; }
@@ -7343,26 +7366,25 @@ A: For diagnostics, the picture is worth the tokens. Mechanics scan a flowchart 
   <p class="lead">I was already running <a class="mlink" href="https://posthog.com/docs/ai-observability" target="_blank" rel="noopener">PostHog</a> for product analytics — funnels, retention, session replay. Turning on its <strong>LLM observability</strong> dropped every AI trace onto that same dashboard: cost, tokens, latency, and tool-routing, per turn.</p>
 
   <div class="two-col" style="gap:14px;">
-    <div class="box-feature-list">
+    <div class="box-feature-list obs-card">
       <h4>ONE POSTHOG TRACE PER CHAT TURN</h4>
-      <div>
-        <div style="margin-bottom:10px;">
-          <span style="font-family:'JetBrains Mono',monospace; color:var(--orange); font-weight:700; font-size:0.84em;">$ai_trace</span>
-          <div style="font-size:0.7em; color:var(--body); line-height:1.4; margin-top:2px;">the whole turn &mdash; total tokens &middot; tools called &middot; finish reason</div>
+      <div class="trace-wf">
+        <div class="twf-legend">
+          <span><i class="lg-trace"></i>$ai_trace</span>
+          <span><i class="lg-gen"></i>$ai_generation</span>
+          <span><i class="lg-span"></i>$ai_span</span>
         </div>
-        <div style="margin-left:16px; padding-left:14px; border-left:2px solid var(--muted-soft); margin-bottom:10px;">
-          <span style="font-family:'JetBrains Mono',monospace; color:#2563EB; font-weight:700; font-size:0.84em;">$ai_generation</span> <span style="font-size:0.62em; color:var(--muted);">per model call</span>
-          <div style="font-size:0.7em; color:var(--body); line-height:1.4; margin-top:2px;">model &middot; tokens &middot; <strong style="color:var(--navy);">cache-aware cost</strong> (read / write / fresh)</div>
-        </div>
-        <div style="margin-left:32px; padding-left:14px; border-left:2px solid var(--muted-soft);">
-          <span style="font-family:'JetBrains Mono',monospace; color:#2563EB; font-weight:700; font-size:0.84em;">$ai_span</span> <span style="font-size:0.62em; color:var(--muted);">per tool &amp; mini-agent</span>
-          <div style="font-size:0.7em; color:var(--body); line-height:1.4; margin-top:2px;">input args &middot; output &middot; latency &mdash; nested under its generation</div>
-        </div>
+        <div class="twf-row"><div class="twf-name">the whole turn</div><div class="twf-track"><div class="twf-bar b-trace" style="left:0; width:100%;"></div></div><div class="twf-dur">3.2s</div></div>
+        <div class="twf-row"><div class="twf-name i1">pre-agent</div><div class="twf-track"><div class="twf-bar b-span" style="left:1%; width:8%;"></div></div><div class="twf-dur">0.25s</div></div>
+        <div class="twf-row"><div class="twf-name i1">route tools</div><div class="twf-track"><div class="twf-bar b-gen" style="left:10%; width:13%;"></div></div><div class="twf-dur">Sonnet</div></div>
+        <div class="twf-row"><div class="twf-name i2">diagnose</div><div class="twf-track"><div class="twf-bar b-span" style="left:24%; width:6%;"></div></div><div class="twf-dur">0.18s</div></div>
+        <div class="twf-row"><div class="twf-name i2">query_graph</div><div class="twf-track"><div class="twf-bar b-span" style="left:24%; width:4%;"></div></div><div class="twf-dur">0.08s</div></div>
+        <div class="twf-row"><div class="twf-name i1">synthesis</div><div class="twf-track"><div class="twf-bar b-gen" style="left:40%; width:60%;"></div></div><div class="twf-dur">1.9s</div></div>
+        <div class="twf-cap">Each <code>$ai_generation</code> logs model · tokens · <strong>cache-aware cost</strong>; each <code>$ai_span</code> logs args · output · latency — automatically. <strong>You can't tune what you can't see.</strong></div>
       </div>
-      <div style="margin-top:auto; padding-top:10px; border-top:1px solid var(--muted-soft); font-size:0.68em; color:var(--muted); line-height:1.45;">Pre-agent and parent-trace spans too &mdash; emitted every turn, batched and flushed automatically. <strong style="color:var(--navy);">You can't tune what you can't see.</strong></div>
     </div>
 
-    <div class="remember-card">
+    <div class="remember-card obs-card">
       <h4>ONE PANE OF GLASS</h4>
       <p class="rmb-headline">AI traces land right next to the product analytics I already had.</p>
       <ul>
