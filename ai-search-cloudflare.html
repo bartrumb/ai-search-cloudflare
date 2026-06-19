@@ -2029,11 +2029,12 @@ a.mlink:hover { color: var(--orange); }
 .trace-wf .twf-legend span { display: inline-flex; align-items: center; gap: 5px; }
 .trace-wf .twf-legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
 .trace-wf .lg-trace { background: #F6821F; } .trace-wf .lg-gen { background: #2563EB; } .trace-wf .lg-span { background: #6BB6FF; }
-.trace-wf .twf-row { display: grid; grid-template-columns: 110px 1fr 44px; gap: 9px; align-items: center; }
+.trace-wf .twf-query { font-family: 'Inter', sans-serif; font-style: italic; font-size: 0.7em; color: var(--navy); font-weight: 600; margin: 4px 0 2px; line-height: 1.35; }
+.trace-wf .twf-row { display: grid; grid-template-columns: 122px 1fr 46px; gap: 9px; align-items: center; }
 .trace-wf .twf-name { font-family: 'Inter', sans-serif; font-size: 0.66em; font-weight: 600; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .trace-wf .twf-name.i1 { padding-left: 11px; } .trace-wf .twf-name.i2 { padding-left: 22px; }
 .trace-wf .twf-track { position: relative; height: 16px; background: #EEF1F7; border-radius: 4px; }
-.trace-wf .twf-bar { position: absolute; top: 0; height: 16px; border-radius: 4px; box-shadow: 0 1px 3px rgba(15,27,51,0.14); }
+.trace-wf .twf-bar { position: absolute; top: 0; height: 16px; min-width: 7px; border-radius: 4px; box-shadow: 0 1px 3px rgba(15,27,51,0.14); }
 .trace-wf .twf-bar.b-trace { background: linear-gradient(90deg, #F6821F 0%, #FFB066 100%); }
 .trace-wf .twf-bar.b-gen { background: linear-gradient(90deg, #2563EB 0%, #5B8DEF 100%); }
 .trace-wf .twf-bar.b-span { background: linear-gradient(90deg, #6BB6FF 0%, #A5D2FF 100%); }
@@ -7367,20 +7368,22 @@ A: For diagnostics, the picture is worth the tokens. Mechanics scan a flowchart 
 
   <div class="two-col" style="gap:14px;">
     <div class="box-feature-list obs-card">
-      <h4>ONE POSTHOG TRACE PER CHAT TURN</h4>
+      <h4>ONE REAL TRACE · POSTHOG</h4>
+      <div class="twf-query">"Best margin on 26×4 fat tires + tubes, grouped by distributor"</div>
       <div class="trace-wf">
         <div class="twf-legend">
           <span><i class="lg-trace"></i>$ai_trace</span>
           <span><i class="lg-gen"></i>$ai_generation</span>
           <span><i class="lg-span"></i>$ai_span</span>
         </div>
-        <div class="twf-row"><div class="twf-name">the whole turn</div><div class="twf-track"><div class="twf-bar b-trace" style="left:0; width:100%;"></div></div><div class="twf-dur">3.2s</div></div>
-        <div class="twf-row"><div class="twf-name i1">pre-agent</div><div class="twf-track"><div class="twf-bar b-span" style="left:1%; width:8%;"></div></div><div class="twf-dur">0.25s</div></div>
-        <div class="twf-row"><div class="twf-name i1">route tools</div><div class="twf-track"><div class="twf-bar b-gen" style="left:10%; width:13%;"></div></div><div class="twf-dur">Sonnet</div></div>
-        <div class="twf-row"><div class="twf-name i2">diagnose</div><div class="twf-track"><div class="twf-bar b-span" style="left:24%; width:6%;"></div></div><div class="twf-dur">0.18s</div></div>
-        <div class="twf-row"><div class="twf-name i2">query_graph</div><div class="twf-track"><div class="twf-bar b-span" style="left:24%; width:4%;"></div></div><div class="twf-dur">0.08s</div></div>
-        <div class="twf-row"><div class="twf-name i1">synthesis</div><div class="twf-track"><div class="twf-bar b-gen" style="left:40%; width:60%;"></div></div><div class="twf-dur">1.9s</div></div>
-        <div class="twf-cap">Each <code>$ai_generation</code> logs model · tokens · <strong>cache-aware cost</strong>; each <code>$ai_span</code> logs args · output · latency — automatically. <strong>You can't tune what you can't see.</strong></div>
+        <div class="twf-row"><div class="twf-name">the whole turn</div><div class="twf-track"><div class="twf-bar b-trace" style="left:0; width:100%;"></div></div><div class="twf-dur">31.8s</div></div>
+        <div class="twf-row"><div class="twf-name i1">pre-agent</div><div class="twf-track"><div class="twf-bar b-span" style="left:0; width:1.8%;"></div></div><div class="twf-dur">0.6s</div></div>
+        <div class="twf-row"><div class="twf-name i1">route tools</div><div class="twf-track"><div class="twf-bar b-gen" style="left:1.8%; width:19.9%;"></div></div><div class="twf-dur">6.3s</div></div>
+        <div class="twf-row"><div class="twf-name i2">search: tires</div><div class="twf-track"><div class="twf-bar b-span" style="left:4%; width:6.6%;"></div></div><div class="twf-dur">2.1s</div></div>
+        <div class="twf-row"><div class="twf-name i2">search: tubes</div><div class="twf-track"><div class="twf-bar b-span" style="left:4%; width:10.4%;"></div></div><div class="twf-dur">3.3s</div></div>
+        <div class="twf-row"><div class="twf-name i2">format ×2</div><div class="twf-track"><div class="twf-bar b-gen" style="left:11%; width:9.9%;"></div></div><div class="twf-dur">3.1s</div></div>
+        <div class="twf-row"><div class="twf-name i1">synthesis</div><div class="twf-track"><div class="twf-bar b-gen" style="left:21.7%; width:78.3%;"></div></div><div class="twf-dur">24.9s</div></div>
+        <div class="twf-cap"><strong>44.9K tokens · $0.072 · 8 spans.</strong> The Sonnet <strong>synthesis alone is 24.9s — 78% of the turn</strong>; the 3 searches + 2 Cerebras formatters total ~3s and <code>$0.009</code>. You only see that once it's traced.</div>
       </div>
     </div>
 
@@ -7403,7 +7406,7 @@ A: For diagnostics, the picture is worth the tokens. Mechanics scan a flowchart 
 <aside class="notes">
 <strong>Observability — 1.5 min. (Optional add-on slide.)</strong><br><br>
 <strong>Framing first, so nobody thinks it's a cost line:</strong> "This isn't part of the ~$80/mo. I was already running PostHog for product analytics — funnels, retention, session replay. The LLM observability is icing on the cake: it puts every AI trace on the same pane of glass."<br><br>
-<strong>The trace hierarchy (left card):</strong> every chat turn emits one <code>$ai_trace</code> (the whole turn), with a nested <code>$ai_generation</code> per model call (model, tokens, cache-aware cost — read/write/fresh pricing), and a <code>$ai_span</code> per tool and per mini-agent (input args, output, latency). Pre-agent gets its own span. It's all batched and flushed automatically per turn.<br><br>
+<strong>The waterfall (left card) is a REAL trace</strong> — a live parts query: "best margin on 26×4 fat tires + tubes, grouped by distributor." Every turn emits one <code>$ai_trace</code> (the whole turn), nested <code>$ai_generation</code> per model call (model, tokens, cache-aware cost), and a <code>$ai_span</code> per tool/mini-agent (args, output, latency). <strong>The punchline to point at: the synthesis bar.</strong> The two searches finished in ~2–3s and the Cerebras formatters in ~3s — but Sonnet writing the final answer took <strong>24.9 seconds, 78% of the whole turn</strong>. Total: 44.9K tokens, $0.072. Sonnet (route + synthesis) is ~$0.063 of that; the searches + 2 Cerebras formatters are $0.009 combined. "You'd never guess the bottleneck is the write-up, not the search — until you trace it."<br><br>
 <strong>Why it matters (right card):</strong> cost and tokens per turn, which tools fired and in what order, latency per step — and because it's the same PostHog, it sits next to the product funnels and session replay. One pane of glass.<br><br>
 <strong>The lesson it sets up:</strong> next slide, lesson 1 is "observability first." You can't tune what you can't see — I had this wired before I optimized anything.<br><br>
 <strong>Link:</strong> posthog.com/docs/ai-observability for their LLM analytics.<br><br>
