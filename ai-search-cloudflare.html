@@ -5746,7 +5746,7 @@ Don't dwell. Click through.
     <div class="icon">$</div>
     <h2>The Search Stack — Think of It Like Shopping</h2>
   </div>
-  <p class="lead">Three search engines, three shopping behaviors. The customer's voice picks the station: keyword for exact parts, semantic for symptoms, faceted for browsing with constraints.</p>
+  <p class="lead">Three search engines, three shopping behaviors. The customer's voice picks the station: semantic for symptoms, faceted for browsing with constraints, keyword for exact parts.</p>
 
   <div class="store-scene">
     <svg viewBox="0 0 900 260" preserveAspectRatio="xMidYMid meet">
@@ -5761,6 +5761,7 @@ Don't dwell. Click through.
       <text x="450" y="15" text-anchor="middle" fill="#F6821F" font-size="9" font-weight="700" letter-spacing="3" font-family="Inter">SHOP DAWG · YOUR LOCAL BIKE SHOP</text>
 
       <!-- ============ STATION 1: REGISTER ============ -->
+      <g transform="translate(600,0)"><!-- reordered: register now rightmost -->
       <!-- Thought bubble -->
       <g>
         <ellipse cx="150" cy="58" rx="120" ry="22" fill="#fff" stroke="#1B2A4A" stroke-width="1.5"/>
@@ -5881,7 +5882,9 @@ Don't dwell. Click through.
       <!-- Divider between stations 1 and 2 -->
       <line x1="290" y1="100" x2="290" y2="220" stroke="#D8D0C2" stroke-width="1" stroke-dasharray="3 3"/>
 
+      </g>
       <!-- ============ STATION 2: AISLE DIRECTORY (SEMANTIC SEARCH) ============ -->
+      <g transform="translate(-300,0)"><!-- reordered: aisle now leftmost -->
       <!-- Thought bubble -->
       <g>
         <ellipse cx="450" cy="60" rx="125" ry="22" fill="#fff" stroke="#1B2A4A" stroke-width="1.5"/>
@@ -6021,7 +6024,9 @@ Don't dwell. Click through.
       <!-- Divider between stations 2 and 3 -->
       <line x1="610" y1="100" x2="610" y2="220" stroke="#D8D0C2" stroke-width="1" stroke-dasharray="3 3"/>
 
+      </g>
       <!-- ============ STATION 3: SHELF (innertubes + tire facets) ============ -->
+      <g transform="translate(-300,0)"><!-- reordered: shelf now middle -->
       <!-- Thought bubble -->
       <g>
         <ellipse cx="750" cy="60" rx="125" ry="22" fill="#fff" stroke="#1B2A4A" stroke-width="1.5"/>
@@ -6137,16 +6142,11 @@ Don't dwell. Click through.
         <circle cx="675" cy="248" r="1.5" fill="#F6821F"/>
         <circle cx="750" cy="248" r="1.5" fill="#F6821F"/>
       </g>
+      </g>
     </svg>
   </div>
 
   <div class="store-mappings">
-    <div class="mapping-col">
-      <div class="eyebrow">SCAN THE BARCODE</div>
-      <div class="engine">D1 + FTS5 <span class="search-type">keyword</span></div>
-      <div class="voice">"I need part BR-M6100"</div>
-      <div class="tech">SQL · BM25 · ~3&ndash;11 ms</div>
-    </div>
     <div class="mapping-col">
       <div class="eyebrow">FIND THE RIGHT AISLE</div>
       <div class="engine">Vectorize <span class="search-type">semantic</span></div>
@@ -6158,6 +6158,12 @@ Don't dwell. Click through.
       <div class="engine">D1 + Meilisearch <span class="search-type">faceted</span></div>
       <div class="voice">"Innertube — 26" × 4", Schrader valve"</div>
       <div class="tech">facets · typo-tolerant · ~28 ms<sup>&Dagger;</sup></div>
+    </div>
+    <div class="mapping-col">
+      <div class="eyebrow">SCAN THE BARCODE</div>
+      <div class="engine">D1 + FTS5 <span class="search-type">keyword</span></div>
+      <div class="voice">"I need part BR-M6100"</div>
+      <div class="tech">SQL · BM25 · ~3&ndash;11 ms</div>
     </div>
   </div>
   <p style="text-align:center; font-size:0.55em; color:var(--muted); font-style:italic; margin:6px 0 0 0; line-height:1.55;">Measured engine times, warm queries. <sup>&dagger;</sup>Semantic embed: ~3ms cached / ~200ms cold. <sup>&Dagger;</sup>Meili is remote-hosted (NYC); warm round-trip adds ~400&ndash;700ms — FTS5 + Vectorize are co-located in the worker.</p>
@@ -6191,106 +6197,14 @@ A: Mostly the agent (Sonnet 4.6) using tools. I also have a pre-agent classifier
 </section>
 
 <!-- ============================================================
-     SLIDE 7 — LAYER 1: BARCODE / FTS5 (animated scan + relaxation)
-     ============================================================ -->
-<section>
-<div class="slide-pad">
-  <div class="slide-header">
-    <div class="icon">||</div>
-    <h2>Layer 1: Scan the Barcode — D1 + FTS5</h2>
-    <span class="layer-badge">Layer 1 of 3</span>
-  </div>
-  <div class="two-col">
-    <div>
-      <h3>How It Works</h3>
-      <p>D1 is Cloudflare's serverless SQLite; FTS5 is its built-in full-text search — co-located with your Worker, no extra service, no extra bill.</p>
-
-      <div class="rank-label">Finding · progressive relaxation <span class="note">one round trip</span></div>
-      <div class="relax-list" id="relaxList">
-        <div class="relax-line" data-step="0"><span class="stage">EXACT</span><span>"BR-M6100" &rarr; 1 hit</span></div>
-        <div class="relax-line" data-step="1"><span class="stage">PREFIX</span><span>"BR-M61…" &rarr; 6 hits</span></div>
-        <div class="relax-line" data-step="2"><span class="stage">FUZZY</span><span>"BR~M6100" &rarr; 18 hits</span></div>
-      </div>
-
-      <div class="rank-label">Ranking · how BM25 scores a hit <span class="note">3 signals &rarr; one score</span></div>
-      <div class="relax-list bm25-list">
-        <div class="relax-line"><span class="stage">RARITY</span><span class="sig">"BR-M6100" outweighs a common "brake"</span></div>
-        <div class="relax-line"><span class="stage">FREQUENCY</span><span class="sig">more hits help — but less each time</span></div>
-        <div class="relax-line"><span class="stage">BREVITY</span><span class="sig">a title hit beats one deep in a manual</span></div>
-      </div>
-    </div>
-    <div class="card top-accent">
-      <h3>Exact-Match Lookup</h3>
-      <p style="font-family:monospace; font-size:0.65em; color:var(--muted); letter-spacing:1.5px;">CUSTOMER ASKS</p>
-      <p style="font-family:'Inter',sans-serif; font-weight:600; font-style:italic; color:var(--navy); font-size:0.9em;">"I need part BR-M6100"</p>
-
-      <div class="barcode-scan-wrap">
-        <div class="barcode-bars">
-          <div class="w1 s1"></div><div class="w2 s1"></div><div class="gap"></div>
-          <div class="w3 s1"></div><div class="w1 s1"></div><div class="w2 s2"></div>
-          <div class="gap"></div><div class="w4 s1"></div><div class="w1 s1"></div>
-          <div class="w2 s1"></div><div class="gap"></div><div class="w1 s1"></div>
-          <div class="w3 s1"></div><div class="w2 s2"></div><div class="gap"></div>
-          <div class="w1 s1"></div><div class="w2 s1"></div><div class="w4 s1"></div>
-          <div class="gap"></div><div class="w1 s1"></div><div class="w2 s1"></div>
-          <div class="w3 s1"></div><div class="w1 s2"></div><div class="gap"></div>
-          <div class="w2 s1"></div><div class="w1 s1"></div><div class="w3 s1"></div>
-          <div class="gap"></div><div class="w1 s1"></div><div class="w4 s1"></div>
-          <div class="barcode-laser"></div>
-        </div>
-      </div>
-
-      <div style="font-family:'JetBrains Mono',monospace; font-size:1.3em; font-weight:700; color:var(--orange); text-align:center; margin-top:4px;">BR-M6100</div>
-      <p style="text-align:center; color:var(--body); font-size:0.78em; margin:2px 0 4px 0;">Shimano Deore Hydraulic Lever</p>
-      <p style="text-align:center; font-style:italic; color:var(--muted); font-size:0.65em;">BM25 score 8.4 · 7 ms (measured)</p>
-    </div>
-  </div>
-
-  <div class="process-strip" id="fts5Process">
-    <span class="ps-label">FTS5 STAGES</span>
-    <div class="ps-step" data-step="0"><span class="num">1</span>tokenize</div>
-    <span class="ps-arrow">→</span>
-    <div class="ps-step" data-step="1"><span class="num">2</span>match (virtual table)</div>
-    <span class="ps-arrow">→</span>
-    <div class="ps-step" data-step="2"><span class="num">3</span>rank (BM25)</div>
-  </div>
-  <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
-</div>
-<aside class="notes">
-<strong>Layer 1 — D1 + FTS5 — 2 min.</strong><br><br>
-<strong>Lead:</strong> "The register. You walk up with an exact part number. The cashier scans it. Done."<br><br>
-<strong>What FTS5 is:</strong> SQLite's full-text search extension. BM25 ranking — think of it as modern TF-IDF. Free with D1.<br><br>
-<strong>The two halves of the left column:</strong> "Finding" is HOW I match — progressive relaxation, exact → prefix → fuzzy in one round trip. "Ranking" is HOW I order the hits — BM25, which is just three intuitions:<br>
-<ul style="margin:6px 0; padding-left:20px;">
-  <li><strong>Rarity</strong> (IDF): a rare token like "BR-M6100" is worth far more than a common one like "brake."</li>
-  <li><strong>Frequency</strong> (TF): more mentions score higher — but with diminishing returns, so keyword-stuffing doesn't win.</li>
-  <li><strong>Brevity</strong> (length norm): the same match in a short title beats one buried in a 900-word manual.</li>
-</ul>
-Tie it to the card on the right: those three signals are what produce the "BM25 score 8.4."<br><br>
-<strong>What's interesting:</strong>
-<ul style="margin:6px 0; padding-left:20px;">
-  <li>Lives inside D1, so no separate cluster, no separate bill</li>
-  <li>Co-located with the worker — engine time ≈ user-perceived time</li>
-  <li>Progressive relaxation: exact → prefix → fuzzy. Three queries, one round trip.</li>
-  <li>Measured 3–11ms in production. That's not a marketing number.</li>
-</ul>
-<strong>Anticipated questions:</strong><br>
-<em>Q: "Doesn't FTS5 fall over at scale?"</em><br>
-A: My parts catalog is 84K rows and the broadest prefix scan returns in 11ms. I'll worry at 10M.<br>
-<em>Q: "What about typos?"</em><br>
-A: FTS5 doesn't do typo tolerance — that's why Meilisearch is on the team for the parts catalog.
-</aside>
-</section>
-
-<!-- ============================================================
      SLIDE 8 — LAYER 2: AISLE / VECTORIZE (animated pipeline + gauge)
      ============================================================ -->
 <section>
 <div class="slide-pad">
   <div class="slide-header">
     <div class="icon">~</div>
-    <h2>Layer 2: Find the Right Aisle — Vectorize</h2>
-    <span class="layer-badge">Layer 2 of 3</span>
+    <h2>Layer 1: Find the Right Aisle — Vectorize</h2>
+    <span class="layer-badge">Layer 1 of 3</span>
   </div>
   <div class="two-col">
     <div>
@@ -6354,7 +6268,7 @@ A: FTS5 doesn't do typo tolerance — that's why Meilisearch is on the team for 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
-<strong>Layer 2 — Vectorize — 3 min.</strong><br><br>
+<strong>Layer 1 — Vectorize — 3 min.</strong><br><br>
 <strong>Lead:</strong> "The aisle directory. You describe your problem in your own words. Someone points you to the right aisle."<br><br>
 <strong>The hard part to explain: embeddings.</strong> Use the meaning-map analogy on the slide. Workers AI takes a sentence, converts it to 768 numbers — coordinates on a high-dimensional map. Two sentences that mean similar things land close together. Cosine similarity measures that distance.<br><br>
 <strong>What makes Vectorize specifically work:</strong>
@@ -6379,8 +6293,8 @@ A: It doesn't, on raw quality. It beats them on latency (co-located) and cost ($
 <div class="slide-pad">
   <div class="slide-header">
     <div class="icon">▦</div>
-    <h2>Layer 3: Pick Off the Shelf — D1 + Meilisearch</h2>
-    <span class="layer-badge">Layer 3 of 3</span>
+    <h2>Layer 2: Pick Off the Shelf — D1 + Meilisearch</h2>
+    <span class="layer-badge">Layer 2 of 3</span>
   </div>
   <div class="two-col">
     <div>
@@ -6442,7 +6356,7 @@ A: It doesn't, on raw quality. It beats them on latency (co-located) and cost ($
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
-<strong>Layer 3 — Meilisearch — 2 min.</strong><br><br>
+<strong>Layer 2 — Meilisearch — 2 min.</strong><br><br>
 <strong>Lead:</strong> "The shelf. You know exactly what you want — 26", 4", Schrader valve — and you need filters to navigate 84,000 products."<br><br>
 <strong>Why Meili, not D1 FTS5:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
@@ -6455,6 +6369,98 @@ A: It doesn't, on raw quality. It beats them on latency (co-located) and cost ($
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why not host Meili on Workers?"</em><br>
 A: Meili's a Rust binary, not edge-deployable. The Workers-native equivalent (D1 FTS5) covers two of the three things Meili gives me; the third (typo tolerance) is the part I pay for.
+</aside>
+</section>
+
+<!-- ============================================================
+     SLIDE 7 — LAYER 1: BARCODE / FTS5 (animated scan + relaxation)
+     ============================================================ -->
+<section>
+<div class="slide-pad">
+  <div class="slide-header">
+    <div class="icon">||</div>
+    <h2>Layer 3: Scan the Barcode — D1 + FTS5</h2>
+    <span class="layer-badge">Layer 3 of 3</span>
+  </div>
+  <div class="two-col">
+    <div>
+      <h3>How It Works</h3>
+      <p>D1 is Cloudflare's serverless SQLite; FTS5 is its built-in full-text search — co-located with your Worker, no extra service, no extra bill.</p>
+
+      <div class="rank-label">Finding · progressive relaxation <span class="note">one round trip</span></div>
+      <div class="relax-list" id="relaxList">
+        <div class="relax-line" data-step="0"><span class="stage">EXACT</span><span>"BR-M6100" &rarr; 1 hit</span></div>
+        <div class="relax-line" data-step="1"><span class="stage">PREFIX</span><span>"BR-M61…" &rarr; 6 hits</span></div>
+        <div class="relax-line" data-step="2"><span class="stage">FUZZY</span><span>"BR~M6100" &rarr; 18 hits</span></div>
+      </div>
+
+      <div class="rank-label">Ranking · how BM25 scores a hit <span class="note">3 signals &rarr; one score</span></div>
+      <div class="relax-list bm25-list">
+        <div class="relax-line"><span class="stage">RARITY</span><span class="sig">"BR-M6100" outweighs a common "brake"</span></div>
+        <div class="relax-line"><span class="stage">FREQUENCY</span><span class="sig">more hits help — but less each time</span></div>
+        <div class="relax-line"><span class="stage">BREVITY</span><span class="sig">a title hit beats one deep in a manual</span></div>
+      </div>
+    </div>
+    <div class="card top-accent">
+      <h3>Exact-Match Lookup</h3>
+      <p style="font-family:monospace; font-size:0.65em; color:var(--muted); letter-spacing:1.5px;">CUSTOMER ASKS</p>
+      <p style="font-family:'Inter',sans-serif; font-weight:600; font-style:italic; color:var(--navy); font-size:0.9em;">"I need part BR-M6100"</p>
+
+      <div class="barcode-scan-wrap">
+        <div class="barcode-bars">
+          <div class="w1 s1"></div><div class="w2 s1"></div><div class="gap"></div>
+          <div class="w3 s1"></div><div class="w1 s1"></div><div class="w2 s2"></div>
+          <div class="gap"></div><div class="w4 s1"></div><div class="w1 s1"></div>
+          <div class="w2 s1"></div><div class="gap"></div><div class="w1 s1"></div>
+          <div class="w3 s1"></div><div class="w2 s2"></div><div class="gap"></div>
+          <div class="w1 s1"></div><div class="w2 s1"></div><div class="w4 s1"></div>
+          <div class="gap"></div><div class="w1 s1"></div><div class="w2 s1"></div>
+          <div class="w3 s1"></div><div class="w1 s2"></div><div class="gap"></div>
+          <div class="w2 s1"></div><div class="w1 s1"></div><div class="w3 s1"></div>
+          <div class="gap"></div><div class="w1 s1"></div><div class="w4 s1"></div>
+          <div class="barcode-laser"></div>
+        </div>
+      </div>
+
+      <div style="font-family:'JetBrains Mono',monospace; font-size:1.3em; font-weight:700; color:var(--orange); text-align:center; margin-top:4px;">BR-M6100</div>
+      <p style="text-align:center; color:var(--body); font-size:0.78em; margin:2px 0 4px 0;">Shimano Deore Hydraulic Lever</p>
+      <p style="text-align:center; font-style:italic; color:var(--muted); font-size:0.65em;">BM25 score 8.4 · 7 ms (measured)</p>
+    </div>
+  </div>
+
+  <div class="process-strip" id="fts5Process">
+    <span class="ps-label">FTS5 STAGES</span>
+    <div class="ps-step" data-step="0"><span class="num">1</span>tokenize</div>
+    <span class="ps-arrow">→</span>
+    <div class="ps-step" data-step="1"><span class="num">2</span>match (virtual table)</div>
+    <span class="ps-arrow">→</span>
+    <div class="ps-step" data-step="2"><span class="num">3</span>rank (BM25)</div>
+  </div>
+  <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
+</div>
+<aside class="notes">
+<strong>Layer 3 — D1 + FTS5 — 2 min.</strong><br><br>
+<strong>Lead:</strong> "The register. You walk up with an exact part number. The cashier scans it. Done."<br><br>
+<strong>What FTS5 is:</strong> SQLite's full-text search extension. BM25 ranking — think of it as modern TF-IDF. Free with D1.<br><br>
+<strong>The two halves of the left column:</strong> "Finding" is HOW I match — progressive relaxation, exact → prefix → fuzzy in one round trip. "Ranking" is HOW I order the hits — BM25, which is just three intuitions:<br>
+<ul style="margin:6px 0; padding-left:20px;">
+  <li><strong>Rarity</strong> (IDF): a rare token like "BR-M6100" is worth far more than a common one like "brake."</li>
+  <li><strong>Frequency</strong> (TF): more mentions score higher — but with diminishing returns, so keyword-stuffing doesn't win.</li>
+  <li><strong>Brevity</strong> (length norm): the same match in a short title beats one buried in a 900-word manual.</li>
+</ul>
+Tie it to the card on the right: those three signals are what produce the "BM25 score 8.4."<br><br>
+<strong>What's interesting:</strong>
+<ul style="margin:6px 0; padding-left:20px;">
+  <li>Lives inside D1, so no separate cluster, no separate bill</li>
+  <li>Co-located with the worker — engine time ≈ user-perceived time</li>
+  <li>Progressive relaxation: exact → prefix → fuzzy. Three queries, one round trip.</li>
+  <li>Measured 3–11ms in production. That's not a marketing number.</li>
+</ul>
+<strong>Anticipated questions:</strong><br>
+<em>Q: "Doesn't FTS5 fall over at scale?"</em><br>
+A: My parts catalog is 84K rows and the broadest prefix scan returns in 11ms. I'll worry at 10M.<br>
+<em>Q: "What about typos?"</em><br>
+A: FTS5 doesn't do typo tolerance — that's why Meilisearch is on the team for the parts catalog.
 </aside>
 </section>
 
@@ -8310,9 +8316,9 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     <li data-slide="4"><span class="num">05</span><span>Three Generations of Compute</span></li>
     <li class="section" data-slide="5"><span class="num">06</span><span>Part 1 · Architecture Deep Dive</span></li>
     <li data-slide="6"><span class="num">07</span><span>Search Stack — Think of It Like Shopping</span></li>
-    <li data-slide="7"><span class="num">08</span><span>Layer 1 — Scan the Barcode (FTS5)</span></li>
-    <li data-slide="8"><span class="num">09</span><span>Layer 2 — Find the Aisle (Vectorize)</span></li>
-    <li data-slide="9"><span class="num">10</span><span>Layer 3 — Pick the Shelf (Meilisearch)</span></li>
+    <li data-slide="7"><span class="num">08</span><span>Layer 1 — Find the Aisle (Vectorize)</span></li>
+    <li data-slide="8"><span class="num">09</span><span>Layer 2 — Pick the Shelf (Meilisearch)</span></li>
+    <li data-slide="9"><span class="num">10</span><span>Layer 3 — Scan the Barcode (FTS5)</span></li>
     <li data-slide="10"><span class="num">11</span><span>Hybrid Search — Merging Keyword + Vector</span></li>
     <li data-slide="11"><span class="num">12</span><span>PDF Pipeline — OCR, Extract, Optimize</span></li>
     <li data-slide="12"><span class="num">13</span><span>Why Chunking Context Matters</span></li>
@@ -8604,12 +8610,12 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
      ========================================================= */
   (function(){
     const ORCHESTRA = [
-      // slide index 7 = Layer 1 (FTS5): drive .relax-list + #fts5Process
-      { idx: 7, lists: ['relaxList', 'fts5Process'], stepMs: 1200, steps: 3 },
-      // slide index 8 = Layer 2 (Vectorize): drive .embed-pipeline (4 steps) + #vecProcess (3 steps)
-      { idx: 8, lists: ['embedPipeline'], stepMs: 900, steps: 4, secondary: 'vecProcess', secondarySteps: 3 },
-      // slide index 9 = Layer 3 (Meilisearch): drive #meiliProcess (3 steps)
-      { idx: 9, lists: ['meiliProcess'], stepMs: 1400, steps: 3 },
+      // slide index 9 = Layer 3 (FTS5): drive .relax-list + #fts5Process
+      { idx: 9, lists: ['relaxList', 'fts5Process'], stepMs: 1200, steps: 3 },
+      // slide index 7 = Layer 1 (Vectorize): drive .embed-pipeline (4 steps) + #vecProcess (3 steps)
+      { idx: 7, lists: ['embedPipeline'], stepMs: 900, steps: 4, secondary: 'vecProcess', secondarySteps: 3 },
+      // slide index 8 = Layer 2 (Meilisearch): drive #meiliProcess (3 steps)
+      { idx: 8, lists: ['meiliProcess'], stepMs: 1400, steps: 3 },
       // slide index 11 = PDF Pipeline: drive #pdfProcess (4 steps)
       { idx: 11, lists: ['pdfProcess'], stepMs: 1100, steps: 4 },
     ];
