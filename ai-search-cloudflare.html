@@ -3224,7 +3224,8 @@ html, body, .reveal {
 .mermaid-panel .mp-legend .swatch.sym { background: #F6821F; }
 .mermaid-panel .mp-legend .swatch.cause { background: #C62828; }
 .mermaid-panel .mp-legend .swatch.comp { background: #2E7D32; }
-.mermaid-panel .mp-legend .live-link { color: var(--orange); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.mermaid-panel .mp-legend .live-link { color: var(--orange); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: opacity 0.15s ease; }
+.mermaid-panel .mp-legend a.live-link:hover { text-decoration: underline; opacity: 0.82; }
 
 /* ============================================================
    SLIDES 27-28 — Two paths: AI Search shortcut + DIY long road
@@ -7290,7 +7291,7 @@ A: Hand-assigned base probabilities per edge, with environmental multipliers (ra
         <span><span class="swatch sym"></span>symptom</span>
         <span><span class="swatch cause"></span>cause</span>
         <span><span class="swatch comp"></span>component</span>
-        <span class="live-link">→ live demo</span>
+        <a class="live-link" href="https://shepherd.shopdawg.app" target="_blank" rel="noopener">→ live demo</a>
       </div>
     </div>
   </div>
