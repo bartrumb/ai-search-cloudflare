@@ -7489,6 +7489,66 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
 </section>
 
 <!-- ============================================================
+     SLIDE 19b — OBSERVABILITY (PostHog LLM analytics — optional, single pane of glass)
+     ============================================================ -->
+<section>
+<div class="slide-pad">
+  <div class="slide-header">
+    <div class="icon">◎</div>
+    <h2>Observability: One Pane of Glass</h2>
+  </div>
+  <p class="lead">I was already running <a class="mlink" href="https://posthog.com/docs/ai-observability" target="_blank" rel="noopener">PostHog</a> for product analytics — funnels, retention, session replay. Turning on its <strong>LLM observability</strong> dropped every AI trace onto that same dashboard: cost, tokens, latency, and tool-routing, per turn.</p>
+
+  <div class="two-col" style="gap:14px;">
+    <div class="box-feature-list">
+      <h4>ONE POSTHOG TRACE PER CHAT TURN</h4>
+      <div>
+        <div style="margin-bottom:10px;">
+          <span style="font-family:'JetBrains Mono',monospace; color:var(--orange); font-weight:700; font-size:0.84em;">$ai_trace</span>
+          <div style="font-size:0.7em; color:var(--body); line-height:1.4; margin-top:2px;">the whole turn &mdash; total tokens &middot; tools called &middot; finish reason</div>
+        </div>
+        <div style="margin-left:16px; padding-left:14px; border-left:2px solid var(--muted-soft); margin-bottom:10px;">
+          <span style="font-family:'JetBrains Mono',monospace; color:#2563EB; font-weight:700; font-size:0.84em;">$ai_generation</span> <span style="font-size:0.62em; color:var(--muted);">per model call</span>
+          <div style="font-size:0.7em; color:var(--body); line-height:1.4; margin-top:2px;">model &middot; tokens &middot; <strong style="color:var(--navy);">cache-aware cost</strong> (read / write / fresh)</div>
+        </div>
+        <div style="margin-left:32px; padding-left:14px; border-left:2px solid var(--muted-soft);">
+          <span style="font-family:'JetBrains Mono',monospace; color:#2563EB; font-weight:700; font-size:0.84em;">$ai_span</span> <span style="font-size:0.62em; color:var(--muted);">per tool &amp; mini-agent</span>
+          <div style="font-size:0.7em; color:var(--body); line-height:1.4; margin-top:2px;">input args &middot; output &middot; latency &mdash; nested under its generation</div>
+        </div>
+      </div>
+      <div style="margin-top:auto; padding-top:10px; border-top:1px solid var(--muted-soft); font-size:0.68em; color:var(--muted); line-height:1.45;">Pre-agent and parent-trace spans too &mdash; emitted every turn, batched and flushed automatically. <strong style="color:var(--navy);">You can't tune what you can't see.</strong></div>
+    </div>
+
+    <div class="remember-card">
+      <h4>ONE PANE OF GLASS</h4>
+      <p class="rmb-headline">AI traces land right next to the product analytics I already had.</p>
+      <ul>
+        <li><strong>Per-turn cost &amp; tokens</strong> — cache-aware, so prompt-cache savings show up</li>
+        <li><strong>Tool routing</strong> — which tools fired, in what order, how long each took</li>
+        <li><strong>Latency per step</strong> — pre-agent · tools · synthesis</li>
+        <li>Beside <strong>funnels, retention &amp; session replay</strong> — already running</li>
+      </ul>
+      <div style="margin-top:6px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.12); font-size:0.72em; color:#C5D0E0; line-height:1.5;">Recommended, not required — and <strong style="color:#fff;">not part of the ~$80/mo search infra</strong>. PostHog was already in the stack; the LLM layer was icing on the cake.</div>
+      <a class="rmb-link" href="https://posthog.com/docs/ai-observability" target="_blank" rel="noopener">posthog.com/docs/ai-observability</a>
+    </div>
+  </div>
+
+  <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
+</div>
+<aside class="notes">
+<strong>Observability — 1.5 min. (Optional add-on slide.)</strong><br><br>
+<strong>Framing first, so nobody thinks it's a cost line:</strong> "This isn't part of the ~$80/mo. I was already running PostHog for product analytics — funnels, retention, session replay. The LLM observability is icing on the cake: it puts every AI trace on the same pane of glass."<br><br>
+<strong>The trace hierarchy (left card):</strong> every chat turn emits one <code>$ai_trace</code> (the whole turn), with a nested <code>$ai_generation</code> per model call (model, tokens, cache-aware cost — read/write/fresh pricing), and a <code>$ai_span</code> per tool and per mini-agent (input args, output, latency). Pre-agent gets its own span. It's all batched and flushed automatically per turn.<br><br>
+<strong>Why it matters (right card):</strong> cost and tokens per turn, which tools fired and in what order, latency per step — and because it's the same PostHog, it sits next to the product funnels and session replay. One pane of glass.<br><br>
+<strong>The lesson it sets up:</strong> next slide, lesson 1 is "observability first." You can't tune what you can't see — I had this wired before I optimized anything.<br><br>
+<strong>Link:</strong> posthog.com/docs/ai-observability for their LLM analytics.<br><br>
+<strong>Anticipated questions:</strong><br>
+<em>Q: "Does PostHog add latency to the chat turn?"</em><br>
+A: No — events are captured and flushed out-of-band (batch size 10, 2s interval, explicit flush in the finally). The user never waits on it.
+</aside>
+</section>
+
+<!-- ============================================================
      SLIDE 20 — LESSONS FROM PRODUCTION
      ============================================================ -->
 <section>
@@ -7868,11 +7928,12 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     <li data-slide="21"><span class="num">22</span><span>From Symptom to Diagram — Live</span></li>
     <li data-slide="22"><span class="num">23</span><span>Real-World Scale</span></li>
     <li data-slide="23"><span class="num">24</span><span>Cost Comparison</span></li>
-    <li data-slide="24"><span class="num">25</span><span>Lessons from Production</span></li>
-    <li class="section" data-slide="25"><span class="num">26</span><span>Part 3 · Build It Yourself</span></li>
-    <li data-slide="26"><span class="num">27</span><span>The Shortcut — Cloudflare AI Search</span></li>
-    <li data-slide="27"><span class="num">28</span><span>The Long Road — Same Primitives, DIY</span></li>
-    <li data-slide="28"><span class="num">29</span><span>Start Building Today</span></li>
+    <li data-slide="24"><span class="num">25</span><span>Observability — One Pane of Glass</span></li>
+    <li data-slide="25"><span class="num">26</span><span>Lessons from Production</span></li>
+    <li class="section" data-slide="26"><span class="num">27</span><span>Part 3 · Build It Yourself</span></li>
+    <li data-slide="27"><span class="num">28</span><span>The Shortcut — Cloudflare AI Search</span></li>
+    <li data-slide="28"><span class="num">29</span><span>The Long Road — Same Primitives, DIY</span></li>
+    <li data-slide="29"><span class="num">30</span><span>Start Building Today</span></li>
   </ol>
   <div class="toc-colophon">
     <div class="tc-label">Colophon · How this was built</div>
