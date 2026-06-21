@@ -6171,12 +6171,12 @@ Don't dwell. Click through.
 </div>
 <aside class="notes">
 <strong>Search Stack — Shopping Analogy — 4 min. THE slide.</strong><br><br>
-<strong>Open with the metaphor:</strong> "Imagine walking into a hardware store. You arrive with one of three questions in your head…"<br><br>
-<strong>Three stations, ~75s each:</strong>
+<strong>Open with the metaphor:</strong> "Imagine walking into a bike shop. You arrive with one of three things in your head — a symptom, a rough idea, or an exact part number — and each one routes you to a different station."<br><br>
+<strong>Three stations, ~75s each — walk them left to right, the way one repair actually flows:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li><strong>Register (keyword) — point at the scanner + barcode:</strong> "The customer walks up knowing exactly what they want — a part number, TU1200. That's a fat-bike innertube. The cashier doesn't browse; they scan the barcode. The register matches it to one specific SKU and rings it up. That's keyword search. <strong>D1 + FTS5</strong> — SQLite's built-in full-text engine. I index every part number, every SKU, every error code. When the query has a strong identifier, I go straight to BM25 and return the exact match in <strong>3 to 11 milliseconds</strong>. There's no AI in this path — the AI is overkill when the user already typed the answer. <em>This is the layer most teams skip because it's unglamorous; it's also where the most-precise queries land.</em>"</li>
-  <li><strong>Aisle directory (semantic):</strong> "My bike has a flat tire." A symptom, not a SKU → meaning map. 768-dim vectors. ~15ms warm.</li>
-  <li><strong>Shelf (faceted):</strong> "Innertube — 26" × 4", Schrader valve." Structured filters. Meilisearch + facets. ~28ms engine.</li>
+  <li><strong>Aisle directory (semantic) — start here, point at the aisle sign:</strong> "A customer comes in: 'My bike has a flat tire.' That's a symptom, not a part number. Vector search maps the plain-language problem onto a meaning map and sends them to the right aisle — Wheels &amp; Tires — even with zero shared keywords. <strong>Vectorize</strong>, 768-dim embeddings, nearest-neighbor by cosine. ~15ms warm."</li>
+  <li><strong>Shelf (faceted) — now narrow it down:</strong> "They're in the aisle facing a wall of tubes. Faceted search filters by the constraints that matter — 26×4 fat, Schrader valve — and ranks what's left. <strong>Meilisearch</strong> over the D1 catalog, typo-tolerant, built for facets. They grab the right innertube. ~28ms engine."</li>
+  <li><strong>Register (keyword) — ring it up, point at the scanner + barcode:</strong> "By now they have the exact part — TU1200, the fat-bike innertube. The cashier doesn't browse; they scan the barcode and the register matches one SKU. <strong>D1 + FTS5</strong> — SQLite's built-in full-text engine. I index every part number, SKU, and error code; with a strong identifier I go straight to BM25 and return the exact match in <strong>3 to 11 milliseconds</strong>. No AI in this path — it's overkill once the user has typed the answer. <em>This is the layer most teams skip because it's unglamorous; it's also where the most-precise queries land.</em>"</li>
 </ul>
 <strong>On the Register graphic specifically — point at the elements as you talk:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
