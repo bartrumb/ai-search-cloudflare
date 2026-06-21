@@ -6444,7 +6444,7 @@ A: Meili's a Rust binary, not edge-deployable. The Workers-native equivalent (D1
 <strong>What FTS5 is:</strong> SQLite's full-text search extension. BM25 ranking — think of it as modern TF-IDF. Free with D1.<br><br>
 <strong>The two halves of the left column:</strong> "Finding" is HOW I match — progressive relaxation, exact → prefix → fuzzy in one round trip. "Ranking" is HOW I order the hits — BM25, which is just three intuitions:<br>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li><strong>Rarity</strong> (IDF): a rare token like "TU1200" is worth far more than a common one like "brake."</li>
+  <li><strong>Rarity</strong> (IDF): a rare token like "TU1200" is worth far more than a common one like "tube."</li>
   <li><strong>Frequency</strong> (TF): more mentions score higher — but with diminishing returns, so keyword-stuffing doesn't win.</li>
   <li><strong>Brevity</strong> (length norm): the same match in a short title beats one buried in a 900-word manual.</li>
 </ul>
