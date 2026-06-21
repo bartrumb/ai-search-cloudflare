@@ -2405,14 +2405,14 @@ a.mlink:hover { color: var(--orange); }
 .trace-wf .lg-trace { background: #F6821F; } .trace-wf .lg-gen { background: #2563EB; } .trace-wf .lg-span { background: #6BB6FF; }
 .trace-wf .twf-query { font-family: 'Inter', sans-serif; font-style: italic; font-size: 0.7em; color: var(--navy); font-weight: 600; margin: 4px 0 2px; line-height: 1.35; }
 .trace-wf .twf-row { display: grid; grid-template-columns: 122px 1fr 46px; gap: 9px; align-items: center; }
-.trace-wf .twf-name { font-family: 'Inter', sans-serif; font-size: 0.66em; font-weight: 600; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trace-wf .twf-name { font-family: 'Inter', sans-serif; font-size: 0.74em; font-weight: 600; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .trace-wf .twf-name.i1 { padding-left: 11px; } .trace-wf .twf-name.i2 { padding-left: 22px; }
 .trace-wf .twf-track { position: relative; height: 16px; background: #EEF1F7; border-radius: 4px; }
 .trace-wf .twf-bar { position: absolute; top: 0; height: 16px; min-width: 7px; border-radius: 4px; box-shadow: 0 1px 3px rgba(15,27,51,0.14); }
 .trace-wf .twf-bar.b-trace { background: linear-gradient(90deg, #F6821F 0%, #FFB066 100%); }
 .trace-wf .twf-bar.b-gen { background: linear-gradient(90deg, #2563EB 0%, #5B8DEF 100%); }
 .trace-wf .twf-bar.b-span { background: linear-gradient(90deg, #6BB6FF 0%, #A5D2FF 100%); }
-.trace-wf .twf-dur { font-family: 'JetBrains Mono', monospace; font-size: 0.55em; font-weight: 700; color: var(--muted); text-align: right; white-space: nowrap; }
+.trace-wf .twf-dur { font-family: 'JetBrains Mono', monospace; font-size: 0.6em; font-weight: 700; color: var(--muted); text-align: right; white-space: nowrap; }
 .trace-wf .twf-cap { margin-top: 8px; padding-top: 9px; border-top: 1px solid var(--muted-soft); font-size: 0.64em; color: var(--muted); line-height: 1.5; }
 .trace-wf .twf-cap code { font-family: 'JetBrains Mono', monospace; color: #2563EB; font-size: 0.94em; }
 .trace-wf .twf-cap strong { color: var(--navy); }
@@ -5272,7 +5272,7 @@ kbd.key {
   <div class="speaker">
     Brett Bartrum
     <span class="role">Founder · Juiced Wheels &amp; ShopDAWG</span>
-    <span class="role">Senior DevOps Engineer · Applied Systems</span>
+    <span class="role" style="opacity:0.66;">Senior DevOps Engineer · Applied Systems</span>
   </div>
 </div>
 <aside class="notes">
@@ -6987,7 +6987,7 @@ Say the stateless→stateful line, then move. This is the transition the whole b
       <text x="505" y="212" font-family="JetBrains Mono" font-size="9.5" font-weight="700" fill="#2E7D32">carried forward across every request &#8594;</text>
 
       <!-- crash-safe -->
-      <text x="188" y="252" font-family="Inter" font-size="9.5" fill="#1B2A4A"><tspan fill="#2E7D32" font-weight="700">&#10003; runFiber</tspan> resumes from the last saved token if the object is evicted mid-stream &#183; the whole agent turn runs in here</text>
+      <text x="188" y="252" font-family="Inter" font-size="11" fill="#1B2A4A"><tspan fill="#2E7D32" font-weight="700">&#10003; runFiber</tspan> resumes from the last saved token if the object is evicted mid-stream &#183; the whole agent turn runs in here</text>
     </svg>
   </div>
 
@@ -7341,17 +7341,17 @@ A: It preserves page citations and chunk IDs, so Sonnet can always pull the exac
             <marker id="cg19" markerWidth="7" markerHeight="7" refX="5.5" refY="2.5" orient="auto"><polygon points="0 0, 6 2.5, 0 5" fill="#93A1C1"/></marker>
           </defs>
           <line x1="101" y1="46" x2="122" y2="46" stroke="#93A1C1" stroke-width="1.4" marker-end="url(#cg19)"/>
-          <text x="111" y="22" text-anchor="middle" font-size="6" letter-spacing="0.3" fill="#93A1C1">SYMPTOM_OF</text>
+          <text x="111" y="22" text-anchor="middle" font-size="7.5" letter-spacing="0.3" fill="#93A1C1">SYMPTOM_OF</text>
           <line x1="218" y1="46" x2="239" y2="46" stroke="#93A1C1" stroke-width="1.4" marker-end="url(#cg19)"/>
-          <text x="228.5" y="22" text-anchor="middle" font-size="6" letter-spacing="0.3" fill="#93A1C1">CUTS_POWER_TO</text>
+          <text x="228.5" y="22" text-anchor="middle" font-size="7.5" letter-spacing="0.3" fill="#93A1C1">CUTS_POWER_TO</text>
           <rect x="3" y="26" width="98" height="40" rx="7" fill="#FFF1E2" stroke="#F6821F" stroke-width="1.5"/>
-          <text x="52" y="40" text-anchor="middle" font-size="6" font-weight="700" letter-spacing="1" fill="#F6821F">SYMPTOM</text>
+          <text x="52" y="40" text-anchor="middle" font-size="7.5" font-weight="700" letter-spacing="1" fill="#F6821F">SYMPTOM</text>
           <text x="52" y="56" text-anchor="middle" font-size="10" font-weight="700" fill="#1B2A4A">motor cutout</text>
           <rect x="122" y="26" width="96" height="40" rx="7" fill="#FDECEC" stroke="#C62828" stroke-width="1.5"/>
-          <text x="170" y="40" text-anchor="middle" font-size="6" font-weight="700" letter-spacing="1" fill="#C62828">CAUSE</text>
+          <text x="170" y="40" text-anchor="middle" font-size="7.5" font-weight="700" letter-spacing="1" fill="#C62828">CAUSE</text>
           <text x="170" y="56" text-anchor="middle" font-size="10" font-weight="700" fill="#1B2A4A">thermal cutoff</text>
           <rect x="239" y="26" width="98" height="40" rx="7" fill="#E8F3E9" stroke="#2E7D32" stroke-width="1.5"/>
-          <text x="288" y="40" text-anchor="middle" font-size="6" font-weight="700" letter-spacing="1" fill="#2E7D32">COMPONENT</text>
+          <text x="288" y="40" text-anchor="middle" font-size="7.5" font-weight="700" letter-spacing="1" fill="#2E7D32">COMPONENT</text>
           <text x="288" y="56" text-anchor="middle" font-size="10" font-weight="700" fill="#1B2A4A">motor</text>
         </svg>
       </div>
