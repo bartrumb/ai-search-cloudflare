@@ -5155,6 +5155,16 @@ html.print-pdf-active .cost-compare .cc-seg { animation: none !important; transf
 /* Slide 7 relaxation lines: show all at full opacity in the static print/PPTX export */
 html.print-pdf-active .relax-line { opacity: 1 !important; }
 
+/* Slide 22 live demo — its chat + diagram fill in via JS .play animation on live
+   slide entry; force everything visible in static print/PPTX so the panels are never blank. */
+html.print-pdf-active .chat-console > .cc-msg,
+html.print-pdf-active .chat-console > .cc-tool,
+html.print-pdf-active .chat-console > .cc-args,
+html.print-pdf-active .chat-console > .cc-result,
+html.print-pdf-active .chat-console > .cc-answer,
+html.print-pdf-active .mp-svg g.svg-node,
+html.print-pdf-active .mp-svg g.svg-edge { opacity: 1 !important; animation: none !important; }
+
 /* Slide 21 live demo — cap the mermaid SVG height so the demo panels fit their
    row and the chat answer can't overflow onto the legend below. */
 .mermaid-panel .mp-svg { max-height: 372px; min-height: 0; }
@@ -5287,7 +5297,7 @@ Hi, I'm Brett — I run shopdawg.app. For the next hour I'll walk through how I 
     <div class="icon">⚙</div>
     <h2>Why I Built This — It Starts at the Workbench</h2>
   </div>
-  <p class="lead">Before the architecture, the problem. At <strong>Juiced Wheels</strong> a bench tech has a customer's e-bike on the stand and the clock running — and the answer is buried in a parts catalog and a stack of manuals no keyword box can navigate.</p>
+  <p class="lead">At <strong>Juiced Wheels</strong> a bench tech has a customer's e-bike on the stand and the clock running — and the answer is buried in a parts catalog and a stack of manuals no keyword box can navigate.</p>
 
   <div class="why-grid">
     <div class="why-card">
@@ -5452,7 +5462,7 @@ Ground the whole talk in the physical reality before any architecture. "I run Ju
       </div>
       <div class="problem-body">
         <h4>Stitched Stack</h4>
-        <p>Vector DB + keyword search are <strong>separate systems</strong>. Two bills, two query APIs, glue code to merge.</p>
+        <p>Vector DB + keyword search are <strong>separate systems</strong>. Four vendors, four bills, glue code to merge.</p>
         <div class="problem-tag">No native hybrid · sync drift · double the ops</div>
       </div>
     </div>
@@ -5524,7 +5534,7 @@ A: Workers Paid is $5/mo flat. The bill doesn't grow when nobody shows up.
       </div>
       <div class="advantage-body">
         <h4>Usage-Based Pricing</h4>
-        <p>Pay per request, per row, per query — not per hour.</p>
+        <p>Pay per request, per query, per GB stored — not per hour.</p>
         <div class="advantage-tag"><strong>Zero traffic = zero cost</strong></div>
       </div>
     </div>
@@ -5593,7 +5603,7 @@ A: Workers Paid is $5/mo flat. The bill doesn't grow when nobody shows up.
       <div class="advantage-body">
         <h4>Zero Cold Starts</h4>
         <p>V8 isolates start in sub-ms — the shop lights flick on, no warming a cold engine.</p>
-        <div class="advantage-tag"><strong>200× faster</strong> than containerized FaaS</div>
+        <div class="advantage-tag"><strong>~0ms cold start</strong> vs ~200ms containers</div>
       </div>
     </div>
   </div>
@@ -5728,7 +5738,7 @@ A: Same V8 model, same advantages. I picked Cloudflare for the bindings ecosyste
 <div class="section-slide">
   <div class="eyebrow">Part One</div>
   <h1>Search Architecture Deep Dive</h1>
-  <div class="sub">Three layers of search, one edge platform</div>
+  <div class="sub">Three engines, one router — all on the edge</div>
 </div>
 <aside class="notes">
 <strong>Architecture section divider — 15 seconds.</strong><br><br>
@@ -5767,14 +5777,14 @@ Don't dwell. Click through.
         <ellipse cx="150" cy="58" rx="120" ry="22" fill="#fff" stroke="#1B2A4A" stroke-width="1.5"/>
         <polygon points="142,78 158,78 150,90" fill="#fff" stroke="#1B2A4A" stroke-width="1.5"/>
         <polygon points="144,78 156,78 150,87" fill="#fff"/>
-        <text x="150" y="63" text-anchor="middle" font-size="11" fill="#1B2A4A" font-family="Inter" font-style="italic" font-weight="600">"I need a TU1200"</text>
+        <text x="150" y="63" text-anchor="middle" font-size="11" fill="#1B2A4A" font-family="Inter" font-style="italic" font-weight="600">"I need part TU1200"</text>
       </g>
 
       <!-- "EXACT MATCH" success badge — hovers above POS terminal -->
       <g>
         <rect x="148" y="98" width="98" height="17" rx="8.5" fill="#2E7D32"/>
         <path d="M157,107 l3.5,3.5 l7,-7" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <text x="208" y="110" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="700" font-family="Inter" letter-spacing="2">EXACT MATCH</text>
+        <text x="208" y="110" text-anchor="middle" font-size="8" fill="#fff" font-weight="700" font-family="Inter" letter-spacing="1">EXACT MATCH</text>
         <!-- Tiny ping ring around the check -->
         <circle cx="160.5" cy="107" r="6.5" fill="none" stroke="#fff" stroke-width="0.8" opacity="0.5"/>
       </g>
@@ -6402,7 +6412,7 @@ A: Meili's a Rust binary, not edge-deployable. The Workers-native equivalent (D1
       </div>
     </div>
     <div class="card top-accent">
-      <h3>Exact-Match Lookup</h3>
+      <h3>Progressive Lookup</h3>
       <p style="font-family:monospace; font-size:0.65em; color:var(--muted); letter-spacing:1.5px;">CUSTOMER ASKS</p>
       <p style="font-family:'Inter',sans-serif; font-weight:600; font-style:italic; color:var(--navy); font-size:0.9em;">"I need part TU1200"</p>
 
@@ -6560,7 +6570,7 @@ A: FTS5 doesn't do typo tolerance — that's why Meilisearch is on the team for 
       <div class="weight-mix">
         <div class="wm-row">
           <span class="wm-q">1&ndash;2 words</span>
-          <div class="wm-bar"><div class="wm-seg kw" style="width:70%;">70% keyword</div><div class="wm-seg vec" style="width:30%;">30%</div></div>
+          <div class="wm-bar"><div class="wm-seg kw" style="width:70%;">70% keyword</div><div class="wm-seg vec" style="width:30%;">30% vector</div></div>
         </div>
         <div class="wm-row">
           <span class="wm-q">3+ words</span>
@@ -6568,7 +6578,7 @@ A: FTS5 doesn't do typo tolerance — that's why Meilisearch is on the team for 
         </div>
       </div>
       <ul>
-        <li>Short queries lean keyword &mdash; prevents false matches like <em>"venue"</em> ≠ <em>"venus"</em></li>
+        <li>Short queries lean keyword &mdash; prevents false matches like <em>"brake"</em> ≠ <em>"break"</em></li>
         <li>Below-floor results get cut, with a top-3 fallback so the agent never starves</li>
       </ul>
     </div>
@@ -6780,7 +6790,7 @@ A: ISO 19005-2 — long-term archival format. Embeds all fonts, normalizes struc
 
   <div class="bridge-strip">
     <span class="next-tag">NEXT</span>
-    <span><strong>Metadata fixes naming.</strong> But what about OCR garbage where even the chunk text is scrambled? <span class="arrow">&rarr;</span></span>
+    <span><strong>Metadata fixes naming.</strong> But what about OCR garbage where even the chunk text is garbled? <span class="arrow">&rarr;</span></span>
   </div>
 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
@@ -6790,7 +6800,7 @@ A: ISO 19005-2 — long-term archival format. Embeds all fonts, normalizes struc
 <strong>Lead:</strong> "Here's the problem with naïve chunking. The chunk that contains the answer doesn't always contain the context that makes it findable."<br><br>
 <strong>The example:</strong> a chunk from the middle of a Bosch manual. The text says "the speed sensor must be torqued to 5Nm." It doesn't say "Bosch." It doesn't say "DriveUnit." It doesn't say "speed sensor installation procedure." Those words are on page 3; the chunk is from page 47.<br><br>
 <strong>The fix on this slide (metadata):</strong> tag every chunk with structural metadata — manual brand, model, section heading. Now FTS5 can find the chunk even when the body doesn't have the query terms.<br><br>
-<strong>The bridge:</strong> "Metadata fixes naming. But what about OCR garbage where even the chunk text is scrambled?" — Click forward to Contextual Retrieval.<br><br>
+<strong>The bridge:</strong> "Metadata fixes naming. But what about OCR garbage where even the chunk text is garbled?" — Click forward to Contextual Retrieval.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Couldn't you just use bigger chunks?"</em><br>
 A: Bigger chunks dilute embeddings (everything looks medium-related to everything). Smaller chunks lose context. Metadata + contextual retrieval is the win.
@@ -6856,7 +6866,7 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
     <div class="card top-accent" style="padding:14px 22px;">
       <div class="eyebrow">COST PER TURN</div>
       <div class="stat-row"><span class="label">Dollars per turn</span><span class="before">$0.201</span><span class="arrow">→</span><span class="after">$0.075</span><span class="delta">−63%</span></div>
-      <div class="stat-row"><span class="label">Step-2 input tokens</span><span class="before">49.6K</span><span class="arrow">→</span><span class="after">13K</span><span class="delta">−73%</span></div>
+      <div class="stat-row"><span class="label">Sonnet synthesis tokens</span><span class="before">49.6K</span><span class="arrow">→</span><span class="after">13K</span><span class="delta">−73%</span></div>
     </div>
   </div>
 
@@ -6877,7 +6887,7 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
 <div class="section-slide">
   <div class="eyebrow">Part Two</div>
   <h1>From RAG to Agentic AI</h1>
-  <div class="sub">Everything so far was <em>stateless</em> — every request started cold. Now I add what search can't have: <em>durable per-user memory</em>, crash recovery, and query-aware context compression. Watch one number the whole way down: a tool turn drops from ~36¢ to ~3¢.</div>
+  <div class="sub">Everything so far was <em>stateless</em> — every request started cold. Now I add what search can't have: <em>durable per-user memory</em>, crash recovery, and query-aware context compression. Watch one number fall the whole way down: a tool turn drops from ~36¢ to ~3¢.</div>
 </div>
 <aside class="notes">
 <strong>RAG/Agentic AI section divider — 20 seconds. The hinge of the talk.</strong><br><br>
@@ -7116,9 +7126,9 @@ A: State is persisted to durable storage. Restart picks up exactly where it left
       <text x="560" y="357" text-anchor="middle" font-size="9" font-family="JetBrains Mono" fill="#F6821F">cost: ~$0.018</text>
 
       <!-- step 8: Sonnet → User -->
-      <line x1="560" y1="385" x2="100" y2="385" stroke="#1B2A4A" stroke-width="2" marker-end="url(#s_arr)"/>
-      <text x="320" y="377" text-anchor="middle" font-size="11" font-family="Inter" fill="#1B2A4A" font-weight="600">Final user-facing answer</text>
-      <text x="320" y="399" text-anchor="middle" font-size="10" font-family="JetBrains Mono" fill="#2E7D32" font-weight="700">total turn: ~$0.030 (vs ~$0.36 without offload)</text>
+      <line x1="560" y1="374" x2="100" y2="374" stroke="#1B2A4A" stroke-width="2" marker-end="url(#s_arr)"/>
+      <text x="320" y="366" text-anchor="middle" font-size="11" font-family="Inter" fill="#1B2A4A" font-weight="600">Final user-facing answer</text>
+      <text x="320" y="388" text-anchor="middle" font-size="10" font-family="JetBrains Mono" fill="#2E7D32" font-weight="700">total turn: ~$0.030 (vs ~$0.36 without offload)</text>
     </svg>
   </div>
 
@@ -7144,7 +7154,7 @@ A: State is persisted to durable storage. Restart picks up exactly where it left
     </div>
 
     <div class="ss-footnote">
-      <strong>20&ndash;50&times; faster</strong> than frontier APIs.<br>The pre-agent adds <em>~250ms</em>, not <em>~3 seconds</em> &mdash; that's what makes the offload pattern viable.<br><br><strong>Why <a class="mlink" href="https://cloud.cerebras.ai/" target="_blank" rel="noopener">Cerebras</a> for the mini-agent:</strong> I trialed Claude Haiku and Cloudflare Workers AI models too &mdash; both viable, but Cerebras's speed at low cost was the best fit for work that runs on every turn.
+      <strong>20&ndash;60&times; faster</strong> than frontier APIs.<br>The pre-agent adds <em>~250ms</em>, not <em>~3 seconds</em> &mdash; that's what makes the offload pattern viable.<br><br><strong>Why <a class="mlink" href="https://cloud.cerebras.ai/" target="_blank" rel="noopener">Cerebras</a> for the mini-agent:</strong> I trialed Claude Haiku and Cloudflare Workers AI models too &mdash; both viable, but Cerebras's speed at low cost was the best fit for work that runs on every turn.
     </div>
   </div>
   </div><!-- /.sa-row -->
@@ -7243,7 +7253,7 @@ A: Mini-agent bench runs against fixed fixtures. If I swap models, I re-bench be
   <div class="ctx-tagline">
     <span>RAG retrieves.</span><span>Prompting reasons.</span><span class="accent">Compression curates.</span>
     <span class="ctx-tools">
-      Always-compress tools: <code>read_manual</code> &middot; <code>get_manual_content</code> &middot; <code>get_content_section</code>
+      Always-compress tools: <code>read_manual</code> &middot; <code>get_content_section</code>
       &nbsp;&middot;&nbsp; others compress only above the 4K-token budget
     </span>
   </div>
@@ -7265,7 +7275,7 @@ A: Mini-agent bench runs against fixed fixtures. If I swap models, I re-bench be
   <li><strong>Cost / turn ~$0.36 &rarr; ~$0.03</strong> (&minus;90%) &mdash; about $330 saved per 1,000 turns</li>
   <li><strong>Useful response 230 &rarr; 2,239 chars</strong> (+10&times;) &mdash; cheaper AND better, not a trade-off</li>
 </ul>
-<strong>How it's wired:</strong> three high-token tools always compress &mdash; <code>read_manual</code>, <code>get_manual_content</code>, <code>get_content_section</code>; everything else compresses only when a result blows past the 4K-token budget. The compressor is the same Cerebras sub-agent offload from the previous slide, now aimed at curation instead of formatting.<br><br>
+<strong>How it's wired:</strong> the high-token deep-read tools always compress &mdash; <code>read_manual</code>, <code>get_content_section</code>; everything else compresses only when a result blows past the 4K-token budget. The compressor is the same Cerebras sub-agent offload from the previous slide, now aimed at curation instead of formatting.<br><br>
 <strong>The take-home:</strong> point at the kicker. "RAG retrieves. Prompting reasons. Compression curates." Compression is the third lever &mdash; the one most teams skip, and the cheapest 10&times; I've found.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why not just use a bigger context window?"</em><br>
@@ -7349,7 +7359,7 @@ A: It preserves page citations and chunk IDs, so Sonnet can always pull the exac
   </div>
 
   <div class="case-next">
-    <span class="cn-label">NEXT THREE SLIDES</span>
+    <span class="cn-label">WHY HAND-CRAFTED</span>
     <p>I tried LLM extraction. It hallucinated. I shipped hand-crafted instead &mdash; and the agent still queries the graph every diagnostic turn. Here's the trade-off, the anatomy, and the live trace.</p>
   </div>
 
@@ -7578,7 +7588,7 @@ A: New parts → new nodes via PR. Pre-commit hook catches structural inconsiste
         <div class="gf-label">HOW GRAPHRAG ANSWERS &mdash; <em>"motor cuts out climbing"</em></div>
         <div class="gf-steps">
           <div class="gf-step"><span class="gf-n">1</span><span class="gf-k">MATCH</span><span class="gf-d"><span class="fn">diagnose</span> maps the phrase to a <strong>node</strong> &mdash; codes &amp; the 768D vector are other ways in &rarr; <span class="blue">sym_motor_cutout_under_load</span></span></div>
-          <div class="gf-step"><span class="gf-n">2</span><span class="gf-k">TRAVERSE</span><span class="gf-d"><span class="fn">query_ebike_graph</span> walks causal edges to pull the connected subsystem</span></div>
+          <div class="gf-step"><span class="gf-n">2</span><span class="gf-k">TRAVERSE</span><span class="gf-d"><span class="fn">query_ebike_graph</span> walks causal edges to pull the connected causal subgraph</span></div>
           <div class="gf-step"><span class="gf-n">3</span><span class="gf-k">RANK</span><span class="gf-d">scored by base&nbsp;p &times; live conditions (climb = load + heat) &rarr; <span class="blue">thermal_cutoff &middot; battery_cell_sag &middot; controller_overcurrent</span></span></div>
           <div class="gf-step"><span class="gf-n">4</span><span class="gf-k">ANSWER</span><span class="gf-d">Sonnet reasons over the <strong>causal subgraph</strong> and names the cause + the fix</span></div>
         </div>
@@ -7767,7 +7777,7 @@ A: For diagnostics, the picture is worth the tokens. Mechanics scan a flowchart 
         <div class="twf-row"><div class="twf-name i2">search: tubes</div><div class="twf-track"><div class="twf-bar b-span" style="left:4%; width:10.4%;"></div></div><div class="twf-dur">3.3s</div></div>
         <div class="twf-row"><div class="twf-name i2">format ×2</div><div class="twf-track"><div class="twf-bar b-gen" style="left:11%; width:9.9%;"></div></div><div class="twf-dur">3.1s</div></div>
         <div class="twf-row"><div class="twf-name i1">synthesis</div><div class="twf-track"><div class="twf-bar b-gen" style="left:21.7%; width:78.3%;"></div></div><div class="twf-dur">24.9s</div></div>
-        <div class="twf-cap"><strong>44.9K tokens · $0.072 · 8 spans.</strong> The Sonnet <strong>synthesis alone is 24.9s — 78% of the turn</strong>; the 3 searches + 2 Cerebras formatters total ~3s and <code>$0.009</code>. You only see that once it's traced.</div>
+        <div class="twf-cap"><strong>44.9K tokens · $0.072 · 8 spans.</strong> The Sonnet <strong>synthesis alone is 24.9s — 78% of the turn</strong> (streaming a long answer, not a stall); the 3 searches + 2 Cerebras formatters total ~3s and <code>$0.009</code>. You only see that once it's traced.</div>
       </div>
     </div>
 
@@ -7855,7 +7865,7 @@ A: No — events are captured and flushed out-of-band (batch size 10, 2s interva
         </svg>
       </div>
       <div class="big-stat" data-count-to="80" data-prefix="$" data-suffix="/mo">$0</div>
-      <h4>Production Stack Cost</h4>
+      <h4>Entire production stack</h4>
       <p>Workers + D1 + Vectorize + Meili included</p>
     </div>
   </div>
@@ -7916,7 +7926,7 @@ A: I'm pre-launch. The system is sized for shop staff (10s) initially, scales to
         <div class="cc-seg z4" style="width:12%;">Vectorize</div>
         <div class="cc-seg z5" style="width:8%;">Workers</div>
       </div>
-      <div style="font-size:0.6em; color:var(--muted); margin-top:7px; font-style:italic;">Orange = Meilisearch, the only paid third-party &mdash; skip it and D1 FTS5 covers parts (Workers Paid $5 &middot; D1 free tier).</div>
+      <div style="font-size:0.6em; color:var(--muted); margin-top:7px; font-style:italic;">Orange = Meilisearch, the only paid third-party &mdash; skip it and D1 FTS5 covers parts (Workers Paid $5 &middot; D1 free tier). Infra floor only &mdash; LLM inference (Sonnet + Cerebras) adds ~$50&ndash;200/mo at usage.</div>
     </div>
     <div class="cc-savings"><span class="cc-x">25&times;</span> cheaper &middot; same throughput &middot; scale-to-zero baseline</div>
   </div>
@@ -7993,7 +8003,7 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
       </div>
       <span class="ls-tag">Cost</span>
       <h4>Offload heavy work</h4>
-      <p class="ls-line"><a class="mlink" href="https://cloud.cerebras.ai/" target="_blank" rel="noopener">Cheap models</a> do bulk context; a premium model synthesizes. ~10&times; cheaper.</p>
+      <p class="ls-line"><a class="mlink" href="https://cloud.cerebras.ai/" target="_blank" rel="noopener">Cheap models</a> do bulk context; a premium model synthesizes. ~10&times; cheaper per token.</p>
     </div>
     <div class="flow-arrow" aria-hidden="true">&rarr;</div>
     <div class="lesson-step">
@@ -8020,7 +8030,7 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
       </div>
       <span class="ls-tag">Metadata</span>
       <h4>Contextualize chunks</h4>
-      <p class="ls-line">Tag every chunk: source, section, vehicle class, date. Context disambiguates.</p>
+      <p class="ls-line">Tag every chunk: source, section, vehicle class, date. Context disambiguates. 66.7% &rarr; 93.3% Top-1.</p>
     </div>
     <div class="flow-arrow" aria-hidden="true">&rarr;</div>
     <div class="lesson-step">
@@ -8064,8 +8074,8 @@ A: Real. The Long Road slide later addresses how to keep architecture portable.
 <div class="section-slide">
   <div class="eyebrow">Part Three</div>
   <h1>Build It Yourself</h1>
-  <div class="sub">Two steps, not two choices — ship on AI Search now, graduate to the primitives when you scale.</div>
-  <div class="sub" style="font-size:0.9em; color:#93A1C1; margin-top:14px;">None of it is bike-specific — swap in your industry's manuals, parts &amp; diagnostics and the architecture holds.</div>
+  <div class="sub">Two paths, same destination — managed AI Search to start, raw primitives when you want full control.</div>
+  <div class="sub" style="font-size:0.9em; color:#93A1C1; margin-top:14px;">None of it is bike-specific — the architecture holds for any domain.</div>
 </div>
 <aside class="notes">
 <strong>Build It Yourself section divider — 15 seconds.</strong><br><br>
@@ -8089,12 +8099,12 @@ Plant the takeaway here too: the recipe is domain-agnostic — swap the e-bike c
     <span style="padding:4px 12px; border-radius:14px; background:#F5F6FA; color:#93A1C1; border:1px solid #E2E6EF;">2 · CUSTOM STACK — WHEN YOU SCALE</span>
   </div>
   <h2 style="font-size: 1.7em; margin: 0 0 6px 0;">Cloudflare <em>AI Search</em>.</h2>
-  <p class="lead">The same architecture you just saw — provisioned for you in a few clicks.</p>
+  <p class="lead">The retrieval primitives you just saw — provisioned for you, fully managed.</p>
 
   <div class="two-col" style="gap: 14px;">
     <div class="box-feature-list">
       <h4>WHERE AI SEARCH FITS IN YOUR STACK</h4>
-      <p style="margin:0 0 9px; font-size:0.72em; line-height:1.4; color:var(--body);"><strong style="color:var(--orange);">~80% of this deck without writing a Worker.</strong> It provisions the whole <strong>retrieval pipeline</strong> you just built:</p>
+      <p style="margin:0 0 9px; font-size:0.72em; line-height:1.4; color:var(--body);"><strong style="color:var(--orange);">~80% of the retrieval pipeline without writing a Worker.</strong> It provisions the whole <strong>retrieval pipeline</strong> you just built:</p>
       <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:#FFF8F0; border:1.5px solid #F6821F; border-radius:6px;">
         <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; font-weight:700; color:#fff; background:#F6821F; padding:3px 9px; border-radius:10px; white-space:nowrap;">✓ AI SEARCH</span>
         <div style="min-width:0;">
@@ -8269,14 +8279,14 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
     <a class="cta-link" href="https://developers.cloudflare.com/d1" target="_blank" rel="noopener">developers.cloudflare.com/d1</a>
     <a class="cta-link" href="https://developers.cloudflare.com/vectorize" target="_blank" rel="noopener">developers.cloudflare.com/vectorize</a>
     <a class="cta-link" href="https://developers.cloudflare.com/workers-ai" target="_blank" rel="noopener">developers.cloudflare.com/workers-ai</a>
-    <a class="cta-link" href="https://www.cloudflare.com/startups/" target="_blank" rel="noopener">cloudflare.com/startups</a>
+    <a class="cta-link" href="https://developers.cloudflare.com/durable-objects" target="_blank" rel="noopener">developers.cloudflare.com/durable-objects</a>
     <a class="cta-link" href="https://blog.cloudflare.com/ai-search-agent-primitive/" target="_blank" rel="noopener">blog: AI Search primitive</a>
     <a class="cta-link" href="https://blog.cloudflare.com/project-think/" target="_blank" rel="noopener">blog: Project Think</a>
   </div>
 
   <a class="live-link" href="https://shepherd.shopdawg.app" target="_blank" rel="noopener">See it live → shepherd.shopdawg.app</a>
 
-  <div class="qmark">Built for e-bikes. The primitives fit any industry.<br><span style="font-size:0.55em; opacity:0.8;">Same engine, healthcare next — point these primitives at your domain.</span></div>
+  <div class="qmark">Built for e-bikes. The primitives fit any industry.<br><span style="font-size:0.55em; opacity:0.8;">Same engine — healthcare is next.</span></div>
 </div>
 <aside class="notes">
 <strong>Closing — 1 min + Q&A.</strong><br><br>
