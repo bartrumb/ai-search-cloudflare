@@ -7251,23 +7251,27 @@ A: Mini-agent bench runs against fixed fixtures. If I swap models, I re-bench be
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
 <aside class="notes">
-<strong>Context Engineering — 3 min.</strong><br><br>
-<strong>Lead:</strong> "Agents work better when you don't dump everything on them. The model isn't dumb — it gets overwhelmed by the wrong thing."<br><br>
-<strong>The before/after on the slide:</strong>
+<strong>Query-Aware Compression — 3 min.</strong><br><br>
+<strong>Lead:</strong> "RAG gets you the right document &mdash; but the tool hands back 15&nbsp;KB of raw PDF. Dump that straight on Sonnet and you've turned a retrieval win into a token bill. The fix isn't a bigger window or a cleverer prompt &mdash; it's a cheap, fast hop that curates the result before the premium model ever sees it."<br><br>
+<strong>The two columns &mdash; point at them:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li><strong>Before:</strong> 49.6K input tokens — full chunk dumps, every tool result raw, the entire system prompt every turn</li>
-  <li><strong>After:</strong> 13K input tokens — targeted reads via <code>read_manual</code> and <code>get_content_section</code>, mini-agent–compressed tool output, intent-gated soul</li>
+  <li><strong>Before (dumb truncation):</strong> the tool returns 15&nbsp;KB of raw PDF, char-clipped at 16K. Sonnet sees 8 irrelevant pages of OEM filler, burns 8 follow-up tool calls narrowing down, gets no page citations &mdash; and still only manages 230 chars of vague advice. "Like clipping the manual at page 16."</li>
+  <li><strong>After (query-aware compression):</strong> the same 15&nbsp;KB goes to a <strong>Cerebras gpt-oss-120b</strong> sub-agent first. It extracts only the query-relevant sections and keeps the page citations + chunk IDs. Sonnet receives 3&nbsp;KB of focused content and answers in 2 calls with diagnostic depth &mdash; 2,239 chars of specific guidance. "Like a service writer marking the right page."</li>
 </ul>
-<strong>The tools that earn their keep:</strong>
+<strong>The four tiles are the whole argument:</strong>
 <ul style="margin:6px 0; padding-left:20px;">
-  <li><code>read_manual(brand, model, question)</code> — pulls the focused answer from one manual instead of 5K raw chunks</li>
-  <li><code>get_content_section(slug, heading)</code> — fetches one section, not the whole doc</li>
-  <li>Pre-agent intent gating — skip the 1,600-token diagnostic block on parts queries</li>
+  <li><strong>Input tokens 15K &rarr; 3K</strong> (&minus;80%) per tool result that reaches Sonnet</li>
+  <li><strong>Tool calls / answer 8 &rarr; 2</strong> (&minus;75%) &mdash; no follow-up narrowing</li>
+  <li><strong>Cost / turn ~$0.36 &rarr; ~$0.03</strong> (&minus;90%) &mdash; about $330 saved per 1,000 turns</li>
+  <li><strong>Useful response 230 &rarr; 2,239 chars</strong> (+10&times;) &mdash; cheaper AND better, not a trade-off</li>
 </ul>
-<strong>The take-home:</strong> "context engineering" is the underdiscussed half of agentic AI. People obsess over prompts and models. The real lever is what you put in the window in the first place.<br><br>
+<strong>How it's wired:</strong> three high-token tools always compress &mdash; <code>read_manual</code>, <code>get_manual_content</code>, <code>get_content_section</code>; everything else compresses only when a result blows past the 4K-token budget. The compressor is the same Cerebras sub-agent offload from the previous slide, now aimed at curation instead of formatting.<br><br>
+<strong>The take-home:</strong> point at the kicker. "RAG retrieves. Prompting reasons. Compression curates." Compression is the third lever &mdash; the one most teams skip, and the cheapest 10&times; I've found.<br><br>
 <strong>Anticipated questions:</strong><br>
 <em>Q: "Why not just use a bigger context window?"</em><br>
-A: Bigger windows cost more and degrade quality at the edges. Targeted retrieval wins on both axes.
+A: Bigger windows cost more and degrade quality at the edges. Curating what reaches the model wins on both cost and quality.<br>
+<em>Q: "Doesn't the cheap model drop something important?"</em><br>
+A: It preserves page citations and chunk IDs, so Sonnet can always pull the exact source if it needs more. Extraction is exactly the bulk, well-scoped task a fast cheap model is good at.
 </aside>
 </section>
 
