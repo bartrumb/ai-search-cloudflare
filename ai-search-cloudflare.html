@@ -4936,6 +4936,7 @@ a.mlink:hover { color: var(--orange); }
   font-weight: 800;
 }
 .gd-fill.g1 .gd-mult, .gd-fill.g2 .gd-mult { color: #fff; }
+.gd-fill.g3 .gd-mult { background: #1B2A4A; color: #fff; padding: 1px 8px; border-radius: 3px; opacity: 1; font-weight: 800; }
 html.print-pdf-active .gd-fill { animation: none !important; transform: none !important; }
 
 /* ---- Slide 17 · Context Engineering — 3-metric dashboard ---- */
@@ -6342,11 +6343,11 @@ A: It doesn't, on raw quality. It beats them on latency (co-located) and cost ($
           <div class="fm-result">
             <div class="thumb">⊙</div>
             <div class="info">
-              <div class="t">26" × 4.0–4.8" Fat Innertube</div>
-              <div class="p">Kenda · 35mm Schrader valve · $13.99</div>
+              <div class="t">26" × 4.0–4.8" Fat Bike Tube</div>
+              <div class="p">Q-Tubes TU1200 · Schrader valve · $18.99</div>
             </div>
           </div>
-          <p style="text-align:right; font-style:italic; color:var(--muted); font-size:0.65em; margin:2px 0 0;">typo-tolerant · ~28ms · fallback to D1 FTS5</p>
+          <p style="text-align:right; font-style:italic; color:var(--muted); font-size:0.65em; margin:2px 0 0;">typo-tolerant · ~28ms engine · fallback to D1 FTS5</p>
         </div>
       </div>
 
@@ -6641,7 +6642,7 @@ A: I do — Sonnet re-ranks the top 30. The weighted merge is the prefilter.
             <li><span class="opt-check">✓</span> Subset embedded fonts <span class="opt-note">(strip unused glyphs)</span></li>
             <li><span class="opt-check">✓</span> Recompress images <span class="opt-note">(JPEG2000 / lossy DCT)</span></li>
             <li><span class="opt-check">✓</span> Inject OCR text layer <span class="opt-note">(hidden, selectable, indexable)</span></li>
-            <li><span class="opt-check">✓</span> Optimize via Adobe to PDF/A-2u <span class="opt-note">(latest archival standard)</span></li>
+            <li><span class="opt-check">✓</span> Optimize to PDF/A <span class="opt-note">(archival standard &mdash; keeps the OCR text map)</span></li>
             <li><span class="opt-check">✓</span> Web-linearize <span class="opt-note">(first page renders before full download)</span></li>
           </ul>
         </div>
@@ -6866,7 +6867,7 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
       <div class="stat-row"><span class="label">Top-3 accuracy</span><span class="before">83.3%</span><span class="arrow">→</span><span class="after">100%</span><span class="delta">+16.7 pp</span></div>
     </div>
     <div class="card top-accent" style="padding:14px 22px;">
-      <div class="eyebrow">COST PER TURN</div>
+      <div class="eyebrow">COST PER TURN <span style="font-size:0.7em; font-weight:500; color:var(--muted); letter-spacing:0.05em;">&middot; fewer tokens reach Sonnet</span></div>
       <div class="stat-row"><span class="label">Dollars per turn</span><span class="before">$0.201</span><span class="arrow">→</span><span class="after">$0.075</span><span class="delta">−63%</span></div>
       <div class="stat-row"><span class="label">Sonnet synthesis tokens</span><span class="before">49.6K</span><span class="arrow">→</span><span class="after">13K</span><span class="delta">−73%</span></div>
     </div>
@@ -6889,7 +6890,8 @@ A: Bigger chunks dilute embeddings (everything looks medium-related to everythin
 <div class="section-slide">
   <div class="eyebrow">Part Two</div>
   <h1>From RAG to Agentic AI</h1>
-  <div class="sub">Everything so far was <em>stateless</em> — every request started cold. Now I add what search can't have: <em>durable per-user memory</em>, crash recovery, and query-aware context compression. Watch one number fall the whole way down: a tool turn drops from ~36¢ to ~3¢.</div>
+  <div class="sub">Everything so far was <em>stateless</em> — every request started cold. Now I add what search can't have: <em>durable per-user memory</em>, crash recovery, and query-aware context compression. Watch one number fall the whole way down:</div>
+  <div style="margin-top:24px; font-family:'JetBrains Mono',monospace; font-size:1.6em; font-weight:700; color:#F6821F; letter-spacing:0.5px;">~36¢ &rarr; ~3¢ <span style="font-size:0.5em; color:#C5D0E0; font-weight:500; letter-spacing:0;">per tool turn</span></div>
 </div>
 <aside class="notes">
 <strong>RAG/Agentic AI section divider — 20 seconds. The hinge of the talk.</strong><br><br>
@@ -7915,7 +7917,7 @@ A: I'm pre-launch. The system is sized for shop staff (10s) initially, scales to
     <div class="cc-row">
       <span class="cc-name cf">Cloudflare</span>
       <div class="cc-track">
-        <div class="cc-seg cf" style="width:4%;">$80</div>
+        <div class="cc-seg cf" style="width:8%;">$80</div>
       </div>
       <span class="cc-total cf">~$80</span>
     </div>
@@ -8119,6 +8121,7 @@ Plant the takeaway here too: the recipe is domain-agnostic — swap the e-bike c
         <div style="display:flex; gap:10px; align-items:baseline; padding:5px 12px; border:1px dashed #C9D2E0; border-radius:6px;"><span style="color:#64748B; font-weight:700; font-size:0.72em; min-width:118px;">Agent + Memory</span><span style="color:#64748B; font-size:0.64em;">Durable Objects · diagnostic graph</span></div>
       </div>
       <div style="font-family:'JetBrains Mono',monospace; font-size:0.6em; font-weight:700; color:var(--orange); margin-top:7px;">↑ bolt these on in Step 2, as you outgrow the shortcut</div>
+      <div style="margin-top:10px;"><span style="display:inline-block; padding:4px 14px; border:1px solid #F6821F; border-radius:14px; font-size:0.66em; color:#5C6470; background:#FFF8F0; font-family:'Inter',sans-serif;"><strong style="color:#D86F0F;">Open beta</strong> &middot; free within limits &middot; 4&nbsp;MB max per file</span></div>
     </div>
 
     <div class="remember-card">
@@ -8134,7 +8137,7 @@ Plant the takeaway here too: the recipe is domain-agnostic — swap the e-bike c
     </div>
   </div>
 
-  <p style="text-align:center; font-size:0.62em; color:#93A1C1; margin:14px 0 0; font-family:'Inter',sans-serif;">Cloudflare AI Search is in <strong style="color:#64748B;">open beta</strong> — free within limits, 4&nbsp;MB max per file.</p>
+  
 
   <div class="footer-bar">OPO STARTUPS  ·  AI-POWERED SEARCH ON CLOUDFLARE</div>
 </div>
@@ -8218,7 +8221,7 @@ A: I started before it launched. I'd also lose the graph and the agent. For my u
     <div class="lr-row">
       <div class="lr-num">5</div>
       <div>
-        <span class="lr-stage">Agent · Memory</span>
+        <span class="lr-stage">Agent · Memory <span class="lr-chip" style="background:#FFF1E2; border:1px solid #F6821F; color:#D86F0F; font-size:11px; letter-spacing:0.5px; vertical-align:middle; margin-left:6px;">★ your real build</span></span>
         <div class="lr-title">Agent layer for tools &amp; memory</div>
       </div>
       <div class="lr-desc">Install <code>@cloudflare/think</code> &mdash; streaming, tools, per-user Durable Object memory, crash recovery.</div>
@@ -8275,7 +8278,7 @@ A: Bare-minimum hybrid in a weekend. Production-grade with eval suite + monitori
   </div>
   <h1>Start Building Today</h1>
   <div class="sub">Everything shown here runs on Cloudflare's free or pay-as-you-go tiers</div>
-  <p style="font-family:'JetBrains Mono',monospace; font-size:0.78em; color:#F6821F; margin:8px 0 16px; letter-spacing:0.5px;">Start on AI Search → graduate to the primitives as you grow. Same edge, same economics, no rip-and-replace.</p>
+  <p style="font-family:'JetBrains Mono',monospace; font-size:0.78em; color:#F6821F; margin:8px 0 16px; letter-spacing:0.5px;">Start on AI Search → grow into the primitives as you scale. Same edge, same economics, no rip-and-replace.</p>
 
   <div class="cta-stack">
     <a class="cta-link" href="https://developers.cloudflare.com/d1" target="_blank" rel="noopener">developers.cloudflare.com/d1</a>
