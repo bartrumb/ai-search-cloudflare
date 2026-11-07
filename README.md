@@ -1,29 +1,26 @@
-# AI Search on Cloudflare — Conference Deck
+# Build Smarter Search with AI on Cloudflare's Edge
 
-Self-contained reveal.js presentation for **"AI Search on Cloudflare"** — a talk given at OPO Startups (July 2026) by Brett Bartrum, founder of Shop DAWG / Shop Shepherd.
+Slides from my OPO Startups Tech Talk at Confluence Tech Hub in St. Charles, Missouri, on July 1, 2026: AI-powered hybrid search and agentic assistants built entirely on Cloudflare, with a live demo of [Shepherd](https://shepherd.shopdawg.app), the production AI platform I built for e-bike repair shops.
 
-## What this is
+**[View the slides](https://bartrumb.github.io/ai-search-cloudflare/)**, or [download the PDF](AI-Powered%20Hybrid%20Search%20%26%20Agentic%20Assistants%20on%20Cloudflare%20%E2%80%94%20OPO%20Startups.pdf).
 
-A 30-slide technical conference deck covering the design, implementation, and lessons learned from building a production AI-powered search and repair assistant ([shepherd.shopdawg.app](https://shepherd.shopdawg.app)) entirely on Cloudflare's serverless stack.
+This is the talk as I gave it. Shepherd has kept changing since; the current numbers are on [brett.bartrum.family](https://brett.bartrum.family).
 
-Topics covered:
+## What the talk covers
 
-- **Cloudflare stack** — Workers, D1, KV, R2, Vectorize, Workers AI, Durable Objects
-- **Hybrid search** — D1 + FTS5 (BM25 keyword), Vectorize (semantic), and Meilisearch (faceted): three engines, one router
-- **RAG pipeline** — Contextual Retrieval (Kimi K2.6 context summaries), Voyage rerank-2.5, structural reranking (Gemini)
-- **Pre-agent / intent classification** — Cerebras Qwen-3-235B query optimizer running before every turn
-- **Diagnostic knowledge graph** — 825 expert-authored node profiles, 2,523 weighted edges, probability-ranked fault isolation ("a wiring diagram the AI can walk")
-- **Mini-agents** — Cerebras GPT-OSS-120B and Kimi K2.6 for tool-output compression
-- **Observability** — PostHog LLM analytics (`$ai_trace → $ai_generation → $ai_span`), cache-aware cost, one pane of glass
-- **Cost comparison** — 25× cheaper than the traditional Elastic + Pinecone + EC2 stack
-- **Ship now → scale later** — Cloudflare AI Search (managed hybrid RAG) as Step 1, the DIY primitives as Step 2
-- **Production lessons** — what bit us in order of impact
+30 slides, in this order:
 
-## How to use
+- **Why I built it:** it starts at a bike shop's workbench. Traditional search infrastructure bills you every month whether or not anyone searches; the edge changes that math.
+- **The search stack, explained like a shop:** find the right aisle with Vectorize (semantic search), pick off the shelf with D1 and Meilisearch (faceted search), and scan the barcode with D1's FTS5 (keyword search), then merge keyword and vector results.
+- **Documents:** a PDF pipeline (OCR, extract, optimize), why chunk context matters, and contextual retrieval.
+- **Agents:** from RAG to agentic AI, a Durable Object per user (Cloudflare's Project Think), offloading bulk work to cheap sub-agents, and query-aware compression.
+- **When retrieval isn't enough:** a hand-built diagnostic knowledge graph, why it beat LLM extraction, and walking from a symptom to a diagram live.
+- **Running it:** observability in one pane of glass, real-world scale, and a cost comparison with a traditional search stack.
+- **Lessons from production**, then two ways to build it yourself: Cloudflare's managed AI Search to start, or the same primitives for full control.
 
-Just open `ai-search-cloudflare.html` in a modern browser. **Fully self-contained and offline-safe** — reveal.js, its notes plugin, and the three typefaces are inlined (base64), so the deck renders with no internet connection. No build step, no dependencies to install.
+## How to use it
 
-### Navigation
+Open `ai-search-cloudflare.html` in a modern browser, or use the link above. The file is self-contained and works offline: reveal.js, its notes plugin and the three typefaces are inlined, so there's nothing to build or install.
 
 | Key | Action |
 |-----|--------|
@@ -31,42 +28,37 @@ Just open `ai-search-cloudflare.html` in a modern browser. **Fully self-containe
 | `←` | Previous slide |
 | `Esc` | Slide overview |
 | `S` | Speaker notes |
-| `M` | Slide menu / table of contents |
-| `H` | Keyboard shortcuts help overlay |
+| `M` | Slide menu and table of contents |
+| `H` | Keyboard shortcuts |
 | `F` | Fullscreen |
 
-### Print / Export PDF
+**Print or save as PDF:** press `M`, then **Print / Export PDF**. In Chrome, choose Save as PDF with a custom paper size of 13.333 × 7.5 in. Adding `?print-pdf` to the address gives the same one-slide-per-page layout.
 
-1. Press `M` to open the menu, then click **⎙ Print / Export PDF**
-2. In Chrome: Print → Destination: Save as PDF → Paper: Custom 13.333 × 7.5 in
-3. Or append `?print-pdf` to the URL and use Chrome's print dialog
+## How it's built
 
-The `?print-pdf` URL parameter activates the multi-page print layout (one PDF page per slide, 720px × 1280px each).
+| Part | What |
+|------|------|
+| Slides | [reveal.js 5.1.0](https://revealjs.com) (MIT), inlined, with the notes plugin |
+| Typefaces | Inter, Playfair Display and JetBrains Mono (SIL OFL), embedded |
+| Charts and diagrams | Hand-written inline SVG with CSS animations; no charting library |
+| Build step | None: one HTML file |
 
-## Tech stack
+Print mode turns the animations off, so every chart prints in its final state.
 
-| Component | Technology |
-|-----------|------------|
-| Slide framework | [reveal.js 5.1.0](https://revealjs.com) (MIT) — inlined, plus the notes plugin |
-| Typefaces | Inter, Playfair Display, JetBrains Mono (SIL OFL) — base64-embedded (latin subset) |
-| Charts & diagrams | Hand-authored inline SVG + CSS animations |
-| Build step | None — single self-contained, offline-safe HTML file |
+## About me
 
-Every chart, bar graph, and diagram is hand-authored SVG with CSS keyframe animations (`@keyframes gdGrow`). No charting library. Print mode freezes animations via `animation: none !important` on `html.print-pdf-active`.
+I'm Brett Bartrum, a platform and AI infrastructure engineer in St. Louis. I've spent 20 years keeping enterprise production running, and I built Shepherd on my own. More, including my 2023 talk [Show-Me Artificial Intelligence](https://www.youtube.com/watch?v=lweCB1GMzbg), is at [brett.bartrum.family](https://brett.bartrum.family). Email: [brett@bartrum.family](mailto:brett@bartrum.family).
 
-## Credits
+Layout, diagrams and copy were iterated with Claude (Anthropic) in [Claude Code](https://claude.ai/code).
 
-Designed and built by **Brett Bartrum** ([brett@shopdawg.app](mailto:brett@shopdawg.app))  
-Layout, diagrams, and copy iterated with **Claude** (Anthropic) in [Claude Code](https://claude.ai/code).
+### Cloudflare resources from the talk
 
-### Cloudflare resources mentioned
-
-- [developers.cloudflare.com/d1](https://developers.cloudflare.com/d1)
-- [developers.cloudflare.com/vectorize](https://developers.cloudflare.com/vectorize)
-- [developers.cloudflare.com/workers-ai](https://developers.cloudflare.com/workers-ai)
-- [cloudflare.com/startups](https://www.cloudflare.com/startups/)
-- [blog: AI Search primitive](https://blog.cloudflare.com/ai-search-agent-primitive/)
-- [blog: Project Think](https://blog.cloudflare.com/project-think/)
+- [D1](https://developers.cloudflare.com/d1)
+- [Vectorize](https://developers.cloudflare.com/vectorize)
+- [Workers AI](https://developers.cloudflare.com/workers-ai)
+- [Cloudflare for Startups](https://www.cloudflare.com/startups/)
+- [Blog: the AI Search primitive](https://blog.cloudflare.com/ai-search-agent-primitive/)
+- [Blog: Project Think](https://blog.cloudflare.com/project-think/)
 
 ## License
 
