@@ -2,7 +2,7 @@
 
 Slides from my OPO Startups Tech Talk at Confluence Tech Hub in St. Charles, Missouri, on July 1, 2026: AI-powered hybrid search and agentic assistants built entirely on Cloudflare, with a live demo of [Shepherd](https://shepherd.shopdawg.app), the production AI platform I built for e-bike repair shops.
 
-**[View the slides](https://bartrumb.github.io/ai-search-cloudflare/)**, or [download the PDF](AI-Powered%20Hybrid%20Search%20%26%20Agentic%20Assistants%20on%20Cloudflare%20%E2%80%94%20OPO%20Startups.pdf).
+**[View the slides](https://bartrumb.github.io/ai-search-cloudflare/ai-search-cloudflare.html)**, or [download the PDF](AI-Powered%20Hybrid%20Search%20%26%20Agentic%20Assistants%20on%20Cloudflare%20%E2%80%94%20OPO%20Startups.pdf).
 
 This is the talk as I gave it. Shepherd has kept changing since; the current numbers are on [brett.bartrum.family](https://brett.bartrum.family).
 
